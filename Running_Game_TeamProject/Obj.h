@@ -64,7 +64,7 @@ protected:
 	bool			m_bIsCollied;
 
 	// 현재 그림을 렌더링하기위해 선언한 TEXINFO*
-	const TEXINFO*	m_pTexInfo;
+
 	FRAME			m_tFrame;
 
 	_mat			m_matInfo[MATRIXID::END];

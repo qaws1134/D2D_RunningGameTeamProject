@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "FieldHurdle.h"
+#include "Texture_Manager.h"
 
-
-CFieldHurdle::CFieldHurdle()
+CFieldHurdle::CFieldHurdle(): byDrawID(0),byOption(0)
 {
 }
 
@@ -18,6 +18,7 @@ HRESULT CFieldHurdle::Ready_Object(void)
 	case HURDLEID::FLOOR:
 		m_tInfo.vSize.x = 124.f;
 		m_tInfo.vSize.y = 140.f;
+		
 		break;
 	case HURDLEID::FLOOR2F:
 		m_tInfo.vSize.x = 129.f;
@@ -56,8 +57,11 @@ void CFieldHurdle::LateUpdate_Object(void)
 
 void CFieldHurdle::Render_Object(void)
 {
+	const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo(L"Terrain", L"Tile", byDrawID);
+
 }
 
 void CFieldHurdle::Release_Object(void)
 {
+	
 }

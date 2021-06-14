@@ -13,7 +13,7 @@ CObj_Manager::CObj_Manager()
 
 CObj_Manager::~CObj_Manager()
 {
-
+	Release_Object();
 }
 
 HRESULT CObj_Manager::Ready_Object(void)
@@ -75,10 +75,7 @@ void CObj_Manager::Release_Object(void)
 {
 	for (int i = 0; i < OBJID::END; ++i)
 	{
-
 		for_each(m_listObj[i].begin(), m_listObj[i].end(), Safe_Delete<CObj*>);
-
-
 		m_listObj[i].clear();
 	}
 }
