@@ -7,7 +7,6 @@ CObj::CObj()
 	:m_bDead(false), m_bIsCollied(false), m_pTexInfo(nullptr)
 {
 	ZeroMemory(&m_tInfo, sizeof(m_tInfo));
-	ZeroMemory(&m_tFrame, sizeof(m_tFrame));
 
 	for (int i = 0; i < MATRIXID::END; ++i)
 		ZeroMemory(&m_matInfo[i], sizeof(_mat));
