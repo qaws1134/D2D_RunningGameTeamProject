@@ -7,7 +7,6 @@ CGraphic_Dev::CGraphic_Dev()
 	m_pGraphicDev(nullptr),
 	m_pSprite(nullptr)
 {
-
 }
 
 CGraphic_Dev::~CGraphic_Dev()

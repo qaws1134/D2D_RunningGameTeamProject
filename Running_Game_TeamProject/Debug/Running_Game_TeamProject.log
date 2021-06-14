@@ -1,7 +1,21 @@
-﻿  Graphic_Dev.cpp
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
+﻿  stdafx.cpp
+  Texture.cpp
+  Stage.cpp
+  Single_Texture.cpp
+  SceneMgr.cpp
+  Scene.cpp
+  Running_Game_TeamProject.cpp
+  Player.cpp
+  Obj_Manager.cpp
+  Obj.cpp
+  Multi_Texture.cpp
   MainApp.cpp
+  KeyMgr.cpp
+  Item.cpp
+  Graphic_Dev.cpp
+  FieldHurdle.cpp
+  Collision_Manager.cpp
   코드를 생성하고 있습니다...
-  Running_Game_TeamProject.vcxproj -> C:\Users\naturekim\Desktop\Running_Game_TeamProject\Debug\Running_Game_TeamProject.exe
-  Running_Game_TeamProject.vcxproj -> C:\Users\naturekim\Desktop\Running_Game_TeamProject\Debug\Running_Game_TeamProject.pdb (Full PDB)
+  LINK : C:\Users\naturekim\Desktop\CookieRun\RunningTeamProject\Debug\Running_Game_TeamProject.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
+  Running_Game_TeamProject.vcxproj -> C:\Users\naturekim\Desktop\CookieRun\RunningTeamProject\Debug\Running_Game_TeamProject.exe
+  Running_Game_TeamProject.vcxproj -> C:\Users\naturekim\Desktop\CookieRun\RunningTeamProject\Debug\Running_Game_TeamProject.pdb (Full PDB)
