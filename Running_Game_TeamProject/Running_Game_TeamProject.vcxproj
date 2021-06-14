@@ -155,32 +155,39 @@
     <ClInclude Include="Define.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="Functor.h" />
+    <ClInclude Include="Multi_Texture.h" />
     <ClInclude Include="Obj_Manager.h" />
     <ClInclude Include="Graphic_Dev.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="MainApp.h" />
     <ClInclude Include="Obj.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Running_Game_TeamProject.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneMgr.h" />
+    <ClInclude Include="Single_Texture.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Include.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="Typedef.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Collision_Manager.cpp" />
+    <ClCompile Include="Multi_Texture.cpp" />
     <ClCompile Include="Obj_Manager.cpp" />
     <ClCompile Include="Graphic_Dev.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="MainApp.cpp" />
     <ClCompile Include="Obj.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Running_Game_TeamProject.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
+    <ClCompile Include="Single_Texture.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -188,6 +195,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Running_Game_TeamProject.rc" />

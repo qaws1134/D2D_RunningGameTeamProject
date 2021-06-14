@@ -37,6 +37,18 @@
     <Filter Include="01.Scene\01.Stage">
       <UniqueIdentifier>{375317cf-6eb8-4cae-9bb5-67e8e25c26e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Obj\00.Player">
+      <UniqueIdentifier>{79104faf-46a5-49ce-b4e8-0e51eb2c551d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96.Texture">
+      <UniqueIdentifier>{323affcc-0f13-45b4-8fad-bf4979969894}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96.Texture\00.Single_Texture">
+      <UniqueIdentifier>{f3180600-3f0c-4631-8a98-fe037d4cebd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96.Texture\01.Multi_Texture">
+      <UniqueIdentifier>{9542db14-a358-4f62-ab70-80fe8872777c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -96,6 +108,18 @@
     <ClInclude Include="Stage.h">
       <Filter>01.Scene\01.Stage</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>02.Obj\00.Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>96.Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Multi_Texture.h">
+      <Filter>96.Texture\01.Multi_Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Single_Texture.h">
+      <Filter>96.Texture\00.Single_Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Running_Game_TeamProject.cpp">
@@ -130,6 +154,18 @@
     </ClCompile>
     <ClCompile Include="Stage.cpp">
       <Filter>01.Scene\01.Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>02.Obj\00.Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>96.Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Multi_Texture.cpp">
+      <Filter>96.Texture\01.Multi_Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Single_Texture.cpp">
+      <Filter>96.Texture\00.Single_Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
