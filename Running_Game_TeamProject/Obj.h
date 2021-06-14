@@ -14,6 +14,14 @@ public:
 	virtual ~CObj(void);
 
 
+
+public:
+	enum MATRIXID
+	{
+		SCALE, ROTATION, TRANS, REV, PARENT, WORLD, END
+	};
+
+
 public:
 	// Get
 	const INFO&		Get_Info(void) { return m_tInfo; }
@@ -38,6 +46,11 @@ public:
 protected:
 	virtual void				Moving_Logic(void)PURE;
 
+	// TEXINFO 뽑아오는 함수
+	HRESULT						Setting_TexInfo(void);
+
+	// 애니메이션 프레임 증가함수
+	void						Move_Frame(void);
 
 
 protected:
@@ -45,10 +58,18 @@ protected:
 	void	Ready_Rectangle(void);
 
 protected:
-	INFO			m_tInfo;
 	//OBJID			m_eID;
+	INFO			m_tInfo;
 	bool			m_bDead;
 	bool			m_bIsCollied;
+
+	// 현재 그림을 렌더링하기위해 선언한 TEXINFO*
+	const TEXINFO*	m_pTexInfo;
+	FRAME			m_tFrame;
+
+	_mat			m_matInfo[MATRIXID::END];
+
+
 };
 
 
