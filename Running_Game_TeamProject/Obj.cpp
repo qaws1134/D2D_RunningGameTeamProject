@@ -26,12 +26,12 @@ CObj::~CObj()
 void CObj::Ready_Rectangle(void)
 {
 	// ÁÂ»ó
-	m_tInfo.vPoint[0] = _vec3(-m_tInfo.vSize.x * 0.5f, -m_tInfo.vSize.y * 0.5f, 0.f);
+	m_tInfo.m_vPoint[0] = _vec3(-m_tInfo.vSize.x * 0.5f, -m_tInfo.vSize.y * 0.5f, 0.f);
 	// ¿ì»ó
-	m_tInfo.vPoint[1] = _vec3(m_tInfo.vSize.x * 0.5f, -m_tInfo.vSize.y * 0.5f, 0.f);
+	m_tInfo.m_vPoint[1] = _vec3(m_tInfo.vSize.x * 0.5f, -m_tInfo.vSize.y * 0.5f, 0.f);
 	// ¿ìÇÏ
-	m_tInfo.vPoint[2] = _vec3(m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f);
+	m_tInfo.m_vPoint[2] = _vec3(m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f);
 	// ÁÂÇÏ
-	m_tInfo.vPoint[3] = _vec3(-m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f);
+	m_tInfo.m_vPoint[3] = _vec3(-m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f);
 }
 

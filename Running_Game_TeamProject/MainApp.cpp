@@ -19,24 +19,21 @@ HRESULT CMainApp::Ready_MainApp(void)
 {
 	FAILED_CHECK_RETURN(CGraphic_Dev::Get_Instance()->Ready_GraphicDev(), E_FAIL);
 
-	CSceneMgr::Get_Instance()->Scene_Change(CSceneMgr::STAGE);
+
 
 	return S_OK;
 }
 
 void CMainApp::Update_MainApp(void)
 {
-	CSceneMgr::Get_Instance()->Update_Scene();
 }
 
 void CMainApp::LateUpdate_MainApp(void)
 {
-	CSceneMgr::Get_Instance()->LateUpdate_Scene();
 }
 
 void CMainApp::Render_MainApp(void)
 {
-	CSceneMgr::Get_Instance()->Render_Scene();
 }
 
 void CMainApp::Release_MainApp(void)

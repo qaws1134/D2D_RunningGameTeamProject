@@ -36,11 +36,7 @@ public:
 
 
 protected:
-	virtual void				Moving_Logic(void)PURE;
 
-
-
-protected:
 	// »ç°¢Çü
 	void	Ready_Rectangle(void);
 

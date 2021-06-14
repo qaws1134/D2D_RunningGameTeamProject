@@ -14,8 +14,8 @@ typedef struct tagInfo
 	// 중앙값, 크기, 이동스피드, 회전스피드, 회전앵글값
 	_vec3		vPos;
 	_vec3		vSize;
-	_vec3		vPoint[4];
-	_vec3		vDraw[4];
+	_vec3		m_vPoint[4];
+	_vec3		m_vDraw[4];
 	float		fMoveSpeed;
 	float		fRotSpeed;
 	float		fAngle;
@@ -34,14 +34,5 @@ typedef struct tagLineInfo
 
 }LINEINFO;
 
-
-
-// Texture 정보 담은 객체
-typedef struct tagTexInfo
-{
-	PDIRECT3DTEXTURE9 pTexture;
-	D3DXIMAGE_INFO tImageInfo;
-
-}TEXINFO;
 
 #endif // !__Struct_H_
