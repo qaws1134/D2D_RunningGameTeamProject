@@ -1,21 +1,5 @@
-﻿  stdafx.cpp
-  Texture_Manager.cpp
-  Texture.cpp
-  Stage.cpp
-  Single_Texture.cpp
-  SceneMgr.cpp
-  Scene.cpp
-  Running_Game_TeamProject.cpp
-  Player.cpp
-  Obj.cpp
-  MainApp.cpp
-  KeyMgr.cpp
-  Graphic_Dev.cpp
+﻿  Texture_Manager.cpp
   Obj_Manager.cpp
-  Multi_Texture.cpp
-  Item.cpp
-  FieldHurdle.cpp
-  Collision_Manager.cpp
   코드를 생성하고 있습니다...
   Running_Game_TeamProject.vcxproj -> C:\Users\naturekim\Desktop\CookieRun\RunningTeamProject\Debug\Running_Game_TeamProject.exe
   Running_Game_TeamProject.vcxproj -> C:\Users\naturekim\Desktop\CookieRun\RunningTeamProject\Debug\Running_Game_TeamProject.pdb (Full PDB)

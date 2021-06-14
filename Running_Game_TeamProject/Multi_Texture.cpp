@@ -46,7 +46,7 @@ HRESULT CMulti_Texture::Insert_Texture(const wstring & wstrFilePath, const wstri
 
 		if (FAILED(D3DXGetImageInfoFromFile(szFilePath, &pTexInfo->tImageInfo)))
 		{
-			wstring wstrERR = wstring(szFilePath) + L"의묵이는 말을 존나 막한다.. 존나 상처... ";
+			wstring wstrERR = wstring(szFilePath) + L"이미지 정보 얻어오기 실패 ";
 			ERR_MSG(wstrERR.c_str());
 			return E_FAIL;
 		}
