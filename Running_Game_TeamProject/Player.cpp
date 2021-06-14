@@ -4,6 +4,7 @@
 
 CPlayer::CPlayer()
 {
+	// 주석 테스트
 }
 
 
