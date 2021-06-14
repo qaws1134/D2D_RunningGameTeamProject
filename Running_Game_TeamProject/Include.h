@@ -19,5 +19,5 @@ using namespace std;
 #include "Functor.h"
 #include "Enum.h"
 #include "Define.h"
-
+#include "Graphic_Dev.h"
 #endif // !__Include_H_

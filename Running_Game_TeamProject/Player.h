@@ -3,6 +3,7 @@
 
 
 
+
 #include "Obj.h"
 class CPlayer :
 	public CObj
@@ -18,6 +19,11 @@ public:
 	virtual void LateUpdate_Object(void) override;
 	virtual void Render_Object(void) override;
 	virtual void Release_Object(void) override;
+
+
+public:
+	virtual void				Moving_Logic(void);
+
 
 public:
 	static CPlayer*		Create(void);
