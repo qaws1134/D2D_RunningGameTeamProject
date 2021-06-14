@@ -35,3 +35,4 @@ typedef struct tagLineInfo
 }LINEINFO;
 
 
+#endif __Struct_H_
