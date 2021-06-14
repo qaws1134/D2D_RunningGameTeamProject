@@ -22,7 +22,7 @@ typedef struct tagInfo
 
 	// 체력
 	int			iHP;
-	// 필살기
+	// 필살기 = 얘는 없어도 될듯
 	unsigned int			iNuke;
 }INFO;
 
