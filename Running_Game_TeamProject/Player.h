@@ -40,8 +40,6 @@ public:
 	static CPlayer*		Create(void);
 
 
-private:
-	int ia = 0;
 };
 
 #endif // !__Player_H_
