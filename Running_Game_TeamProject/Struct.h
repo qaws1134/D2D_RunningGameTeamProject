@@ -35,4 +35,12 @@ typedef struct tagLineInfo
 }LINEINFO;
 
 
+typedef struct tagTexInfo
+{
+	D3DXIMAGE_INFO		tImageInfo;
+	LPDIRECT3DTEXTURE9	pTexture;
+
+}TEXINFO;
+
+
 #endif __Struct_H_
