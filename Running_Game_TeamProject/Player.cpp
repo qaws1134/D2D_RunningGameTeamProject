@@ -9,16 +9,27 @@ CPlayer::CPlayer()
 
 CPlayer::~CPlayer()
 {
+	Release_Object();
 }
 
 HRESULT CPlayer::Ready_Object(void)
 {
-	return E_NOTIMPL;
+	m_tInfo.vPos = _vec3(WINCX >> 1, WINCY >> 1, 0.f);
+	m_tInfo.vSize = _vec3(50.f, 50.f, 0.f);
+
+	Ready_Rectangle();
+	return S_OK;
 }
 
 int CPlayer::Update_Object(void)
 {
-	return 0;
+	DEAD_CHECK;
+
+
+	Moving_Logic();
+
+
+	return OBJ_NOEVENT;
 }
 
 void CPlayer::LateUpdate_Object(void)
@@ -31,6 +42,20 @@ void CPlayer::Render_Object(void)
 
 void CPlayer::Release_Object(void)
 {
+}
+
+void CPlayer::Moving_Logic(void)
+{
+	_mat matScale, matTrans, matWorld;
+	D3DXMatrixIdentity(&matWorld);
+
+	D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
+	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
+	matWorld = matScale * matTrans;
+
+
+
+
 }
 
 CPlayer * CPlayer::Create(void)
