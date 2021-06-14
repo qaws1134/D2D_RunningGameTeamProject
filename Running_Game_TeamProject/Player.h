@@ -13,6 +13,17 @@ private:
 public:
 	virtual ~CPlayer(void);
 
+
+private:/*
+	enum PLAYER_STATE
+	{
+		NORMAL, DASHING, JUMPING, 
+	};*/
+
+
+
+
+public:
 	// CObj을(를) 통해 상속됨
 	virtual HRESULT Ready_Object(void) override;
 	virtual int Update_Object(void) override;

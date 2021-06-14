@@ -73,6 +73,9 @@
     <Filter Include="95.Texture\01.Multi_Texture">
       <UniqueIdentifier>{cdd7f05d-99c2-4419-98d7-093e493a3275}</UniqueIdentifier>
     </Filter>
+    <Filter Include="95.Texture\99.Texture_Manager">
+      <UniqueIdentifier>{a48760dc-7653-4dae-a09c-710d77a9a714}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -150,6 +153,9 @@
     <ClInclude Include="Multi_Texture.h">
       <Filter>95.Texture\01.Multi_Texture</Filter>
     </ClInclude>
+    <ClInclude Include="Texture_Manager.h">
+      <Filter>95.Texture\99.Texture_Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Running_Game_TeamProject.cpp">
@@ -202,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="Multi_Texture.cpp">
       <Filter>95.Texture\01.Multi_Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture_Manager.cpp">
+      <Filter>95.Texture\99.Texture_Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

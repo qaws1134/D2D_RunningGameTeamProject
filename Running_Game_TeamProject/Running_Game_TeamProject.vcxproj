@@ -175,6 +175,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Include.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Texture_Manager.h" />
     <ClInclude Include="Typedef.h" />
   </ItemGroup>
   <ItemGroup>
@@ -200,6 +201,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Texture_Manager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Running_Game_TeamProject.rc" />
