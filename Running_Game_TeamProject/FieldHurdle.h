@@ -17,6 +17,8 @@ public :
 	
 private:
 	HURDLEID::ID m_eID;
+	int iCX;
+	int iCY;
 
 
 };
