@@ -63,7 +63,12 @@ CPlayer * CPlayer::Create(void)
 {
 	CPlayer*		pInstance = new CPlayer;
 	if (FAILED(pInstance->Ready_Object()))
-		Safe_Delete(pInstance);
-
+	{
+		if (pInstance == nullptr)
+		{
+			delete pInstance;
+			pInstance = nullptr;
+		}
+	}
 	return pInstance;
 }

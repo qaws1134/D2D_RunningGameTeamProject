@@ -42,7 +42,7 @@ void CStage::Render_Scene(void)
 
 void CStage::Release_Scene(void)
 {
-	
+	CObj_Manager::Get_Instance()->Release_Object();
 }
 
 CStage * CStage::Create(void)
