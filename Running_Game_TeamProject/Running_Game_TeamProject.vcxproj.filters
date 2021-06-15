@@ -120,9 +120,6 @@
     <ClInclude Include="Multi_Texture.h">
       <Filter>96.Texture\01.Multi_Texture</Filter>
     </ClInclude>
-    <ClInclude Include="Single_Texture.h">
-      <Filter>96.Texture\00.Single_Texture</Filter>
-    </ClInclude>
     <ClInclude Include="Include.h">
       <Filter>98.Headers</Filter>
     </ClInclude>
@@ -144,14 +141,14 @@
     <ClInclude Include="Obj.h">
       <Filter>02.Obj</Filter>
     </ClInclude>
-    <ClInclude Include="Texture_Manager.h">
-      <Filter>96.Texture\99.Texture_Manager</Filter>
-    </ClInclude>
     <ClInclude Include="FieldHurdle.h">
       <Filter>02.Obj\01.Field</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>02.Obj\02.Item</Filter>
+    <ClInclude Include="Texture_Manager.h">
+      <Filter>96.Texture\99.Texture_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Single_Texture.h">
+      <Filter>96.Texture\00.Single_Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -197,17 +194,14 @@
     <ClCompile Include="Multi_Texture.cpp">
       <Filter>96.Texture\01.Multi_Texture</Filter>
     </ClCompile>
-    <ClCompile Include="Single_Texture.cpp">
-      <Filter>96.Texture\00.Single_Texture</Filter>
+    <ClCompile Include="FieldHurdle.cpp">
+      <Filter>02.Obj\01.Field</Filter>
     </ClCompile>
     <ClCompile Include="Texture_Manager.cpp">
       <Filter>96.Texture\99.Texture_Manager</Filter>
     </ClCompile>
-    <ClCompile Include="FieldHurdle.cpp">
-      <Filter>02.Obj\01.Field</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>02.Obj\02.Item</Filter>
+    <ClCompile Include="Single_Texture.cpp">
+      <Filter>96.Texture\00.Single_Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
