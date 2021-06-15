@@ -1,19 +1,13 @@
-﻿  stdafx.cpp
-  Texture_Manager.cpp
-  Texture.cpp
-  Stage.cpp
-  Single_Texture.cpp
-  SceneMgr.cpp
-  Scene.cpp
+﻿  Stage.cpp
   Running_Game_TeamProject.cpp
   Player.cpp
+  Obj_Manager.cpp
   Obj.cpp
+  Multi_Texture.cpp
   MainApp.cpp
   KeyMgr.cpp
-  Graphic_Dev.cpp
-  Obj_Manager.cpp
-  Multi_Texture.cpp
   Item.cpp
+  Graphic_Dev.cpp
   FieldHurdle.cpp
   Collision_Manager.cpp
   코드를 생성하고 있습니다...
