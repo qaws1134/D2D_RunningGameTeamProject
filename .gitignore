@@ -32,7 +32,7 @@
 *.la
 *.a
 *.lib
-
+*.suo
 # Executables
 *.exe
 *.out
