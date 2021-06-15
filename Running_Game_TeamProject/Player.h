@@ -13,16 +13,14 @@ private:
 public:
 	virtual ~CPlayer(void);
 
-<<<<<<< HEAD
-private:
-=======
 
-private:/*
->>>>>>> parent of 76bc780 (Merge branch 'main' into YL)
+private:
 	enum PLAYER_STATE
 	{
-		NORMAL, DASHING, JUMPING, 
-	};*/
+		RUN, DASHING, JUMPING, DOUBLEJUMPING,  SLIDING, HIT, DEAD, END
+	};
+
+
 
 
 public:
@@ -37,10 +35,14 @@ public:
 public:
 	virtual void				Moving_Logic(void);
 
+private:
+	void		Switch_State(const PLAYER_STATE& eState);
 
 public:
 	static CPlayer*		Create(void);
 
+	PLAYER_STATE		m_eCurState;
+	PLAYER_STATE		m_ePreState;
 
 };
 

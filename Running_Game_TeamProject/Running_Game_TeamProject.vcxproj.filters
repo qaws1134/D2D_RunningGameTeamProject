@@ -43,6 +43,21 @@
     <Filter Include="02.Obj\01.Field">
       <UniqueIdentifier>{a683b040-f68e-4173-89f0-aa2d76ac86a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Obj\01.Field\00.Floor">
+      <UniqueIdentifier>{2d8966f4-a021-4792-a6e5-1d67e3181313}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\01.Field\02.LowHill">
+      <UniqueIdentifier>{1a7f4e54-7bc1-4799-8114-667c3f899b80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\01.Field\03.HighHill">
+      <UniqueIdentifier>{771248c0-fa1b-4902-99f9-30f7246ecafc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\01.Field\04.Bullet">
+      <UniqueIdentifier>{abd98fdd-bdc8-4444-8877-89276b5c66e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\01.Field\01.Floor2F">
+      <UniqueIdentifier>{a8725a28-e6e9-4b5b-ac7c-90de7fb15fda}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.Obj\03.Player">
       <UniqueIdentifier>{a04d56e3-0624-4c46-b8b0-2e169676b31d}</UniqueIdentifier>
     </Filter>
@@ -126,9 +141,6 @@
     <ClInclude Include="FieldHurdle.h">
       <Filter>02.Obj\01.Field</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>02.Obj\03.Player</Filter>
-    </ClInclude>
     <ClInclude Include="Single_Texture.h">
       <Filter>95.Texture\00.Single_Texture</Filter>
     </ClInclude>
@@ -141,15 +153,9 @@
     <ClInclude Include="Texture_Manager.h">
       <Filter>95.Texture\99.Texture_Manager</Filter>
     </ClInclude>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
     <ClInclude Include="Player.h">
       <Filter>02.Obj\03.Player</Filter>
     </ClInclude>
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> parent of 76bc780 (Merge branch 'main' into YL)
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Running_Game_TeamProject.cpp">
@@ -191,9 +197,6 @@
     <ClCompile Include="FieldHurdle.cpp">
       <Filter>02.Obj\01.Field</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>02.Obj\03.Player</Filter>
-    </ClCompile>
     <ClCompile Include="Single_Texture.cpp">
       <Filter>95.Texture\00.Single_Texture</Filter>
     </ClCompile>
@@ -206,15 +209,9 @@
     <ClCompile Include="Texture_Manager.cpp">
       <Filter>95.Texture\99.Texture_Manager</Filter>
     </ClCompile>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
     <ClCompile Include="Player.cpp">
       <Filter>02.Obj\03.Player</Filter>
     </ClCompile>
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> parent of 76bc780 (Merge branch 'main' into YL)
   </ItemGroup>
   <ItemGroup>
     <Image Include="Running_Game_TeamProject.ico">
