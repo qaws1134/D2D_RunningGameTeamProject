@@ -11,37 +11,51 @@ typedef struct tagInfo
 		const float& RotSpeed = 0.f,
 		const float& Angle = 0.f) :vPos(vecPos), vSize(vecSize), fMoveSpeed(MoveSpeed), fRotSpeed(RotSpeed), fAngle(Angle) {}
 
-	// 중앙값, 크기, 이동스피드, 회전스피드, 회전앵글값
+	// 중앙값, 이미지 사이즈, 크기(Scale값), 이동스피드, 회전스피드, 회전앵글값, RGBA값
 	_vec3		vPos;
 	_vec3		vSize;
+	_vec3		vScale;
 	_vec3		vPoint[4];
 	_vec3		vDraw[4];
+	D3DXCOLOR	vColor;
 	float		fMoveSpeed;
 	float		fRotSpeed;
 	float		fAngle;
 
 	// 체력
 	int			iHP;
-	// 필살기 = 얘는 없어도 될듯
-	unsigned int			iNuke;
+
+
+
 }INFO;
 
 
 typedef struct tagLineInfo
 {
-	bool m_bStart;
+	PDIRECT3DTEXTURE9 pTexture;
 	D3DXVECTOR3 vPos;
 
 }LINEINFO;
 
 
-
-// Texture 정보 담은 객체
 typedef struct tagTexInfo
 {
-	PDIRECT3DTEXTURE9 pTexture;
-	D3DXIMAGE_INFO tImageInfo;
+	D3DXIMAGE_INFO		tImageInfo;
+	LPDIRECT3DTEXTURE9	pTexture;
 
 }TEXINFO;
 
-#endif // !__Struct_H_
+
+typedef struct tagFrame
+{
+	float  fStartFrame;
+	float  fMaxFrame;
+	float  fFrameSpeed;
+
+
+	wstring wstrObjKey;
+	wstring wstrStateKey;
+
+}FRAME;
+
+#endif __Struct_H_

@@ -9,7 +9,6 @@ CGraphic_Dev::CGraphic_Dev()
 {
 }
 
-
 CGraphic_Dev::~CGraphic_Dev()
 {
 	Release_GraphicDev();
@@ -70,8 +69,6 @@ HRESULT CGraphic_Dev::Ready_GraphicDev(void)
 		ERR_MSG(L"CreateSprite FAILED!");
 		return E_FAIL;
 	}
-
-
 
 	return S_OK;
 }

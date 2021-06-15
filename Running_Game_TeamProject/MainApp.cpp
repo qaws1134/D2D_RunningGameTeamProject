@@ -4,7 +4,7 @@
 #include "KeyMgr.h"
 #include "Obj_Manager.h"
 #include "Graphic_Dev.h"
-
+#include "Texture_Manager.h"
 CMainApp::CMainApp()
 {
 }
@@ -36,7 +36,11 @@ void CMainApp::LateUpdate_MainApp(void)
 
 void CMainApp::Render_MainApp(void)
 {
+	CGraphic_Dev::Get_Instance()->Render_Begin();
+
 	CSceneMgr::Get_Instance()->Render_Scene();
+
+	CGraphic_Dev::Get_Instance()->Render_End();
 }
 
 void CMainApp::Release_MainApp(void)
@@ -46,6 +50,7 @@ void CMainApp::Release_MainApp(void)
 	CSceneMgr::Get_Instance()->Destroy_Instance();
 	CKeyMgr::Get_Instance()->Destroy_Instance();
 	CObj_Manager::Get_Instance()->Destroy_Instance();
+	CTexture_Manager::Get_Instance()->Destroy_Instance();
 	CGraphic_Dev::Get_Instance()->Destroy_Instance();
 
 }

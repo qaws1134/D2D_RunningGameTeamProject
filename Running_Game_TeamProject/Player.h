@@ -13,8 +13,6 @@ private:
 public:
 	virtual ~CPlayer(void);
 
-<<<<<<< Updated upstream
-=======
 
 private:
 	enum PLAYER_STATE
@@ -26,7 +24,6 @@ private:
 
 
 public:
->>>>>>> Stashed changes
 	// CObj을(를) 통해 상속됨
 	virtual HRESULT Ready_Object(void) override;
 	virtual int Update_Object(void) override;
@@ -47,8 +44,6 @@ public:
 	PLAYER_STATE		m_eCurState;
 	PLAYER_STATE		m_ePreState;
 
-private:
-	int ia = 0;
 };
 
 #endif // !__Player_H_

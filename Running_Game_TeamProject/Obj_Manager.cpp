@@ -13,7 +13,7 @@ CObj_Manager::CObj_Manager()
 
 CObj_Manager::~CObj_Manager()
 {
-
+	Release_Object();
 }
 
 HRESULT CObj_Manager::Ready_Object(void)

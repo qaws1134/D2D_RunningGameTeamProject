@@ -1,6 +1,14 @@
 #ifndef _Enum_H_
 #define _Enum_H_
 
+namespace TEXID
+{
+	enum ID
+	{
+		TEX_SINGLE, TEX_MULTI, TEX_END
+	};
+}
+
 
 namespace OBJID
 {
@@ -17,4 +25,13 @@ namespace ITEMID
 	};
 
 }
+
+namespace HURDLEID
+{
+	enum ID
+	{
+		FLOOR, FLOOR2F, LOWHILL, HIGHHILL, BULLET
+	};
+}
+
 #endif // !_Enum_H_

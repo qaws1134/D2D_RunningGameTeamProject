@@ -1,11 +1,17 @@
 #include "stdafx.h"
 #include "Obj.h"
+#include "Texture_Manager.h"
 
 
 CObj::CObj()
-	:m_bDead(false), m_bIsCollied(false)
+	:m_bDead(false), m_bIsCollied(false), m_pTexInfo(nullptr)
 {
 	ZeroMemory(&m_tInfo, sizeof(m_tInfo));
+
+	for (int i = 0; i < MATRIXID::END; ++i)
+		ZeroMemory(&m_matInfo[i], sizeof(_mat));
+
+	m_tInfo.vColor = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
 }
 
 CObj::CObj(const INFO & rInfo)
@@ -23,8 +29,6 @@ CObj::~CObj()
 {
 }
 
-<<<<<<< Updated upstream
-=======
 HRESULT CObj::Setting_TexInfo(void)
  {
 	m_pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo(m_tFrame.wstrObjKey, m_tFrame.wstrStateKey, (int)m_tFrame.fStartFrame);
@@ -45,7 +49,6 @@ void CObj::Move_Frame(void)
 		m_tFrame.fStartFrame = 0.f;
 }
 
->>>>>>> Stashed changes
 void CObj::Ready_Rectangle(void)
 {
 	// аб╩С

@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "Player.h"
-
+#include "Texture_Manager.h"
 
 CPlayer::CPlayer()
 {
+	// 주석 테스트
 }
 
 
@@ -14,12 +15,9 @@ CPlayer::~CPlayer()
 
 HRESULT CPlayer::Ready_Object(void)
 {
-	m_tInfo.vPos = _vec3(WINCX >> 1, WINCY >> 1, 0.f);
-<<<<<<< Updated upstream
-	m_tInfo.vSize = _vec3(50.f, 50.f, 0.f);
 
-	Ready_Rectangle();
-=======
+
+	m_tInfo.vPos = _vec3(WINCX >> 1, WINCY >> 1, 0.f);
 	m_tInfo.vScale = _vec3(1.f, 1.f, 0.f);
 	//초기값은 러닝
 
@@ -35,7 +33,6 @@ HRESULT CPlayer::Ready_Object(void)
 	// 상태값이 변화하면 MaxFrame도 변화 ㄱㄱㄱ
 	
 
->>>>>>> Stashed changes
 	return S_OK;
 }
 
@@ -79,16 +76,26 @@ int CPlayer::Update_Object(void)
 
 void CPlayer::LateUpdate_Object(void)
 {
-<<<<<<< Updated upstream
-=======
 	Move_Frame();
 
 	FAILED_CHECK_RETURN(Setting_TexInfo(), );
->>>>>>> Stashed changes
 }
 
 void CPlayer::Render_Object(void)
 {
+
+
+	CGraphic_Dev::Get_Instance()->Get_Sprite()->SetTransform(&m_matInfo[MATRIXID::WORLD]);
+
+
+	CGraphic_Dev::Get_Instance()->Get_Sprite()->Draw(m_pTexInfo->pTexture, 
+														nullptr, 
+														&_vec3(m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f), 
+														nullptr, 
+														D3DXCOLOR(m_tInfo.vColor.r, m_tInfo.vColor.g, m_tInfo.vColor.b, m_tInfo.vColor.a));
+
+
+
 }
 
 void CPlayer::Release_Object(void)
@@ -97,14 +104,11 @@ void CPlayer::Release_Object(void)
 
 void CPlayer::Moving_Logic(void)
 {
-	_mat matScale, matTrans, matWorld;
-	D3DXMatrixIdentity(&matWorld);
+	D3DXMatrixIdentity(&m_matInfo[MATRIXID::WORLD]);
 
-	D3DXMatrixScaling(&matScale, 1.f, 1.f, 0.f);
-	D3DXMatrixTranslation(&matTrans, m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
-	matWorld = matScale * matTrans;
-
-
+	D3DXMatrixScaling(&m_matInfo[MATRIXID::SCALE], m_tInfo.vScale.x, m_tInfo.vScale.y, m_tInfo.vScale.z);
+	D3DXMatrixTranslation(&m_matInfo[MATRIXID::TRANS], m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
+	m_matInfo[MATRIXID::WORLD] = m_matInfo[MATRIXID::SCALE] * m_matInfo[MATRIXID::TRANS];
 
 
 }
