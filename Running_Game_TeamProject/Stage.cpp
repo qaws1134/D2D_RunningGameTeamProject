@@ -4,6 +4,7 @@
 #include "Obj_Manager.h"
 #include "Texture_Manager.h"
 #include "FieldHurdle.h"
+
 CStage::CStage()
 {
 }
@@ -40,11 +41,6 @@ HRESULT CStage::Ready_Scene()
 
 
 
-
-
-
-
-
 	CObj*	pObj = nullptr;
 
 	// 플레이어 생성 
@@ -57,9 +53,6 @@ HRESULT CStage::Ready_Scene()
 	Obj = CFieldHurdle::Create({100.f,100.f,0.f}, HURDLEID::LOWHILL);
 	NULL_CHECK_RETURN(Obj, E_FAIL);
 	FAILED_CHECK_RETURN(CObj_Manager::Get_Instance()->Insert_Obj(OBJID::OBSTACLE, Obj), E_FAIL);
-
-
-	
 
 	return S_OK;
 }

@@ -52,7 +52,6 @@ protected:
 	// 애니메이션 프레임 증가함수
 	virtual void				Move_Frame(void);
 
-
 protected:
 	// 사각형
 	void	Ready_Rectangle(void);
@@ -64,12 +63,9 @@ protected:
 	bool			m_bIsCollied;
 
 	// 현재 그림을 렌더링하기위해 선언한 TEXINFO*
-
-	FRAME			m_tFrame;
-
-	_mat			m_matInfo[MATRIXID::END];
-
 	const TEXINFO*	m_pTexInfo = nullptr;
+	FRAME			m_tFrame;
+	_mat			m_matInfo[MATRIXID::END];
 };
 
 

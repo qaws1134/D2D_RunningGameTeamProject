@@ -13,14 +13,11 @@ private:
 public:
 	virtual ~CPlayer(void);
 
-
 private:
 	enum PLAYER_STATE
 	{
 		RUN, DASHING, JUMPING, DOUBLEJUMPING,  SLIDING, HIT, DEAD, END
 	};
-
-
 
 
 public:

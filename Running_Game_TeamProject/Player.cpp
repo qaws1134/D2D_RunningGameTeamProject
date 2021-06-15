@@ -28,11 +28,9 @@ HRESULT CPlayer::Ready_Object(void)
 	m_tFrame.fFrameSpeed = 0.2f;
 	
 
+
 	Setting_TexInfo();
 	
-	// 상태값이 변화하면 MaxFrame도 변화 ㄱㄱㄱ
-	
-
 	return S_OK;
 }
 
@@ -110,7 +108,6 @@ void CPlayer::Moving_Logic(void)
 	D3DXMatrixScaling(&m_matInfo[MATRIXID::SCALE], m_tInfo.vScale.x, m_tInfo.vScale.y, m_tInfo.vScale.z);
 	D3DXMatrixTranslation(&m_matInfo[MATRIXID::TRANS], m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
 	m_matInfo[MATRIXID::WORLD] = m_matInfo[MATRIXID::SCALE] * m_matInfo[MATRIXID::TRANS];
-
 
 }
 

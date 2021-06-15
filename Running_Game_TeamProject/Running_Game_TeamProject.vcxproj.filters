@@ -138,9 +138,12 @@
     <ClInclude Include="Texture_Manager.h">
       <Filter>95.Texture\99.Texture_Manager</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="Player.h">
       <Filter>02.Obj\03.Player</Filter>
     </ClInclude>
+=======
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Running_Game_TeamProject.cpp">
@@ -194,9 +197,12 @@
     <ClCompile Include="Texture_Manager.cpp">
       <Filter>95.Texture\99.Texture_Manager</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="Player.cpp">
       <Filter>02.Obj\03.Player</Filter>
     </ClCompile>
+=======
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <Image Include="Running_Game_TeamProject.ico">
