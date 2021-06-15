@@ -14,11 +14,11 @@ public:
 	virtual ~CPlayer(void);
 
 
-private:/*
+private:
 	enum PLAYER_STATE
 	{
-		NORMAL, DASHING, JUMPING, 
-	};*/
+		RUN, DASHING, JUMPING, DOUBLEJUMPING,  SLIDING, HIT, DEAD, END
+	};
 
 
 
@@ -35,10 +35,14 @@ public:
 public:
 	virtual void				Moving_Logic(void);
 
+private:
+	void		Switch_State(const PLAYER_STATE& eState);
 
 public:
 	static CPlayer*		Create(void);
 
+	PLAYER_STATE		m_eCurState;
+	PLAYER_STATE		m_ePreState;
 
 };
 
