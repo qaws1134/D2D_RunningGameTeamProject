@@ -20,7 +20,6 @@ HRESULT CMainApp::Ready_MainApp(void)
 	FAILED_CHECK_RETURN(CGraphic_Dev::Get_Instance()->Ready_GraphicDev(), E_FAIL);
 
 	CSceneMgr::Get_Instance()->Scene_Change(CSceneMgr::STAGE);
-
 	return S_OK;
 }
 

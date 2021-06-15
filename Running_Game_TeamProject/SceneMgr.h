@@ -18,7 +18,7 @@ public:
 	void Update_Scene();
 	void LateUpdate_Scene();
 	void Render_Scene(void);
-	void Release_Scene();
+	void Release_Scene(void);
 
 public:
 	void Scene_Change(SCENEID _eID);

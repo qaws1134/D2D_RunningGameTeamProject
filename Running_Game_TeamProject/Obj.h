@@ -4,7 +4,7 @@
 
 
 
-class CObj abstract
+class CObj 
 {
 protected:
 	explicit CObj(void);
@@ -44,7 +44,7 @@ public:
 
 
 protected:
-	virtual void				Moving_Logic(void)PURE;
+	virtual void				Moving_Logic(void);
 
 	// TEXINFO 뽑아오는 함수
 	HRESULT						Setting_TexInfo(void);

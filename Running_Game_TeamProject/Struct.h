@@ -58,4 +58,13 @@ typedef struct tagFrame
 
 }FRAME;
 
+
+
+typedef struct tagTime
+{
+	DWORD		dwCountTime;
+	DWORD		dwEndTime;
+
+}CUSTOMTIME;
+
 #endif __Struct_H_

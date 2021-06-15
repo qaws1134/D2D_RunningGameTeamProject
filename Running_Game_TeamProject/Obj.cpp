@@ -12,6 +12,8 @@ CObj::CObj()
 		ZeroMemory(&m_matInfo[i], sizeof(_mat));
 
 	m_tInfo.vColor = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
+	m_tInfo.vScale = _vec3(1.f, 1.f, 0.f);
+
 }
 
 CObj::CObj(const INFO & rInfo)
@@ -27,6 +29,15 @@ CObj::CObj(const CObj & rhs)
 
 CObj::~CObj()
 {
+}
+
+void CObj::Moving_Logic(void)
+{
+	D3DXMatrixIdentity(&m_matInfo[MATRIXID::WORLD]);
+
+	D3DXMatrixScaling(&m_matInfo[MATRIXID::SCALE], m_tInfo.vScale.x, m_tInfo.vScale.y, m_tInfo.vScale.z);
+	D3DXMatrixTranslation(&m_matInfo[MATRIXID::TRANS], m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
+	m_matInfo[MATRIXID::WORLD] = m_matInfo[MATRIXID::SCALE] * m_matInfo[MATRIXID::TRANS];
 }
 
 HRESULT CObj::Setting_TexInfo(void)
@@ -45,7 +56,7 @@ void CObj::Move_Frame(void)
 	// 프레임 증가
 	m_tFrame.fStartFrame += m_tFrame.fFrameSpeed;
 
-	if (m_tFrame.fStartFrame > m_tFrame.fMaxFrame)
+	if (m_tFrame.fStartFrame >= m_tFrame.fMaxFrame)
 		m_tFrame.fStartFrame = 0.f;
 }
 

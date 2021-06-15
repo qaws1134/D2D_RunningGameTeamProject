@@ -1,5 +1,5 @@
-#ifndef __CObj_Mgr_H__
-#define __CObj_Mgr_H__
+#ifndef __Obj_Manager_H_
+#define __Obj_Manager_H_
 
 
 class CObj;
@@ -33,4 +33,4 @@ private:
 	list<CObj*>	m_listObj[OBJID::END];
 };
 
-#endif // !__CObj_Mgr_H__
+#endif // !__Obj_Manager_H_

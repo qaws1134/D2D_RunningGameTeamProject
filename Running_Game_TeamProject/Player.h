@@ -17,7 +17,7 @@ public:
 private:
 	enum PLAYER_STATE
 	{
-		RUN, DASHING, JUMPING, DOUBLEJUMPING,  SLIDING, HIT, DEAD, END
+		RUN, DASHING, JUMPING, DOUBLEJUMPING, SLIDING, HIT, DEAD, END
 	};
 
 
@@ -32,8 +32,15 @@ public:
 	virtual void Release_Object(void) override;
 
 
+
+
 public:
 	virtual void				Moving_Logic(void);
+	void						Item_Acquired(const ITEMID::ID& eID);
+
+public:
+	void		Key_Input(void);
+
 
 private:
 	void		Switch_State(const PLAYER_STATE& eState);
@@ -41,9 +48,23 @@ private:
 public:
 	static CPlayer*		Create(void);
 
+
+
+private:
+	// 플레이어 상태값
 	PLAYER_STATE		m_eCurState;
 	PLAYER_STATE		m_ePreState;
 
-};
+	// 점수 젤리와 코인 카운트
+	int					m_iCoin;
+	int					m_iJelly;
 
+	// 아이템 제한시간값
+	CUSTOMTIME			m_GiantTime;
+	CUSTOMTIME			m_MagnetTime;
+	CUSTOMTIME			m_DashTime;
+
+	// 무적 체크용 불값
+	bool				m_bInvincible;
+}
 #endif // !__Player_H_

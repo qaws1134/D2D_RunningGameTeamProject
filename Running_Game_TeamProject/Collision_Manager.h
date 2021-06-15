@@ -1,8 +1,6 @@
 #ifndef __Colision_Manager
 #define __Colision_Manager
 
-
-
 class CObj;
 class CCollision_Manager
 {

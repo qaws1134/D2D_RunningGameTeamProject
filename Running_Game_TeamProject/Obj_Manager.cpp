@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Obj_Manager.h"
-#include "Collision_Manager.h"
+#include "Player.h"
 #include "SceneMgr.h"
-#include "Obj.h"
+#include "Collision_Manager.h"
 
 IMPLEMENT_SINGLETON(CObj_Manager)
 
@@ -38,6 +38,15 @@ int CObj_Manager::Update_Object(void)
 				++iter;
 		}
 	}
+
+
+
+	// 플레이어 아이템 충돌검사
+	CCollision_Manager::Collision_Rect(m_listObj[OBJID::PLAYER].front(), m_listObj[OBJID::ITEM]);
+
+
+
+
 
 	return 0;
 }
@@ -100,10 +109,10 @@ HRESULT CObj_Manager::Insert_Obj(const OBJID::ID & eID, CObj * pObj)
 
 void CObj_Manager::Item_Acquired(ITEMID::ID eID)
 {
-	//if (m_listObj[OBJ_PLAYER].empty() || CPlayer::PLAYER_DEAD == static_cast<CPlayer*>(m_listObj[OBJ_PLAYER].front())->Get_State()) 
-	//	return;
+	if (m_listObj[OBJID::PLAYER].empty()) /*|| CPlayer::PLAYER_DEAD == static_cast<CPlayer*>(m_listObj[OBJ_PLAYER].front())->Get_State()*/
+		return;
 
 
-	//dynamic_cast<CPlayer*>(m_listObj[OBJ_PLAYER].front())->Item_AcQuired(eID);
+	dynamic_cast<CPlayer*>(m_listObj[OBJID::PLAYER].front())->Item_Acquired(eID);
 
 }
