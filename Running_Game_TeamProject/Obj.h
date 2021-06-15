@@ -50,7 +50,7 @@ protected:
 	HRESULT						Setting_TexInfo(void);
 
 	// 애니메이션 프레임 증가함수
-	virtual void				Move_Frame(void);
+	void						Move_Frame(void);
 
 
 protected:
@@ -69,7 +69,7 @@ protected:
 
 	_mat			m_matInfo[MATRIXID::END];
 
-	const TEXINFO*	m_pTexInfo = nullptr;
+
 };
 
 

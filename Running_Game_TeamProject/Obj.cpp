@@ -31,7 +31,7 @@ CObj::~CObj()
 
 HRESULT CObj::Setting_TexInfo(void)
 {
-
+	const TEXINFO*	m_pTexInfo =nullptr;
 	m_pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo(m_tFrame.wstrObjKey, m_tFrame.wstrStateKey, (int)m_tFrame.fStartFrame);
 
 	NULL_CHECK_RETURN(m_pTexInfo, E_FAIL);
