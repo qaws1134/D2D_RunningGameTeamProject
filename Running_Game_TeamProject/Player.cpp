@@ -1,12 +1,11 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "Texture_Manager.h"
-#include "KeyMgr.h"
 
 CPlayer::CPlayer()
 	:m_iCoin(0), m_iJelly(0), m_bInvincible(false)
 {
-
+	// 주석 테스트
 }
 
 
@@ -18,9 +17,9 @@ CPlayer::~CPlayer()
 HRESULT CPlayer::Ready_Object(void)
 {
 
-	// 임시위치값
-	m_tInfo.vPos = _vec3(WINCX >> 1, WINCY >> 1, 0.f);
 
+	m_tInfo.vPos = _vec3(WINCX >> 1, WINCY >> 1, 0.f);
+	m_tInfo.vScale = _vec3(1.f, 1.f, 0.f);
 	//초기값은 러닝
 
 	m_tFrame.fStartFrame = 0.f;
@@ -28,12 +27,12 @@ HRESULT CPlayer::Ready_Object(void)
 	m_tFrame.wstrObjKey = L"Player";
 	m_tFrame.wstrStateKey = L"Run";
 	m_tFrame.fFrameSpeed = 0.2f;
-	
+
 
 	Setting_TexInfo();
-	
+
 	// 상태값이 변화하면 MaxFrame도 변화 ㄱㄱㄱ
-	
+
 
 	return S_OK;
 }
@@ -42,27 +41,28 @@ int CPlayer::Update_Object(void)
 {
 	DEAD_CHECK;
 
-	//if (GetAsyncKeyState(VK_F1) & 0x8000)
-	//	Switch_State(DASHING);
+	if (GetAsyncKeyState(VK_F1) & 0x8000)
+		Switch_State(DASHING);
 
-	//if (GetAsyncKeyState(VK_F2) & 0x8000)
-	//	Switch_State(RUN);
+	if (GetAsyncKeyState(VK_F2) & 0x8000)
+		Switch_State(RUN);
 
-	//if (GetAsyncKeyState(VK_F3) & 0x8000)
-	//	Switch_State(DEAD);
+	if (GetAsyncKeyState(VK_F3) & 0x8000)
+		Switch_State(DEAD);
 
 
-	//if (GetAsyncKeyState(VK_F4) & 0x8000)
-	//	Switch_State(JUMPING);
+	if (GetAsyncKeyState(VK_F4) & 0x8000)
+		Switch_State(JUMPING);
 
-	//if (GetAsyncKeyState(VK_F5) & 0x8000)
-	//	Switch_State(DOUBLEJUMPING);
+	if (GetAsyncKeyState(VK_F5) & 0x8000)
+		Switch_State(DOUBLEJUMPING);
 
-	//if (GetAsyncKeyState(VK_F6) & 0x8000)
-	//	Switch_State(SLIDING);
+	if (GetAsyncKeyState(VK_F6) & 0x8000)
+		Switch_State(SLIDING);
 
-	//if (GetAsyncKeyState(VK_F7) & 0x8000)
-	//	Switch_State(HIT);
+	if (GetAsyncKeyState(VK_F7) & 0x8000)
+		Switch_State(HIT);
+
 
 	Key_Input();
 
@@ -87,7 +87,6 @@ void CPlayer::Render_Object(void)
 {
 
 
-
 	CGraphic_Dev::Get_Instance()->Get_Sprite()->SetTransform(&m_matInfo[MATRIXID::WORLD]);
 
 
@@ -97,7 +96,6 @@ void CPlayer::Render_Object(void)
 		nullptr,
 		D3DXCOLOR(m_tInfo.vColor.r, m_tInfo.vColor.g, m_tInfo.vColor.b, m_tInfo.vColor.a));
 
-
 }
 
 void CPlayer::Release_Object(void)
@@ -106,8 +104,12 @@ void CPlayer::Release_Object(void)
 
 void CPlayer::Moving_Logic(void)
 {
+	D3DXMatrixIdentity(&m_matInfo[MATRIXID::WORLD]);
 
-	CObj::Moving_Logic();
+	D3DXMatrixScaling(&m_matInfo[MATRIXID::SCALE], m_tInfo.vScale.x, m_tInfo.vScale.y, m_tInfo.vScale.z);
+	D3DXMatrixTranslation(&m_matInfo[MATRIXID::TRANS], m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
+	m_matInfo[MATRIXID::WORLD] = m_matInfo[MATRIXID::SCALE] * m_matInfo[MATRIXID::TRANS];
+
 
 }
 
@@ -193,7 +195,6 @@ void CPlayer::Key_Input(void)
 		m_tInfo.vPos.x += 5.f;
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 		m_tInfo.vPos.x -= 5.f;
-
 }
 
 void CPlayer::Switch_State(const PLAYER_STATE & eState)
@@ -212,49 +213,49 @@ void CPlayer::Switch_State(const PLAYER_STATE & eState)
 			m_tFrame.fMaxFrame = 4;
 
 		}
-			break;
+		break;
 		case CPlayer::DASHING:
 		{
 			m_tFrame.wstrStateKey = L"Dash";
 			m_tFrame.fMaxFrame = 4;
 
 		}
-			break;
+		break;
 		case CPlayer::JUMPING:
 		{
 			m_tFrame.wstrStateKey = L"Jump1";
 			m_tFrame.fMaxFrame = 2;
 
 		}
-			break;
+		break;
 		case CPlayer::DOUBLEJUMPING:
 		{
 			m_tFrame.wstrStateKey = L"Jump2";
 			m_tFrame.fMaxFrame = 7;
 
 		}
-			break;
+		break;
 		case CPlayer::SLIDING:
 		{
 			m_tFrame.wstrStateKey = L"Sliding";
 			m_tFrame.fMaxFrame = 3;
 
 		}
-			break;
+		break;
 		case CPlayer::HIT:
 		{
 			m_tFrame.wstrStateKey = L"Hit";
 			m_tFrame.fMaxFrame = 0;
 
 		}
-			break;
+		break;
 		case CPlayer::DEAD:
 		{
 			m_tFrame.wstrStateKey = L"Dead";
 			m_tFrame.fMaxFrame = 9;
 
 		}
-			break;
+		break;
 		default:
 			break;
 		}

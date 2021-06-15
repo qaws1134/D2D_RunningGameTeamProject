@@ -32,26 +32,16 @@ public:
 	virtual void Release_Object(void) override;
 
 
-
-
 public:
 	virtual void				Moving_Logic(void);
 	void						Item_Acquired(const ITEMID::ID& eID);
-
-public:
-	void		Key_Input(void);
-
-
+	void						Key_Input(void);
 private:
 	void		Switch_State(const PLAYER_STATE& eState);
 
 public:
 	static CPlayer*		Create(void);
 
-
-
-private:
-	// 플레이어 상태값
 	PLAYER_STATE		m_eCurState;
 	PLAYER_STATE		m_ePreState;
 
@@ -66,5 +56,7 @@ private:
 
 	// 무적 체크용 불값
 	bool				m_bInvincible;
-}
+
+};
+
 #endif // !__Player_H_
