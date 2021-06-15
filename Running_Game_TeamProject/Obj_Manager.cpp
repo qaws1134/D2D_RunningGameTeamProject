@@ -94,6 +94,7 @@ HRESULT CObj_Manager::Insert_Obj(const OBJID::ID & eID, CObj * pObj)
 
 
 
+
 void CObj_Manager::Item_Acquired(ITEMID::ID eID)
 {
 	//if (m_listObj[OBJ_PLAYER].empty() || CPlayer::PLAYER_DEAD == static_cast<CPlayer*>(m_listObj[OBJ_PLAYER].front())->Get_State()) 

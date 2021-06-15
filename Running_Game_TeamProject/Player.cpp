@@ -16,31 +16,24 @@ CPlayer::~CPlayer()
 HRESULT CPlayer::Ready_Object(void)
 {
 
-
 	m_tInfo.vPos = _vec3(WINCX >> 1, WINCY >> 1, 0.f);
 	m_tInfo.vScale = _vec3(1.f, 1.f, 0.f);
 	//초기값은 러닝
 
 	m_tFrame.fStartFrame = 0.f;
-	m_tFrame.fMaxFrame = 4.f;
 	m_tFrame.wstrObjKey = L"Player";
 	m_tFrame.wstrStateKey = L"Run";
 	m_tFrame.fFrameSpeed = 0.2f;
 	
 
-
 	Setting_TexInfo();
 	
-	// 상태값이 변화하면 MaxFrame도 변화 ㄱㄱㄱ
-	
-
 	return S_OK;
 }
 
 int CPlayer::Update_Object(void)
 {
 	DEAD_CHECK;
-
 
 
 	Moving_Logic();
@@ -51,8 +44,6 @@ int CPlayer::Update_Object(void)
 
 void CPlayer::LateUpdate_Object(void)
 {
-	Move_Frame();
-
 	FAILED_CHECK_RETURN(Setting_TexInfo(), );
 }
 
@@ -63,11 +54,11 @@ void CPlayer::Render_Object(void)
 	CGraphic_Dev::Get_Instance()->Get_Sprite()->SetTransform(&m_matInfo[MATRIXID::WORLD]);
 
 
-	CGraphic_Dev::Get_Instance()->Get_Sprite()->Draw(m_pTexInfo->pTexture, 
-														nullptr, 
-														&_vec3(m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f), 
-														nullptr, 
-														D3DXCOLOR(m_tInfo.vColor.r, m_tInfo.vColor.g, m_tInfo.vColor.b, m_tInfo.vColor.a));
+	//CGraphic_Dev::Get_Instance()->Get_Sprite()->Draw(m_pTexInfo->pTexture, 
+	//													nullptr, 
+	//													&_vec3(m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f), 
+	//													nullptr, 
+	//													D3DXCOLOR(m_tInfo.vColor.r, m_tInfo.vColor.g, m_tInfo.vColor.b, m_tInfo.vColor.a));
 
 
 
@@ -75,6 +66,7 @@ void CPlayer::Render_Object(void)
 
 void CPlayer::Release_Object(void)
 {
+
 }
 
 void CPlayer::Moving_Logic(void)
@@ -93,6 +85,5 @@ CPlayer * CPlayer::Create(void)
 	CPlayer*		pInstance = new CPlayer;
 	if (FAILED(pInstance->Ready_Object()))
 		Safe_Delete(pInstance);
-
 	return pInstance;
 }
