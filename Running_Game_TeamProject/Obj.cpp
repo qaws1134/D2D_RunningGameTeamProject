@@ -23,6 +23,29 @@ CObj::~CObj()
 {
 }
 
+<<<<<<< Updated upstream
+=======
+HRESULT CObj::Setting_TexInfo(void)
+ {
+	m_pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo(m_tFrame.wstrObjKey, m_tFrame.wstrStateKey, (int)m_tFrame.fStartFrame);
+
+	NULL_CHECK_RETURN(m_pTexInfo, E_FAIL);
+
+	m_tInfo.vSize = _vec3((float)m_pTexInfo->tImageInfo.Width, (float)m_pTexInfo->tImageInfo.Height, 0.f);
+
+	return S_OK;
+}
+
+void CObj::Move_Frame(void)
+{
+	// 프레임 증가
+	m_tFrame.fStartFrame += m_tFrame.fFrameSpeed;
+
+	if (m_tFrame.fStartFrame > m_tFrame.fMaxFrame)
+		m_tFrame.fStartFrame = 0.f;
+}
+
+>>>>>>> Stashed changes
 void CObj::Ready_Rectangle(void)
 {
 	// 좌상
