@@ -37,9 +37,6 @@
     <Filter Include="01.Scene\01.Stage">
       <UniqueIdentifier>{375317cf-6eb8-4cae-9bb5-67e8e25c26e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Obj\00.Player">
-      <UniqueIdentifier>{79104faf-46a5-49ce-b4e8-0e51eb2c551d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="96.Texture">
       <UniqueIdentifier>{323affcc-0f13-45b4-8fad-bf4979969894}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,33 @@
     </Filter>
     <Filter Include="96.Texture\01.Multi_Texture">
       <UniqueIdentifier>{9542db14-a358-4f62-ab70-80fe8872777c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96.Texture\99.Texture_Manager">
+      <UniqueIdentifier>{e800582e-7183-43e6-83ce-55ab6dffd3a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\01.Field">
+      <UniqueIdentifier>{319cebf9-20f9-4623-9ccb-21ee8bca3021}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\02.Item">
+      <UniqueIdentifier>{77559cad-71c5-4385-8d3e-8e247a0967cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\03.Player">
+      <UniqueIdentifier>{79104faf-46a5-49ce-b4e8-0e51eb2c551d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\01.Field\00.Floor">
+      <UniqueIdentifier>{bc6ac2cc-5d7e-4857-9471-85c4e2c1a4d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\01.Field\01.Floor2F">
+      <UniqueIdentifier>{eb8158de-709f-432e-86d7-af8ade1481fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\01.Field\02.LowHill">
+      <UniqueIdentifier>{c242e03e-2715-46bf-99ac-2835d52b93b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\01.Field\03.HighHill">
+      <UniqueIdentifier>{c5756032-ff81-4a65-ba08-f95dbdd25c67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\01.Field\04.Bullet">
+      <UniqueIdentifier>{88ad8673-55fd-48d9-a573-bd557803eaba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -63,35 +87,14 @@
     <ClInclude Include="targetver.h">
       <Filter>99.ETC</Filter>
     </ClInclude>
-    <ClInclude Include="Include.h">
-      <Filter>98.Headers</Filter>
-    </ClInclude>
     <ClInclude Include="MainApp.h">
       <Filter>00.MainApp</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj.h">
-      <Filter>02.Obj</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>01.Scene</Filter>
     </ClInclude>
     <ClInclude Include="SceneMgr.h">
       <Filter>01.Scene\99.Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Struct.h">
-      <Filter>98.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Typedef.h">
-      <Filter>98.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Define.h">
-      <Filter>98.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Enum.h">
-      <Filter>98.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Functor.h">
-      <Filter>98.Headers</Filter>
     </ClInclude>
     <ClInclude Include="KeyMgr.h">
       <Filter>97.Managers\01.Key_Mgr</Filter>
@@ -109,7 +112,7 @@
       <Filter>01.Scene\01.Stage</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>02.Obj\00.Player</Filter>
+      <Filter>02.Obj\03.Player</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>96.Texture</Filter>
@@ -119,6 +122,36 @@
     </ClInclude>
     <ClInclude Include="Single_Texture.h">
       <Filter>96.Texture\00.Single_Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Include.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Typedef.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Functor.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj.h">
+      <Filter>02.Obj</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture_Manager.h">
+      <Filter>96.Texture\99.Texture_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldHurdle.h">
+      <Filter>02.Obj\01.Field</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>02.Obj\02.Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -156,7 +189,7 @@
       <Filter>01.Scene\01.Stage</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>02.Obj\00.Player</Filter>
+      <Filter>02.Obj\03.Player</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>96.Texture</Filter>
@@ -166,6 +199,15 @@
     </ClCompile>
     <ClCompile Include="Single_Texture.cpp">
       <Filter>96.Texture\00.Single_Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture_Manager.cpp">
+      <Filter>96.Texture\99.Texture_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="FieldHurdle.cpp">
+      <Filter>02.Obj\01.Field</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>02.Obj\02.Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
