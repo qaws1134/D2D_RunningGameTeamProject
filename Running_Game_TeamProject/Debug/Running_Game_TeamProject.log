@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 ﻿  Player.cpp
 c:\users\qaws1\desktop\runningteamproject\running_game_teamproject\player.cpp(84): error C2065: 'm_pTexInfo': 선언되지 않은 식별자입니다.
 c:\users\qaws1\desktop\runningteamproject\running_game_teamproject\player.cpp(84): error C2227: '->pTexture' 왼쪽은 클래스/구조체/공용 구조체/제네릭 형식을 가리켜야 합니다.
   c:\users\qaws1\desktop\runningteamproject\running_game_teamproject\player.cpp(84): note: 'unknown-type' 형식입니다.
+=======
+﻿  FieldHurdle.cpp
+  Running_Game_TeamProject.vcxproj -> C:\Users\qaws1\Desktop\RunningTeamProject\Debug\Running_Game_TeamProject.exe
+  Running_Game_TeamProject.vcxproj -> C:\Users\qaws1\Desktop\RunningTeamProject\Debug\Running_Game_TeamProject.pdb (Full PDB)
+>>>>>>> parent of 64f640a (Revert "허들 출력")
