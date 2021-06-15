@@ -4,7 +4,7 @@
 
 
 CObj::CObj()
-	:m_bDead(false), m_bIsCollied(false)
+	:m_bDead(false), m_bIsCollied(false), m_pTexInfo(nullptr)
 {
 	ZeroMemory(&m_tInfo, sizeof(m_tInfo));
 
@@ -31,7 +31,6 @@ CObj::~CObj()
 
 HRESULT CObj::Setting_TexInfo(void)
 {
-
 	m_pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo(m_tFrame.wstrObjKey, m_tFrame.wstrStateKey, (int)m_tFrame.fStartFrame);
 
 	NULL_CHECK_RETURN(m_pTexInfo, E_FAIL);
