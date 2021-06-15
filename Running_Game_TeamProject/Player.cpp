@@ -70,6 +70,7 @@ int CPlayer::Update_Object(void)
 
 
 
+
 	Moving_Logic();
 
 
