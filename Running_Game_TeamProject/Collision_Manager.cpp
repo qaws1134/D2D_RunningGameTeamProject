@@ -70,6 +70,7 @@ void CCollision_Manager::Collision_Rect_Monster(list<CObj*>& _Dst, list<CObj*>& 
 
 void CCollision_Manager::Collision_Rect(CObj * pPlayer, list<CObj*>& listItem)
 {
+	// 플레이어 아이템 충돌
 	/*if (CPlayer::PLAYER_DEAD == static_cast<CPlayer*>(pPlayer)->Get_State() || CPlayer::PLAYER_COMPLETELYDEAD == static_cast<CPlayer*>(pPlayer)->Get_State())
 		return;
 		*/

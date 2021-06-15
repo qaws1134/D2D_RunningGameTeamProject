@@ -3,7 +3,7 @@
 #include "Texture_Manager.h"
 
 CPlayer::CPlayer()
-	:m_iCoin(0), m_iJelly(0), m_bInvincible(false)
+	:m_iCoin(0), m_iJelly(0), m_bInvincible(false), m_bGiantOn(false)
 {
 	// 주석 테스트
 }
@@ -34,6 +34,16 @@ HRESULT CPlayer::Ready_Object(void)
 	// 상태값이 변화하면 MaxFrame도 변화 ㄱㄱㄱ
 
 
+	// 거대화 크기제한값
+	m_vLimitedScale = _vec3(2.7f, 2.7f, 0.f);
+
+
+
+	// 강화 아이템 시간값 설정
+	m_tDashTime.dwEndTime		= 5000;
+	m_tGiantTime.dwEndTime		= 5000;
+	m_tMagnetTime.dwEndTime		= 5000;
+
 	return S_OK;
 }
 
@@ -41,27 +51,27 @@ int CPlayer::Update_Object(void)
 {
 	DEAD_CHECK;
 
-	if (GetAsyncKeyState(VK_F1) & 0x8000)
-		Switch_State(DASHING);
+	//if (GetAsyncKeyState(VK_F1) & 0x8000)
+	//	Switch_State(DASHING);
 
-	if (GetAsyncKeyState(VK_F2) & 0x8000)
-		Switch_State(RUN);
+	//if (GetAsyncKeyState(VK_F2) & 0x8000)
+	//	Switch_State(RUN);
 
-	if (GetAsyncKeyState(VK_F3) & 0x8000)
-		Switch_State(DEAD);
+	//if (GetAsyncKeyState(VK_F3) & 0x8000)
+	//	Switch_State(DEAD);
 
 
-	if (GetAsyncKeyState(VK_F4) & 0x8000)
-		Switch_State(JUMPING);
+	//if (GetAsyncKeyState(VK_F4) & 0x8000)
+	//	Switch_State(JUMPING);
 
-	if (GetAsyncKeyState(VK_F5) & 0x8000)
-		Switch_State(DOUBLEJUMPING);
+	//if (GetAsyncKeyState(VK_F5) & 0x8000)
+	//	Switch_State(DOUBLEJUMPING);
 
-	if (GetAsyncKeyState(VK_F6) & 0x8000)
-		Switch_State(SLIDING);
+	//if (GetAsyncKeyState(VK_F6) & 0x8000)
+	//	Switch_State(SLIDING);
 
-	if (GetAsyncKeyState(VK_F7) & 0x8000)
-		Switch_State(HIT);
+	//if (GetAsyncKeyState(VK_F7) & 0x8000)
+	//	Switch_State(HIT);
 
 
 	Key_Input();
@@ -73,13 +83,26 @@ int CPlayer::Update_Object(void)
 	Moving_Logic();
 
 
+
+	// 자이언트 테스트
+	if (m_bGiantOn && D3DXVec3Length(&m_tInfo.vScale) < D3DXVec3Length(&m_vLimitedScale))
+	{
+		m_tInfo.vScale += _vec3(0.01f, 0.01f, 0.f);
+		m_tInfo.vSize += _vec3(0.01f, 0.01f, 0.f);
+	}
+	if (!m_bGiantOn && D3DXVec3Length(&m_tInfo.vScale) > D3DXVec3Length(&_vec3(1.f, 1.f, 0.f)))
+	{
+		m_tInfo.vScale -= _vec3(0.01f, 0.01f, 0.f);
+		m_tInfo.vSize -= _vec3(0.01f, 0.01f, 0.f);
+	}
+
 	return OBJ_NOEVENT;
 }
 
 void CPlayer::LateUpdate_Object(void)
 {
 	Move_Frame();
-
+	Item_ExpiredTimeCheck();
 	FAILED_CHECK_RETURN(Setting_TexInfo(), );
 }
 
@@ -148,7 +171,8 @@ void CPlayer::Item_Acquired(const ITEMID::ID & eID)
 	break;
 	case ITEMID::BIGGEST:
 	{
-
+		m_bGiantOn = true;
+		m_tGiantTime.dwCountTime = GetTickCount();
 	}
 	break;
 	case ITEMID::DASH:
@@ -195,6 +219,25 @@ void CPlayer::Key_Input(void)
 		m_tInfo.vPos.x += 5.f;
 	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 		m_tInfo.vPos.x -= 5.f;
+}
+
+void CPlayer::Item_ExpiredTimeCheck(void)
+{
+	// 대쉬
+	if (m_tDashTime.dwCountTime + m_tDashTime.dwEndTime < GetTickCount())
+	{
+
+	}
+	// 거대화
+	if (m_tGiantTime.dwCountTime + m_tGiantTime.dwEndTime < GetTickCount())
+	{
+		m_bGiantOn = false;
+	}
+	// 마그넷
+	if (m_tMagnetTime.dwCountTime + m_tMagnetTime.dwEndTime < GetTickCount())
+	{
+
+	}
 }
 
 void CPlayer::Switch_State(const PLAYER_STATE & eState)

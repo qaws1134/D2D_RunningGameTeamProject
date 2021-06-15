@@ -33,11 +33,15 @@ public:
 
 
 public:
-	virtual void				Moving_Logic(void);
 	void						Item_Acquired(const ITEMID::ID& eID);
-	void						Key_Input(void);
+
+
+
 private:
-	void		Switch_State(const PLAYER_STATE& eState);
+	virtual void				Moving_Logic(void);
+	void						Switch_State(const PLAYER_STATE& eState);
+	void						Key_Input(void);
+	void						Item_ExpiredTimeCheck(void);
 
 public:
 	static CPlayer*		Create(void);
@@ -50,13 +54,16 @@ public:
 	int					m_iJelly;
 
 	// 아이템 제한시간값
-	CUSTOMTIME			m_GiantTime;
-	CUSTOMTIME			m_MagnetTime;
-	CUSTOMTIME			m_DashTime;
+	CUSTOMTIME			m_tGiantTime;
+	CUSTOMTIME			m_tMagnetTime;
+	CUSTOMTIME			m_tDashTime;
 
 	// 무적 체크용 불값
 	bool				m_bInvincible;
 
+	// 거대화용 불값과 크기제한값
+	bool				m_bGiantOn;
+	_vec3				m_vLimitedScale;
 };
 
 #endif // !__Player_H_
