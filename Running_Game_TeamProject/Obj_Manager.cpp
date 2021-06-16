@@ -2,7 +2,7 @@
 #include "Obj_Manager.h"
 #include "Collision_Manager.h"
 #include "SceneMgr.h"
-#include "Obj.h"
+#include "Player.h"
 
 IMPLEMENT_SINGLETON(CObj_Manager)
 
@@ -38,6 +38,11 @@ int CObj_Manager::Update_Object(void)
 				++iter;
 		}
 	}
+
+
+	// 플레이어 아이템 충돌처리
+	CCollision_Manager::Collision_Rect(m_listObj[OBJID::PLAYER].front(), m_listObj[OBJID::ITEM]);
+
 
 	return 0;
 }
@@ -100,6 +105,6 @@ void CObj_Manager::Item_Acquired(ITEMID::ID eID)
 	//	return;
 
 
-	//dynamic_cast<CPlayer*>(m_listObj[OBJ_PLAYER].front())->Item_AcQuired(eID);
+	dynamic_cast<CPlayer*>(m_listObj[OBJID::PLAYER].front())->Item_Acquired(eID);
 
 }

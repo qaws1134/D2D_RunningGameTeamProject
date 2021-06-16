@@ -76,6 +76,30 @@
     <Filter Include="95.Texture\99.Texture_Manager">
       <UniqueIdentifier>{a48760dc-7653-4dae-a09c-710d77a9a714}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.Obj\04.UI">
+      <UniqueIdentifier>{b268b5d1-7e9e-48b7-9c60-85d8ef1a144b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\04.UI\01.HealthBar">
+      <UniqueIdentifier>{6a6a49d2-7ae1-44f2-935a-be5d4a732a29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\04.UI\02.JellyScore">
+      <UniqueIdentifier>{45523483-03cb-4ec2-a194-4a7477211047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\04.UI\03.CoinScore">
+      <UniqueIdentifier>{18a97da1-e614-4844-9cd0-7de5ca230583}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\04.UI\00.HealthIcon">
+      <UniqueIdentifier>{bdc7422b-bce8-46f1-a035-ce34d8552de3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\03.Player\99.Subject">
+      <UniqueIdentifier>{6d08f57b-29f2-4bfb-96fc-0487bcda93d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\03.Player\99.Subject\00.Observer">
+      <UniqueIdentifier>{f43b6a73-292a-454b-8372-613b9887f450}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\03.Player\99.Subject\00.Observer\00.PlayerObserver">
+      <UniqueIdentifier>{386bc49a-135c-4603-beb6-b8ccb6ad4e59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -156,6 +180,27 @@
     <ClInclude Include="Player.h">
       <Filter>02.Obj\03.Player</Filter>
     </ClInclude>
+    <ClInclude Include="HealthBar.h">
+      <Filter>02.Obj\04.UI\01.HealthBar</Filter>
+    </ClInclude>
+    <ClInclude Include="JellyScore.h">
+      <Filter>02.Obj\04.UI\02.JellyScore</Filter>
+    </ClInclude>
+    <ClInclude Include="CoinScore.h">
+      <Filter>02.Obj\04.UI\03.CoinScore</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthIcon.h">
+      <Filter>02.Obj\04.UI\00.HealthIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>02.Obj\03.Player\99.Subject</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>02.Obj\03.Player\99.Subject\00.Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObserver.h">
+      <Filter>02.Obj\03.Player\99.Subject\00.Observer\00.PlayerObserver</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Running_Game_TeamProject.cpp">
@@ -211,6 +256,27 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>02.Obj\03.Player</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthBar.cpp">
+      <Filter>02.Obj\04.UI\01.HealthBar</Filter>
+    </ClCompile>
+    <ClCompile Include="JellyScore.cpp">
+      <Filter>02.Obj\04.UI\02.JellyScore</Filter>
+    </ClCompile>
+    <ClCompile Include="CoinScore.cpp">
+      <Filter>02.Obj\04.UI\03.CoinScore</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthIcon.cpp">
+      <Filter>02.Obj\04.UI\00.HealthIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>02.Obj\03.Player\99.Subject</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>02.Obj\03.Player\99.Subject\00.Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObserver.cpp">
+      <Filter>02.Obj\03.Player\99.Subject\00.Observer\00.PlayerObserver</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -23,8 +23,8 @@ typedef struct tagInfo
 	float		fAngle;
 
 	// Ã¼·Â
-	int			iHP;
-
+	float			fHP;
+	float			fMaxHP;
 
 
 }INFO;
@@ -57,5 +57,12 @@ typedef struct tagFrame
 	wstring wstrStateKey;
 
 }FRAME;
+
+typedef struct tagTime
+{
+	DWORD		dwCountTime;
+	DWORD		dwEndTime;
+
+}CUSTOMTIME;
 
 #endif __Struct_H_
