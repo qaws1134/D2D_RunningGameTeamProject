@@ -87,18 +87,17 @@ void CCollision_Manager::Collision_Rect_Obstacle(list<CObj*>& _Dst, vector<TILE*
 void CCollision_Manager::Collision_Rect(CObj * pPlayer, list<CObj*>& listItem)
 {
 	/*if (CPlayer::PLAYER_DEAD == static_cast<CPlayer*>(pPlayer)->Get_State() || CPlayer::PLAYER_COMPLETELYDEAD == static_cast<CPlayer*>(pPlayer)->Get_State())
-		return;
+		return;*/
 
 	for (auto& Src : listItem)
 	{
 		float fX = 0.f, fY = 0.f;
 		if (Check_Rect(pPlayer, Src, &fX, &fY))
 		{
-
 			Src->Set_Collied();
 		}
 	}
-	*/
+	
 }
 
 void CCollision_Manager::Collision_Monster(CObj * pPlayer, list<CObj*>& _Src)

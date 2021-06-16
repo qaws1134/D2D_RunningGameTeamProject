@@ -12,6 +12,7 @@ CObj::CObj()
 		ZeroMemory(&m_matInfo[i], sizeof(_mat));
 
 	m_tInfo.vColor = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
+	m_tInfo.vScale = _vec3(1.f, 1.f, 0.f);
 }
 
 CObj::CObj(const INFO & rInfo)
@@ -47,7 +48,7 @@ void CObj::Move_Frame(void)
 	// 프레임 증가
 	m_tFrame.fStartFrame += m_tFrame.fFrameSpeed;
 
-	if (m_tFrame.fStartFrame > m_tFrame.fMaxFrame)
+	if (m_tFrame.fStartFrame >= m_tFrame.fMaxFrame)
 		m_tFrame.fStartFrame = 0.f;
 }
 

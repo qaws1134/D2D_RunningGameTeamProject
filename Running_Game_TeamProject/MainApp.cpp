@@ -5,6 +5,7 @@
 #include "Obj_Manager.h"
 #include "Graphic_Dev.h"
 #include "Texture_Manager.h"
+#include "Subject.h"
 CMainApp::CMainApp()
 {
 }
@@ -48,9 +49,10 @@ void CMainApp::Release_MainApp(void)
 	CSceneMgr::Get_Instance()->Destroy_Instance();
 	CKeyMgr::Get_Instance()->Destroy_Instance();
 	CObj_Manager::Get_Instance()->Destroy_Instance();
+	CSubject::Get_Instance()->Destroy_Instance();
 	CTexture_Manager::Get_Instance()->Destroy_Instance();
 	CGraphic_Dev::Get_Instance()->Destroy_Instance();
-
+	
 }
 
 CMainApp * CMainApp::Create(void)
