@@ -43,8 +43,6 @@ bool CLineMgr::Collision_Line(float _x, float* _y)
 
 	for (auto& pLine : m_listLine)
 	{
-		if (CObj_Manager::Get_Instance()->Get_List(OBJID::PLAYER)->front()->Get_Info().vPos.y + fPlayerSizeY+10.f < pLine->Get_Info().LPos.y)
-			return false;
 		if (pLine->Get_Info().LPos.x - Scroll.x < _x
 			&& pLine->Get_Info().RPos.x - Scroll.x > _x)
 		{
@@ -57,7 +55,6 @@ bool CLineMgr::Collision_Line(float _x, float* _y)
 
 			return true;
 		}
-		
 	}
 
 	return false;	

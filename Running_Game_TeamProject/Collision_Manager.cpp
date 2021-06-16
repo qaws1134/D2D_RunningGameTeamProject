@@ -82,6 +82,7 @@ void CCollision_Manager::Collision_Rect_Obstacle(list<CObj*>& _Dst, vector<TILE*
 			{
 				//플레이어 데미지
 				static_cast<CPlayer*>(Dst)->Set_Hp();
+				static_cast<CPlayer*>(Dst)->Set_Super();
 			}
 	
 		}

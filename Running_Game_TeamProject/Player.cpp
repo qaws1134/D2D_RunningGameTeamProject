@@ -8,7 +8,7 @@ CPlayer::CPlayer()
 	:m_bGiantOn(false), m_fJumpTime(0.f), m_fJumpPower(0.f)
 	, m_bJump(false), m_bDoubleJump(false), m_fHPMinus(0.f)
 	, m_bDeathCountStart(false), m_bDash(false), m_bSuper(false)
-	, m_iSuperTime(0), m_dwSuperTime(GetTickCount()), m_fJumpY(0.f)
+	, m_iSuperTime(0), m_dwSuperTime(GetTickCount()), m_fJumpY(0.f), m_bDown(false),m_iDownTime(0),m_dwDownTime(GetTickCount())
 {
 
 }
@@ -33,7 +33,6 @@ HRESULT CPlayer::Ready_Object(void)
 	m_tFrame.wstrObjKey = L"Player";
 	m_tFrame.wstrStateKey = L"Run";
 	m_tFrame.fFrameSpeed = 0.2f;
-	
 	// 강화아이템 제한시간 설정
 	m_tGiantTime.dwEndTime = 5000;
 	m_tDashTime.dwEndTime = 5000;
@@ -42,7 +41,7 @@ HRESULT CPlayer::Ready_Object(void)
 	Setting_TexInfo();
 	
 	// 상태값이 변화하면 MaxFrame도 변화 ㄱㄱㄱ
-	
+
 
 	// 거대화 제한벡터값, 증가값
 	m_vLimitScale = _vec3(2.5f, 2.5f, 0.f);
@@ -57,7 +56,7 @@ HRESULT CPlayer::Ready_Object(void)
 
 	// 점프 관련
 	m_fJumpPower = 60.f;
-
+	m_iDownTime = 1000;
 
 	m_fHPMinus = m_tInfo.fMaxHP - m_tInfo.fHP;
 	// 옵저버 알림
@@ -77,7 +76,7 @@ int CPlayer::Update_Object(void)
 
 
 	// 체력은 매 프레임마다 1씩 까이도록 임시 설정
-	m_tInfo.fHP -= 0.1f;
+	//m_tInfo.fHP -= 0.1f;
 
 	SuperTime();
 	// 키 체크
@@ -326,7 +325,7 @@ void CPlayer::Item_Expired_Check(void)
 	if (m_bGiantOn && D3DXVec3Length(&m_tInfo.vScale) >= D3DXVec3Length(&m_vLimitScale))
 	{
 		m_tInfo.vScale = m_vLimitScale;
-		m_tInfo.vSize = m_vLimitScale;
+		m_tInfo.vSize *= 2.5f;
 	}
 	else if (!m_bGiantOn && D3DXVec3Length(&m_tInfo.vScale) <= D3DXVec3Length(&_vec3(1.f, 1.f, 0.f)))
 	{
@@ -450,16 +449,38 @@ void CPlayer::Jumping(void)
 			m_bDoubleJump = false;
 		}
 	}
-	else if(bLineCol)
+	else if(bLineCol)		//라인 체크해서 y 값 준다  바닥을 거친 후 라인을 들어오면 m_bdown true로 줘서바닥을 거쳤다고 해줌
 	{
+		if (m_bDown)
+		{
+			m_tInfo.vPos.y -= (1 * m_fJumpTime - 0.5f * 9.8f * m_fJumpTime * m_fJumpTime);
+			m_fJumpTime += 0.1f;
+			if (m_dwDownTime + m_iDownTime < GetTickCount())
+			{
+				m_bDown = false;
+				m_bSuper = true;
+				m_tInfo.fHP -= 2.f;
+				m_dwDownTime=GetTickCount();
+			}
+		}
+		else
+		{
 			m_fJumpTime = 0.f;
 			m_tInfo.vPos.y = fY;
+			 
+		}
+		
 	}
 	else if (!bLineCol)
 	{
+		if (!m_bDown)
+		{
+			m_bDown = true;
+			m_dwDownTime = GetTickCount();
+		}
 		m_tInfo.vPos.y -=  (1 * m_fJumpTime - 0.5f * 9.8f * m_fJumpTime * m_fJumpTime);
 		m_fJumpTime += 0.1f;
-		if (bLineCol&& fY < m_tInfo.vPos.y)	//점프
+		if (bLineCol&&fY < m_tInfo.vPos.y)	//점프	//라인 충돌중이고 pos y 값이 플레이어보다 작을때 
 		{
 			m_fJumpTime = 0.f;
 			m_bJump = false;
@@ -467,6 +488,7 @@ void CPlayer::Jumping(void)
 			m_bDoubleJump = false;
 		}
 	}
+
 
 
 	

@@ -33,7 +33,7 @@ public:
 	void		SuperTime();
 
 public :
-	void		Set_Hp() { m_tInfo.fHP -= 2.f; }
+	void		Set_Hp() { if(!m_bSuper)m_tInfo.fHP -= 20.f; }
 	void		Set_Super() { m_bSuper = true; m_dwSuperTime = GetTickCount();}
 
 public :
@@ -98,6 +98,10 @@ public:
 	float				m_fJumpPower;
 	float				m_fJumpTime;
 	float				m_fJumpY;
+
+	bool				m_bDown;
+	DWORD				m_dwDownTime;
+	int					m_iDownTime;
 
 
 
