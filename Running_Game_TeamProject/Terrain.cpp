@@ -22,8 +22,8 @@ HRESULT CTerrain::Ready_Terrain()
 	{
 		for (size_t j = 0; j < TILEX; ++j)
 		{
-			fX = j * TILECX + (TILECX >> 1);
-			fY = i * TILECY + (TILECY >> 1);
+			fX = (float)(j * TILECX + (TILECX >> 1));
+			fY = (float)(i * TILECY + (TILECY >> 1));
 			pTile = new TILE;
 			pTile->vPos = { fX, fY, 0.f };
 			pTile->vSize = { 1.f, 1.f, 1.f };
@@ -47,12 +47,12 @@ void CTerrain::Render_Terrain()
 		Set_Tile(m_vecTile[i]->byOption);
 		m_vecTile[i]->bCollide = bCollide;
 		const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()
-			->Get_TexInfo(m_tFrame.wstrObjKey, m_tFrame.wstrStateKey, m_tFrame.fStartFrame);
+			->Get_TexInfo(m_tFrame.wstrObjKey, m_tFrame.wstrStateKey, (int)m_tFrame.fStartFrame);
 
 		if (nullptr == pTexInfo)
 			return;
-		float fCenterX = pTexInfo->tImageInfo.Width >> 1;
-		float fCenterY = pTexInfo->tImageInfo.Height >> 1;
+		float fCenterX = (float)(pTexInfo->tImageInfo.Width >> 1);
+		float fCenterY = (float)(pTexInfo->tImageInfo.Height >> 1);
 
 		D3DXMatrixScaling(&matScale, m_vecTile[i]->vSize.x, m_vecTile[i]->vSize.y, 0.f);
 		D3DXMatrixTranslation(&matTrans, m_vecTile[i]->vPos.x - iScroll.x, m_vecTile[i]->vPos.y + m_fOffsetY, 0.f);
@@ -126,12 +126,12 @@ void CTerrain::Set_Tile(int _iID)
 
 void CTerrain::TilePicking_Terrain(const D3DXVECTOR3 & vMousePos, const BYTE & byOption)
 {
-	int x = vMousePos.x / TILECX;
-	int y = vMousePos.y / TILECY;
+	int x = (int)(vMousePos.x / TILECX);
+	int y = (int)(vMousePos.y / TILECY);
 
 	int iIndex = y*TILEX + x;
 
-	if (0 > iIndex || m_vecTile.size() <= iIndex)
+	if (0 > iIndex || m_vecTile.size() <= (size_t)iIndex)
 		return;
 
 	m_vecTile[iIndex]->byOption = byOption;
