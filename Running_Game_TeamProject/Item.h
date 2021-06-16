@@ -21,6 +21,11 @@ public :
 	virtual void Release_Object(void) override;
 
 
+
+public:
+	const ITEMID::ID& Get_ItemID(void) { return m_eItemID; }
+
+
 private:
 	virtual void Moving_Logic(void) override;
 public:

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Item.h"
 #include "Obj_Manager.h"
+#include "Scroll_Manager.h"
 
 CItem::CItem(const ITEMID::ID& eID, const int& iIndex)
 	:m_eItemID(eID)
@@ -16,9 +17,6 @@ CItem::~CItem()
 
 HRESULT CItem::Ready_Object(void)
 {
-
-	// 임시 위치
-	m_tInfo.vPos = _vec3((WINCX >> 1) + 150.f, WINCY >> 1, 0.f);
 
 	m_tInfo.vSize = _vec3(1.f, 1.f, 0.f);
 	m_tFrame.fFrameSpeed = 0.1f;
@@ -199,7 +197,10 @@ void CItem::Moving_Logic(void)
 {
 	D3DXMatrixIdentity(&m_matInfo[MATRIXID::WORLD]);
 
+	_vec3 vScroll = CScroll_Manager::Get_Instance()->Get_Scroll();
+
+
 	D3DXMatrixScaling(&m_matInfo[MATRIXID::SCALE], m_tInfo.vScale.x, m_tInfo.vScale.y, m_tInfo.vScale.z);
-	D3DXMatrixTranslation(&m_matInfo[MATRIXID::TRANS], m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
+	D3DXMatrixTranslation(&m_matInfo[MATRIXID::TRANS], m_tInfo.vPos.x - vScroll.x, m_tInfo.vPos.y - vScroll.y,  m_tInfo.vPos.z);
 	m_matInfo[MATRIXID::WORLD] = m_matInfo[MATRIXID::SCALE] * m_matInfo[MATRIXID::TRANS];
 }

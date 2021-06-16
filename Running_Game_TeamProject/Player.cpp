@@ -154,7 +154,7 @@ void CPlayer::Item_Acquired(const ITEMID::ID & eItemID)
 	case ITEMID::GOLDCOIN_BIG:
 	{
 		m_iCoin += 100;
-		m_iJelly = 240;
+		m_iJelly += 240;
 	}
 	break;
 	case ITEMID::GOLDCOIN_SMALL:
@@ -202,11 +202,15 @@ void CPlayer::Item_Acquired(const ITEMID::ID & eItemID)
 	{
 		// 체력증가
 		m_tInfo.fHP += 30.f;
+		if (m_tInfo.fMaxHP <= m_tInfo.fHP)
+			m_tInfo.fHP = m_tInfo.fMaxHP;
 	}
 	break;
 	case ITEMID::ENERGY_SMALL:
 	{
 		m_tInfo.fHP += 15.f;
+		if (m_tInfo.fMaxHP <= m_tInfo.fHP)
+			m_tInfo.fHP = m_tInfo.fMaxHP;
 	}
 	break;
 	case ITEMID::JELLY_1, ITEMID::JELLY_2, ITEMID::JELLY_3:
@@ -233,9 +237,6 @@ void CPlayer::Moving_Logic(void)
 {
 	// 점프 체크먼저 ㄱㄱ
 	Jumping();
-
-
-
 
 	D3DXMatrixIdentity(&m_matInfo[MATRIXID::WORLD]);
 
