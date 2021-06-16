@@ -84,7 +84,7 @@
     </Filter>
     <Filter Include="02.Obj\03.Player\99.Subject\00.Observer\00.PlayerObserver">
       <UniqueIdentifier>{386bc49a-135c-4603-beb6-b8ccb6ad4e59}</UniqueIdentifier>
-
+    </Filter>
     <Filter Include="01.Scene\02.Menu">
       <UniqueIdentifier>{bfc27d2a-e91c-43e7-919b-fbdb92608c75}</UniqueIdentifier>
     </Filter>
@@ -102,7 +102,6 @@
     </Filter>
     <Filter Include="97.Managers\04.Line_Mgr\Line">
       <UniqueIdentifier>{647cd553-217c-4543-bab5-bfc32ed5daa0}</UniqueIdentifier>
-
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -205,7 +204,7 @@
     </ClInclude>
     <ClInclude Include="PlayerObserver.h">
       <Filter>02.Obj\03.Player\99.Subject\00.Observer\00.PlayerObserver</Filter>
-
+    </ClInclude>
     <ClInclude Include="MyEdit.h">
       <Filter>01.Scene\03.Edit</Filter>
     </ClInclude>
@@ -226,7 +225,6 @@
     </ClInclude>
     <ClInclude Include="LineMgr.h">
       <Filter>97.Managers\04.Line_Mgr</Filter>
-
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -305,6 +303,7 @@
     </ClCompile>
     <ClCompile Include="PlayerObserver.cpp">
       <Filter>02.Obj\03.Player\99.Subject\00.Observer\00.PlayerObserver</Filter>
+          </ClCompile>
     <ClCompile Include="MyEdit.cpp">
       <Filter>01.Scene\03.Edit</Filter>
     </ClCompile>
