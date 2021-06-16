@@ -22,10 +22,10 @@ void CPlayerObserver::Update(int iMessage, void * pData)
 		m_fHp = *static_cast<float*>(pData);
 		break;
 	case DATA_MESSAGE::COIN:
-		m_iCoin += *static_cast<int*>(pData);
+		m_iCoin = *static_cast<int*>(pData);
 		break;
 	case DATA_MESSAGE::JELLY:
-		m_iJelly += *static_cast<int*>(pData);
+		m_iJelly = *static_cast<int*>(pData);
 		break;
 	}
 

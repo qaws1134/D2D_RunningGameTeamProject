@@ -219,7 +219,18 @@ void CPlayer::Item_Acquired(const ITEMID::ID & eItemID)
 			m_tInfo.fHP = m_tInfo.fMaxHP;
 	}
 	break;
-	case ITEMID::JELLY_1,ITEMID::JELLY_2, ITEMID::JELLY_3:
+	case ITEMID::JELLY_1:
+	{
+		m_iJelly += 30;
+	}
+	break;
+	case ITEMID::JELLY_2:
+	{
+		m_iJelly += 30;
+	}
+	break;
+
+	case ITEMID::JELLY_3:
 	{
 		m_iJelly += 30;
 	}

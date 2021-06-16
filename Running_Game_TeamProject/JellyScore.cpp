@@ -11,6 +11,7 @@ CJellyScore::CJellyScore()
 
 CJellyScore::~CJellyScore()
 {
+	// asfadfsdafaesfa
 	Release_Object();
 }
 
@@ -62,12 +63,12 @@ void CJellyScore::Render_Object(void)
 		&_vec3(m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f),
 		nullptr,
 		D3DXCOLOR(m_tInfo.vColor.r, m_tInfo.vColor.g, m_tInfo.vColor.b, m_tInfo.vColor.a));
-	
+
 
 	m_iBufSize = lstrlen(m_szBuf) + 1;
 
 	// 글자출력
-	CGraphic_Dev::Get_Instance()->Get_Font()->DrawTextW(CGraphic_Dev::Get_Instance()->Get_Sprite(), m_szBuf, m_iBufSize, nullptr, DT_CENTER, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+	CGraphic_Dev::Get_Instance()->Get_Font()->DrawTextW(CGraphic_Dev::Get_Instance()->Get_Sprite(), m_szBuf, m_iBufSize, nullptr, 0, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
 
 }
 

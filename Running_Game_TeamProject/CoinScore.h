@@ -37,7 +37,7 @@ private:
 	int					m_iCoin;
 	CObserver*			m_pObserver;
 	TCHAR				m_szBuf[MAX_PATH];
-
+	int					m_iBufSize;
 };
 
 #endif // !__CoinScore_H_

@@ -159,8 +159,11 @@ bool CCollision_Manager::Check_Sphere(CObj * _pDst, CObj * _pSrc)
 
 bool CCollision_Manager::Check_Rect(CObj * _pDst, CObj * _pSrc, float * _x, float * _y)
 {
+	_vec3 Scroll = CScroll_Manager::Get_Instance()->Get_Scroll();
+
+
 	// 중점간의 거리
-	float fX = abs(_pDst->Get_Info().vPos.x - _pSrc->Get_Info().vPos.x);
+	float fX = abs(_pDst->Get_Info().vPos.x - _pSrc->Get_Info().vPos.x + Scroll.x);
 	float fY = abs(_pDst->Get_Info().vPos.y - _pSrc->Get_Info().vPos.y);
 	
 

@@ -5,7 +5,7 @@
 
 
 CCoinScore::CCoinScore()
-	:m_pObserver(nullptr), m_iCoin(0)
+	:m_pObserver(nullptr), m_iCoin(0), m_iBufSize(0)
 {
 }
 
@@ -47,6 +47,8 @@ void CCoinScore::LateUpdate_Object(void)
 
 	wsprintf(m_szBuf, L"%d", m_iCoin);
 
+	m_iBufSize = lstrlen(m_szBuf) + 1;
+
 	FAILED_CHECK_RETURN(Setting_TexInfo(), );
 
 }
@@ -61,6 +63,8 @@ void CCoinScore::Render_Object(void)
 		&_vec3(m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f),
 		nullptr,
 		D3DXCOLOR(m_tInfo.vColor.r, m_tInfo.vColor.g, m_tInfo.vColor.b, m_tInfo.vColor.a));
+
+	CGraphic_Dev::Get_Instance()->Get_Font()->DrawTextW(CGraphic_Dev::Get_Instance()->Get_Sprite(), m_szBuf, m_iBufSize, nullptr, 0, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
 }
 
 void CCoinScore::Release_Object(void)
