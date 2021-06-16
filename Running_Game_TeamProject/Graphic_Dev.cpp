@@ -34,31 +34,29 @@ HRESULT CGraphic_Dev::Ready_GraphicDev(void)
 	if (d3dcaps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT)
 		vp |= D3DCREATE_HARDWARE_VERTEXPROCESSING;
 	else
-		vp |= D3DCREATE_SOFTWARE_VERTEXPROCESSING; //��ǻ�Ͱ�. �������, ������, �ﺸ. 
+		vp |= D3DCREATE_SOFTWARE_VERTEXPROCESSING; 
 
 	D3DPRESENT_PARAMETERS d3dpp;
 	ZeroMemory(&d3dpp, sizeof(D3DPRESENT_PARAMETERS));
 	d3dpp.BackBufferWidth = WINCX;
 	d3dpp.BackBufferHeight = WINCY;
 	d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8;// 0~ 255 
-	d3dpp.BackBufferCount = 1; //���� ī��Ʈ�� ����Ʈ 1 + ���� �־��� ī��Ʈ ��ŭ . �׷��� 
-							   // 1�� �־��ָ� �� 2�� ���ڴ�. ����۸� ����  ?? 
+	d3dpp.BackBufferCount = 1;
 
 	d3dpp.MultiSampleType = D3DMULTISAMPLE_NONE;
 	d3dpp.MultiSampleQuality = 0;
 
-	//D3DSWAPEFFECT_DISCARD - ����ü�� ����� ����ϰڴ� ��� ���� �ȴ�. 
+
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	d3dpp.hDeviceWindow = g_hWnd;
-	d3dpp.Windowed = TRUE; //TRUE �� ��� â��� , FALSE �ϰ�� ��üȭ�� 
+	d3dpp.Windowed = TRUE; 
 	d3dpp.EnableAutoDepthStencil = TRUE;
 	d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;
 
-	// Ǯ��ũ���϶� ��� ó���� �������� ���� ó����.. �̰� ��ǻ�Ͱ� �˾Ƽ� ���� ����. 
+
 	d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 	d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 
-	//3. �� ������ ���� ��ġ�� �����ϴ� �İ�ü�� ������ ���̴�. 
 	if (FAILED(m_pSDK->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, g_hWnd, vp, &d3dpp, &m_pGraphicDev)))
 	{
 		ERR_MSG(L"CreateDevice FAILED!");
