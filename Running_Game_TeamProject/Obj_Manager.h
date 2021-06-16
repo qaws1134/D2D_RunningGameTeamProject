@@ -20,6 +20,15 @@ public:
 	void		Release_Object(void);
 
 
+
+
+
+public:
+	void		Release_List(const OBJID::ID eID);
+
+
+
+
 public:
 	list<CObj*>* Get_List(OBJID::ID eID) { return &m_listObj[eID]; }
 public :

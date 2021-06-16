@@ -69,8 +69,8 @@ void CLineMgr::Picking_Line()
 	GetCursorPos(&pt);
 	ScreenToClient(g_hWnd, &pt);
 
-	pt.x += CScroll_Manager::Get_Instance()->Get_Scroll().x;
-	int iDiv= 0.f;
+	pt.x += (LONG)(CScroll_Manager::Get_Instance()->Get_Scroll().x);
+	int iDiv= (int)0.f;
 	if (m_bCheck)
 	{
 		m_tLinePos[0].x = (float)pt.x;

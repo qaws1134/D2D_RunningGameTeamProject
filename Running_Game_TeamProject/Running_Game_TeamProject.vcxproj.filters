@@ -183,7 +183,6 @@
     <ClInclude Include="Player.h">
       <Filter>02.Obj\03.Player</Filter>
     </ClInclude>
-
     <ClInclude Include="HealthBar.h">
       <Filter>02.Obj\04.UI\01.HealthBar</Filter>
     </ClInclude>
@@ -282,7 +281,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>02.Obj\03.Player</Filter>
     </ClCompile>
-
     <ClCompile Include="HealthBar.cpp">
       <Filter>02.Obj\04.UI\01.HealthBar</Filter>
     </ClCompile>
@@ -303,7 +301,7 @@
     </ClCompile>
     <ClCompile Include="PlayerObserver.cpp">
       <Filter>02.Obj\03.Player\99.Subject\00.Observer\00.PlayerObserver</Filter>
-          </ClCompile>
+    </ClCompile>
     <ClCompile Include="MyEdit.cpp">
       <Filter>01.Scene\03.Edit</Filter>
     </ClCompile>

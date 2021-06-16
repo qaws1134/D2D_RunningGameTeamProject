@@ -88,6 +88,14 @@ void CObj_Manager::Release_Object(void)
 	}
 }
 
+void CObj_Manager::Release_List(const OBJID::ID eID)
+{
+	for (auto& pObj : m_listObj[eID])
+		Safe_Delete(pObj);
+
+	m_listObj[eID].clear();
+}
+
 HRESULT CObj_Manager::Insert_Obj(const OBJID::ID & eID, CObj * pObj)
 {
 

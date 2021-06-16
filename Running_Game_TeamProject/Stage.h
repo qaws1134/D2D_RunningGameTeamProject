@@ -19,6 +19,11 @@ public:
 public :
 	void RenderMap();
 
+
+
+private:
+	void Load_SavedImageObj(void);
+
 public:
 	static CStage*		Create(void);
 	CTerrain* m_pTerrain;

@@ -4,6 +4,7 @@
 
 #include "Scene.h"
 class CTerrain;
+class CObj;
 class CMyEdit :
 	public CScene
 {
@@ -22,11 +23,27 @@ public:
 
 
 private:
+	void		Key_Input(void);
+	void		Save_ItemList(void);
+	void		Load_ItemList(void);
+
+
+private:
 	CTerrain* m_pTerrain;
 	int m_iID;
 	bool m_bSwapLine_Or_Hurdle;
 
 
+	// 아이템
+
+	// 필요한거
+	// 위치값, 아이템ID, 젤리는 iCount까지
+	CObj*			m_pItem;
+	ITEMID::ID		m_eItemID;
+	int				m_iItemIndex;
+	_vec3			m_vItemPos;
+
+	list<CObj*>		m_listItem;
 
 };
 

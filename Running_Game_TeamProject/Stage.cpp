@@ -111,11 +111,11 @@ HRESULT CStage::Ready_Scene()
 	m_pTerrain->Load_Terrain();
 	CLineMgr::Get_Instance()->Load_Line();
 	CObj_Manager::Get_Instance()->Set_Tile(m_pTerrain->Get_Tile());
-
+	
 
 
 	// ������ ����
-	pObj = CItem::Create(ITEMID::DASH);
+	pObj = CItem::Create(ITEMID::ENERGY_SMALL);
 	NULL_CHECK_RETURN(pObj, E_FAIL);
 	FAILED_CHECK_RETURN(CObj_Manager::Get_Instance()->Insert_Obj(OBJID::ITEM, pObj), E_FAIL);
 
@@ -134,6 +134,13 @@ HRESULT CStage::Ready_Scene()
 	pObj = CCoinScore::Create();
 	NULL_CHECK_RETURN(pObj, E_FAIL);
 	FAILED_CHECK_RETURN(CObj_Manager::Get_Instance()->Insert_Obj(OBJID::UI, pObj), E_FAIL);
+
+
+
+
+
+	// 이미지 세이브한거 불러옴
+	Load_SavedImageObj();
 
 
 	return S_OK;
@@ -184,8 +191,8 @@ void CStage::RenderMap()
 {
 	const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo(L"1-1Map");
 	_vec3 Scroll = CScroll_Manager::Get_Instance()->Get_Scroll();
-	float fCenterX = pTexInfo->tImageInfo.Width >> 1;
-	float fCenterY = pTexInfo->tImageInfo.Height >> 1;
+	float fCenterX = (float)(pTexInfo->tImageInfo.Width >> 1);
+	float fCenterY = (float)(pTexInfo->tImageInfo.Height >> 1);
 	_mat matScale, matTrans;
 	D3DXMatrixScaling(&matScale, 2.5f, 2.5f, 0.f);
 	D3DXMatrixTranslation(&matTrans, WINCX+250, WINCY >> 1, 0.f);
@@ -194,6 +201,45 @@ void CStage::RenderMap()
 	CGraphic_Dev::Get_Instance()->
 		Get_Sprite()->
 		Draw(pTexInfo->pTexture, nullptr, &D3DXVECTOR3(fCenterX + Scroll.x*0.01f, fCenterY, 0.f), nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+}
+
+void CStage::Load_SavedImageObj(void)
+{
+	HANDLE hFile = CreateFile(L"../Data/Item.dat", GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+
+
+	if (INVALID_HANDLE_VALUE == hFile)
+		return;
+
+
+	CObj_Manager::Get_Instance()->Release_List(OBJID::ITEM);
+
+	DWORD dwByte = 0;
+	_vec3 vPos = _vec3(0.f, 0.f, 0.f);
+	ITEMID::ID eItemID = ITEMID::END;
+	int iIndex = 0;
+
+	CObj*	pItem = nullptr;
+
+	while (true)
+	{
+		ReadFile(hFile, &vPos, sizeof(_vec3), &dwByte, nullptr);
+
+		if (0 == dwByte)
+			break;
+
+		ReadFile(hFile, &eItemID, sizeof(ITEMID::ID), &dwByte, nullptr);
+		ReadFile(hFile, &iIndex, sizeof(int), &dwByte, nullptr);
+
+
+		pItem = CItem::Create(eItemID, iIndex);
+		pItem->Set_Pos(vPos);
+		CObj_Manager::Get_Instance()->Insert_Obj(OBJID::ITEM, pItem);
+	}
+
+
+	CloseHandle(hFile);
+
 }
 
 CStage * CStage::Create(void)
