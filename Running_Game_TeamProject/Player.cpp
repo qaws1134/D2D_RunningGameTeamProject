@@ -3,9 +3,12 @@
 #include "Texture_Manager.h"
 #include "KeyMgr.h"
 #include "Subject.h"
-
+#include "LineMgr.h"
 CPlayer::CPlayer()
-	:m_bGiantOn(false), m_fJumpTime(0.f), m_fJumpPower(0.f), m_bJump(false), m_bDoubleJump(false), m_fHPMinus(0.f), m_bDeathCountStart(false), m_bDash(false)
+	:m_bGiantOn(false), m_fJumpTime(0.f), m_fJumpPower(0.f)
+	, m_bJump(false), m_bDoubleJump(false), m_fHPMinus(0.f)
+	, m_bDeathCountStart(false), m_bDash(false), m_bSuper(false)
+	, m_iSuperTime(0), m_dwSuperTime(GetTickCount()), m_fJumpY(0.f)
 {
 
 }
@@ -22,7 +25,7 @@ HRESULT CPlayer::Ready_Object(void)
 	m_tInfo.fHP = 224.f;
 	m_tInfo.fMaxHP = m_tInfo.fHP;
 
-	m_tInfo.vPos = _vec3(100.f, WINCY >> 1, 0.f);
+	m_tInfo.vPos = _vec3(100.f, WINCY-(WINCY >> 2), 0.f);
 	//초기값은 러닝
 	m_tInfo.fMoveSpeed = 5.f;
 	m_tFrame.fStartFrame = 0.f;
@@ -48,8 +51,12 @@ HRESULT CPlayer::Ready_Object(void)
 	m_iCoin = 0;
 	m_iJelly = 0;
 
+	//무적
+	m_iSuperTime = 2000;
+
+
 	// 점프 관련
-	m_fJumpPower = 17.f;
+	m_fJumpPower = 60.f;
 
 
 	m_fHPMinus = m_tInfo.fMaxHP - m_tInfo.fHP;
@@ -72,7 +79,7 @@ int CPlayer::Update_Object(void)
 	// 체력은 매 프레임마다 1씩 까이도록 임시 설정
 	m_tInfo.fHP -= 0.1f;
 
-
+	SuperTime();
 	// 키 체크
 	Key_Input();
 
@@ -209,7 +216,7 @@ void CPlayer::Item_Acquired(const ITEMID::ID & eItemID)
 		m_tInfo.fHP += 15.f;
 	}
 	break;
-	case ITEMID::JELLY_1, ITEMID::JELLY_2, ITEMID::JELLY_3:
+	case ITEMID::JELLY_1,ITEMID::JELLY_2, ITEMID::JELLY_3:
 	{
 		m_iJelly += 30;
 	}
@@ -226,6 +233,18 @@ void CPlayer::Item_Acquired(const ITEMID::ID & eItemID)
 	break;
 	default:
 		break;
+	}
+}
+
+void CPlayer::SuperTime()
+{
+	if (m_bSuper)
+	{
+		if (m_dwSuperTime + m_iSuperTime < GetTickCount())
+		{
+			m_bSuper = false;
+			m_dwSuperTime = GetTickCount();
+		}
 	}
 }
 
@@ -250,15 +269,17 @@ void CPlayer::Moving_Logic(void)
 void CPlayer::Key_Input(void)
 {
 	// 아이템 충돌 테스트용 임시 키인풋값
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-		m_tInfo.vPos.x += 5.f;
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-		m_tInfo.vPos.x -= 5.f;
+	//if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+	//	m_tInfo.vPos.x += 5.f;
+	//if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+	//	m_tInfo.vPos.x -= 5.f;
 	
 	// 점프
 
 	if (!m_bJump && !m_bDoubleJump && CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
+		if (!m_bJump)
+			m_fJumpY = m_tInfo.vPos.y;
 		m_bJump = true;
 		Switch_State(JUMPING);
 		m_fJumpTime = 0.f;
@@ -267,8 +288,11 @@ void CPlayer::Key_Input(void)
 	// 더블점프
 	if (m_bJump && !m_bDoubleJump && CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
+		if (!m_bDoubleJump)
+			m_fJumpY = m_tInfo.vPos.y;
 		m_bJump = false;
 		m_bDoubleJump = true;
+
 		m_fJumpTime = 0.f;
 		Switch_State(DOUBLEJUMPING);
 	}
@@ -399,16 +423,48 @@ void CPlayer::Switch_State(const PLAYER_STATE & eState)
 
 void CPlayer::Jumping(void)
 {
+	float fY = 0.f;
+	bool bLineCol = CLineMgr::Get_Instance()->Collision_Line(m_tInfo.vPos.x, &fY);
 	if (m_bJump)
 	{
-		m_tInfo.vPos.y -= (m_fJumpPower * m_fJumpTime - 0.5f * 9.8f * m_fJumpTime * m_fJumpTime);
+		m_tInfo.vPos.y = m_fJumpY-(m_fJumpPower * m_fJumpTime - 0.5f * 12.8f * m_fJumpTime * m_fJumpTime);
 		m_fJumpTime += 0.2f;
+		if (bLineCol&& fY < m_tInfo.vPos.y)
+		{
+			m_bJump = false;
+			m_fJumpTime = 0.f;
+			m_tFrame.fStartFrame = m_tFrame.fMaxFrame - 1.f;
+			m_bDoubleJump = false;
+		}
 	}
-	if (m_bDoubleJump)
+	else if (m_bDoubleJump)
 	{
-		m_tInfo.vPos.y -= (m_fJumpPower * m_fJumpTime - 0.5f * 9.8f * m_fJumpTime * m_fJumpTime);
+		m_tInfo.vPos.y = m_fJumpY-(m_fJumpPower * m_fJumpTime - 0.5f * 12.8f * m_fJumpTime * m_fJumpTime);
 		m_fJumpTime += 0.2f;
-
+		if (bLineCol&& fY < m_tInfo.vPos.y)
+		{
+			m_bJump = false;
+			m_fJumpTime = 0.f;
+			m_tFrame.fStartFrame = m_tFrame.fMaxFrame - 1.f;
+			m_bDoubleJump = false;
+		}
+	}
+	else if(bLineCol)
+	{
+			m_fJumpTime = 0.f;
+			m_tInfo.vPos.y = fY;
+	}
+	else if (!bLineCol)
+	{
+		m_tInfo.vPos.y -=  (1 * m_fJumpTime - 0.5f * 9.8f * m_fJumpTime * m_fJumpTime);
+		m_fJumpTime += 0.1f;
+		if (bLineCol&& fY < m_tInfo.vPos.y)	//점프
+		{
+			m_fJumpTime = 0.f;
+			m_bJump = false;
+			m_tFrame.fStartFrame = m_tFrame.fMaxFrame - 2.f;
+			m_bDoubleJump = false;
+		}
 	}
 
 
@@ -428,17 +484,6 @@ void CPlayer::LateUpdate_StateCheck(void)
  		if (m_tFrame.fStartFrame >= (m_tFrame.fMaxFrame - 2.f) && m_tFrame.fStartFrame <= (m_tFrame.fMaxFrame - 1.f))
 			m_tFrame.fStartFrame = m_tFrame.fMaxFrame - 2.f;
 
-
-		// 착지시 
-		if (m_tInfo.vPos.y > (WINCY >> 1))
-		{
-			m_tInfo.vPos.y = WINCY >> 1;
-			m_fJumpTime = 0.f;
-			m_tFrame.fStartFrame = m_tFrame.fMaxFrame - 1.f;
-			m_bJump = false;
-			m_bDoubleJump = false;
-			
-		}
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

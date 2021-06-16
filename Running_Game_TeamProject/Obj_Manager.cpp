@@ -43,16 +43,9 @@ int CObj_Manager::Update_Object(void)
 
 
 
-	// �÷��̾� ������ �浹ó��
+
 	CCollision_Manager::Collision_Rect(m_listObj[OBJID::PLAYER].front(), m_listObj[OBJID::ITEM]);
-
-	//�÷��̾� Ÿ�� �浹�˻� 
 	CCollision_Manager::Collision_Rect_Obstacle(m_listObj[OBJID::PLAYER], m_vecObstacle);
-	//�÷��̾� x �˻�   �÷��̾� y �����ͷ� �� ����
-	//��������� cosnt Get INFO�ε�  y�� ������ �ȵɰͰ��� �������� ��������???
-	_vec3 PlayerPos = m_listObj[OBJID::PLAYER].front()->Get_Info().vPos;	
-	CLineMgr::Get_Instance()->Collision_Line(PlayerPos.x, &PlayerPos.y);
-
 
 	return 0;
 }

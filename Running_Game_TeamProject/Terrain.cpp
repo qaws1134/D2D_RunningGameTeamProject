@@ -53,12 +53,12 @@ void CTerrain::Render_Terrain()
 			return;
 		float fCenterX = pTexInfo->tImageInfo.Width >> 1;
 		float fCenterY = pTexInfo->tImageInfo.Height >> 1;
-
+		m_vecTile[i]->vScale = { fCenterX, fCenterY, 0.f };
 		D3DXMatrixScaling(&matScale, m_vecTile[i]->vSize.x, m_vecTile[i]->vSize.y, 0.f);
 		D3DXMatrixTranslation(&matTrans, m_vecTile[i]->vPos.x - iScroll.x, m_vecTile[i]->vPos.y + m_fOffsetY, 0.f);
 		matScale *= matTrans;
 		CGraphic_Dev::Get_Instance()->Get_Sprite()->SetTransform(&matScale);
-		CGraphic_Dev::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture, nullptr, &D3DXVECTOR3(fCenterX, fCenterY, 0.f), nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
+		CGraphic_Dev::Get_Instance()->Get_Sprite()->Draw(pTexInfo->pTexture, nullptr, &m_vecTile[i]->vScale, nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 	}
 }
 

@@ -84,7 +84,7 @@ HRESULT CGraphic_Dev::Ready_GraphicDev(void)
 	if (FAILED(D3DXCreateFontIndirectW(m_pGraphicDev, &tFont, &m_pFont)))
 	{
 		ERR_MSG(L"��Ʈ ���� ����!");
-
+	}
 	if (FAILED(D3DXCreateLine(m_pGraphicDev, &m_pLine)))
 	{
 		ERR_MSG(L"CreateLine FAILED!");

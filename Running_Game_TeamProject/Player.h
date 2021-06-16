@@ -1,9 +1,6 @@
 #ifndef __Player_H_
 #define __Player_H_
 
-
-
-
 #include "Obj.h"
 class CPlayer :
 	public CObj
@@ -33,8 +30,14 @@ public:
 
 public:
 	void		Item_Acquired(const ITEMID::ID& eItemID);
-	
+	void		SuperTime();
 
+public :
+	void		Set_Hp() { m_tInfo.fHP -= 2.f; }
+	void		Set_Super() { m_bSuper = true; m_dwSuperTime = GetTickCount();}
+
+public :
+	bool		Get_Super() { return m_bSuper; }
 
 
 private:
@@ -83,6 +86,10 @@ public:
 	// 대쉬 불값
 	bool				m_bDash;
 
+	//무적
+	bool				m_bSuper;
+	DWORD				m_dwSuperTime;
+	int					m_iSuperTime;
 
 	// 점프 관련 변수들
 	// 점프 체크용 불값
@@ -90,6 +97,7 @@ public:
 	bool				m_bDoubleJump;
 	float				m_fJumpPower;
 	float				m_fJumpTime;
+	float				m_fJumpY;
 
 
 

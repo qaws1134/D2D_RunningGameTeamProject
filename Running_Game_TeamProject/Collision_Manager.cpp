@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Collision_Manager.h"
 #include "Obj.h"
-
+#include "Player.h"
+#include "Scroll_Manager.h"
 CCollision_Manager::CCollision_Manager()
 {
 }
@@ -74,11 +75,15 @@ void CCollision_Manager::Collision_Rect_Obstacle(list<CObj*>& _Dst, vector<TILE*
 	{
 		for (auto& Src : _Src)
 		{
-			float fX = 0.f, fY = 0.f;
+			if (!Src->bCollide)
+				continue;
+
 			if (Check_Rect_Obstacle(Dst, Src))
 			{
 				//플레이어 데미지
+				static_cast<CPlayer*>(Dst)->Set_Hp();
 			}
+	
 		}
 	}
 }
@@ -173,21 +178,20 @@ bool CCollision_Manager::Check_Rect(CObj * _pDst, CObj * _pSrc, float * _x, floa
 
 bool CCollision_Manager::Check_Rect_Obstacle(CObj * _pDst, TILE * _pSrc)
 {
-	if (!_pSrc->bCollide)
-		return false;
-
+	_vec3 Scroll = CScroll_Manager::Get_Instance()->Get_Scroll();
 	// 중점간의 거리
-	float fX = abs(_pDst->Get_Info().vPos.x - _pSrc->vPos.x);
+	float fX = abs(_pDst->Get_Info().vPos.x - _pSrc->vPos.x+ Scroll.x);
 	float fY = abs(_pDst->Get_Info().vPos.y - _pSrc->vPos.y);
 
 
 	// 반지름 합
-	float fCX = ((_pDst->Get_Info().vSize.x + _pSrc->vSize.x) * 0.5f);
-	float fCY = ((_pDst->Get_Info().vSize.y + _pSrc->vSize.y) * 0.5f);
+	float fCX = ((_pDst->Get_Info().vSize.x + _pSrc->vScale.x) * 0.5f);
+	float fCY = ((_pDst->Get_Info().vSize.y + _pSrc->vScale.y) * 0.5f);
 
 	if (fCX > fX && fCY > fY)
 	{
-		return true;
+		if(!static_cast<CPlayer*>(_pDst)->Get_Super())
+			return true;
 	}
 	return false;
 }

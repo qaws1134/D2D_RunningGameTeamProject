@@ -71,6 +71,7 @@ typedef struct tagTile
 	D3DXVECTOR3 vSize;
 	bool bCollide;
 
+	_vec3 vScale;
 
 
 	BYTE byDrawID;

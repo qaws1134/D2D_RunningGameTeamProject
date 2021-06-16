@@ -2,7 +2,8 @@
 #include "LineMgr.h"
 #include "Line.h"
 #include "Scroll_Manager.h"
-
+#include "Obj_Manager.h"
+#include "Obj.h"
 IMPLEMENT_SINGLETON(CLineMgr)
 CLineMgr::CLineMgr() : m_bCheck(false), m_bEnd(false)
 {
@@ -34,22 +35,29 @@ void CLineMgr::Release()
 
 bool CLineMgr::Collision_Line(float _x, float* _y)
 {
+	_vec3 Scroll = CScroll_Manager::Get_Instance()->Get_Scroll();
 	if (m_listLine.empty())
 		return false;
 
+	float fPlayerSizeY = CObj_Manager::Get_Instance()->Get_List(OBJID::PLAYER)->front()->Get_Info().vSize.y*0.5f;
+
 	for (auto& pLine : m_listLine)
 	{
-		if (pLine->Get_Info().LPos.x < _x
-			&& pLine->Get_Info().RPos.x > _x)
+		if (CObj_Manager::Get_Instance()->Get_List(OBJID::PLAYER)->front()->Get_Info().vPos.y + fPlayerSizeY+10.f < pLine->Get_Info().LPos.y)
+			return false;
+		if (pLine->Get_Info().LPos.x - Scroll.x < _x
+			&& pLine->Get_Info().RPos.x - Scroll.x > _x)
 		{
 			float x1 = pLine->Get_Info().LPos.x;
 			float y1 = pLine->Get_Info().LPos.y;
 			float x2 = pLine->Get_Info().RPos.x;
 			float y2 = pLine->Get_Info().RPos.y;
 
-			*_y = ((y2 - y1) / (x2 - x1)) * (_x - x1) + y1;		//플레이어 y값
+			*_y = ((y2 - y1) / (x2 - x1)) * (_x - x1) + y1 - fPlayerSizeY;//플레이어 y값
+
 			return true;
 		}
+		
 	}
 
 	return false;	
