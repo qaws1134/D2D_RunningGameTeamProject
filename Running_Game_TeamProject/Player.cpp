@@ -8,7 +8,7 @@ CPlayer::CPlayer()
 	:m_bGiantOn(false), m_fJumpTime(0.f), m_fJumpPower(0.f)
 	, m_bJump(false), m_bDoubleJump(false), m_fHPMinus(0.f)
 	, m_bDeathCountStart(false), m_bDash(false), m_bSuper(false)
-	, m_iSuperTime(0), m_dwSuperTime(GetTickCount()), m_fJumpY(0.f), m_bDown(false),m_iDownTime(0),m_dwDownTime(GetTickCount())
+	, m_iSuperTime(0), m_dwSuperTime(GetTickCount()), m_fJumpY(0.f), m_bDown(false),m_iDownTime(0),m_dwDownTime(GetTickCount()), m_bHit(false)
 {
 
 }
@@ -65,6 +65,12 @@ HRESULT CPlayer::Ready_Object(void)
 	CSubject::Get_Instance()->Notify(DATA_MESSAGE::JELLY, &m_iJelly);
 
 
+	m_tHitTime.dwEndTime = 500;
+
+
+	m_tAlphaTime.dwEndTime = 200;
+
+
 	// 사망후 다음 씬 전환전까지 대기시간
 	m_tDeathTime.dwEndTime = 2000;
 
@@ -93,8 +99,9 @@ int CPlayer::Update_Object(void)
 	// 옵저버 갱신
 	Notify_Observer();
 	
-	
-	Move_Frame();
+	if(m_eCurState != HIT)
+		Move_Frame();
+
 	return OBJ_NOEVENT;
 }
 
@@ -104,6 +111,9 @@ void CPlayer::LateUpdate_Object(void)
 	Item_Expired_Check();
 	
 	LateUpdate_StateCheck();
+
+	if (m_eCurState == HIT)
+		m_tFrame.fStartFrame = 0.f;
 
 	FAILED_CHECK_RETURN(Setting_TexInfo(), );
 }
@@ -258,6 +268,7 @@ void CPlayer::SuperTime()
 		{
 			m_bSuper = false;
 			m_dwSuperTime = GetTickCount();
+			m_tInfo.vColor.a = 1.f;
 		}
 	}
 }
@@ -266,6 +277,14 @@ void CPlayer::Moving_Logic(void)
 {
 	// 점프 체크먼저 ㄱㄱ
 	Jumping();
+
+
+
+
+
+
+
+
 
 	D3DXMatrixIdentity(&m_matInfo[MATRIXID::WORLD]);
 
@@ -525,6 +544,24 @@ void CPlayer::LateUpdate_StateCheck(void)
 
 	///////////////////////////// 장애물 충돌/////////////////////////////////////////////////////////////////////////////////////
 
+
+	if (m_bHit && m_tHitTime.dwCountTime + m_tHitTime.dwEndTime < GetTickCount())
+	{
+		m_bHit = false;
+		Switch_State(RUN);
+	}
+
+
+	// 알파값 조정
+	if (m_bSuper)
+	{
+		if (m_tAlphaTime.dwCountTime + m_tAlphaTime.dwEndTime < GetTickCount())
+			m_tInfo.vColor.a *= -1.f;
+	}
+
+
+
+
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	///////////////////////////// 사망 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -563,6 +600,30 @@ void CPlayer::Item_EffectCheck(void)
 		m_tInfo.vSize -= m_vScaleIncrease;
 	}
 }
+
+void	CPlayer::Set_Hp()
+{
+	if (!m_bSuper)m_tInfo.fHP -= 20.f;
+
+
+	Switch_State(HIT);
+
+	m_tHitTime.dwCountTime = GetTickCount();
+}
+
+
+
+void	CPlayer::Set_Super()
+{
+	m_bSuper = true; 
+	m_bHit = true;
+	m_dwSuperTime = GetTickCount();
+
+
+	m_tAlphaTime.dwCountTime = GetTickCount();
+}
+
+
 
 CPlayer * CPlayer::Create(void)
 {
