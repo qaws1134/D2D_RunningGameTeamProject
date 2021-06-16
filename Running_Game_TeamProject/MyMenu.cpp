@@ -10,6 +10,7 @@ CMyMenu::CMyMenu()
 
 CMyMenu::~CMyMenu()
 {
+	// 주석데스네
 }
 
 HRESULT CMyMenu::Ready_Scene()
