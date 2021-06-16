@@ -20,6 +20,7 @@ public:
 	void		Render_End(HWND hWnd = nullptr);
 
 public:
+	LPD3DXLINE			Get_Line() { return m_pLine; }
 	LPD3DXSPRITE		Get_Sprite(void) { return m_pSprite; }
 	LPDIRECT3DDEVICE9	Get_Device(void) { return m_pGraphicDev; }
 	LPD3DXFONT			Get_Font(void) { return m_pFont; }
@@ -30,7 +31,7 @@ private:
 	LPDIRECT3DDEVICE9	m_pGraphicDev;
 	LPD3DXSPRITE		m_pSprite;
 	LPD3DXFONT			m_pFont;
-
+	LPD3DXLINE			m_pLine;
 };
 
 #endif // !__Graphic_Dev_H_

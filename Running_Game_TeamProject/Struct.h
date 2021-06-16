@@ -11,7 +11,7 @@ typedef struct tagInfo
 		const float& RotSpeed = 0.f,
 		const float& Angle = 0.f) :vPos(vecPos), vSize(vecSize), fMoveSpeed(MoveSpeed), fRotSpeed(RotSpeed), fAngle(Angle) {}
 
-	// Áß¾Ó°ª, ÀÌ¹ÌÁö »çÀÌÁî, Å©±â(Scale°ª), ÀÌµ¿½ºÇÇµå, È¸Àü½ºÇÇµå, È¸Àü¾Þ±Û°ª, RGBA°ª
+	// ï¿½ß¾Ó°ï¿½, ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, Å©ï¿½ï¿½(Scaleï¿½ï¿½), ï¿½Ìµï¿½ï¿½ï¿½ï¿½Çµï¿½, È¸ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½, È¸ï¿½ï¿½ï¿½Þ±Û°ï¿½, RGBAï¿½ï¿½
 	_vec3		vPos;
 	_vec3		vSize;
 	_vec3		vScale;
@@ -22,7 +22,7 @@ typedef struct tagInfo
 	float		fRotSpeed;
 	float		fAngle;
 
-	// Ã¼·Â
+	// Ã¼ï¿½ï¿½
 	float			fHP;
 	float			fMaxHP;
 
@@ -34,7 +34,7 @@ typedef struct tagLineInfo
 {
 	PDIRECT3DTEXTURE9 pTexture;
 	D3DXVECTOR3 vPos;
-
+	D3DXVECTOR2 LPos, RPos;
 }LINEINFO;
 
 
@@ -55,8 +55,8 @@ typedef struct tagFrame
 
 	wstring wstrObjKey;
 	wstring wstrStateKey;
-
 }FRAME;
+
 
 typedef struct tagTime
 {
@@ -64,5 +64,18 @@ typedef struct tagTime
 	DWORD		dwEndTime;
 
 }CUSTOMTIME;
+
+typedef struct tagTile
+{
+	D3DXVECTOR3 vPos;
+	D3DXVECTOR3 vSize;
+	bool bCollide;
+
+
+
+	BYTE byDrawID;
+	BYTE byOption;
+}TILE;
+
 
 #endif __Struct_H_

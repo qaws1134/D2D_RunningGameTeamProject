@@ -3,6 +3,8 @@
 #include "Collision_Manager.h"
 #include "SceneMgr.h"
 #include "Player.h"
+#include "Obj.h"
+#include "LineMgr.h"
 
 IMPLEMENT_SINGLETON(CObj_Manager)
 
@@ -40,8 +42,16 @@ int CObj_Manager::Update_Object(void)
 	}
 
 
-	// ÇÃ·¹ÀÌ¾î ¾ÆÀÌÅÛ Ãæµ¹Ã³¸®
+
+	// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹Ã³ï¿½ï¿½
 	CCollision_Manager::Collision_Rect(m_listObj[OBJID::PLAYER].front(), m_listObj[OBJID::ITEM]);
+
+	//ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Å¸ï¿½ï¿½ ï¿½æµ¹ï¿½Ë»ï¿½ 
+	CCollision_Manager::Collision_Rect_Obstacle(m_listObj[OBJID::PLAYER], m_vecObstacle);
+	//ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ x ï¿½Ë»ï¿½   ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ y ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ cosnt Get INFOï¿½Îµï¿½  yï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ÈµÉ°Í°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½???
+	_vec3 PlayerPos = m_listObj[OBJID::PLAYER].front()->Get_Info().vPos;	
+	CLineMgr::Get_Instance()->Collision_Line(PlayerPos.x, &PlayerPos.y);
 
 
 	return 0;

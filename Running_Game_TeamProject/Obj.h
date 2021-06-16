@@ -32,7 +32,8 @@ public:
 	virtual void	Set_Pos(const _vec3& vPos) { m_tInfo.vPos = vPos; }
 	void			Set_Dead(void) { m_bDead = true; }
 	void			Set_Collied(void) { m_bIsCollied = true; }
-
+	void			Set_Size(const _vec3& vSize) { m_tInfo.vSize = vSize; }
+	void			Set_MatTrans(_mat _mattInfo) { m_matInfo[MATRIXID::TRANS] = _mattInfo; }
 
 public:
 	virtual HRESULT		Ready_Object(void)PURE;
@@ -48,6 +49,8 @@ protected:
 
 	// TEXINFO 뽑아오는 함수
 	HRESULT						Setting_TexInfo(void);
+
+	// TEXINFO 뽑아오는 함수
 
 	// 애니메이션 프레임 증가함수
 	virtual void				Move_Frame(void);

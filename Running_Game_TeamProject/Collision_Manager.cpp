@@ -68,6 +68,22 @@ void CCollision_Manager::Collision_Rect_Monster(list<CObj*>& _Dst, list<CObj*>& 
 	}
 }
 
+void CCollision_Manager::Collision_Rect_Obstacle(list<CObj*>& _Dst, vector<TILE*>& _Src)
+{
+	for (auto& Dst : _Dst)
+	{
+		for (auto& Src : _Src)
+		{
+			float fX = 0.f, fY = 0.f;
+			if (Check_Rect_Obstacle(Dst, Src))
+			{
+				//플레이어 데미지
+			}
+		}
+	}
+}
+
+
 void CCollision_Manager::Collision_Rect(CObj * pPlayer, list<CObj*>& listItem)
 {
 	/*if (CPlayer::PLAYER_DEAD == static_cast<CPlayer*>(pPlayer)->Get_State() || CPlayer::PLAYER_COMPLETELYDEAD == static_cast<CPlayer*>(pPlayer)->Get_State())
@@ -150,6 +166,27 @@ bool CCollision_Manager::Check_Rect(CObj * _pDst, CObj * _pSrc, float * _x, floa
 	{
 		*_x = fCX - fX;
 		*_y = fCY - fY;
+		return true;
+	}
+	return false;
+}
+
+bool CCollision_Manager::Check_Rect_Obstacle(CObj * _pDst, TILE * _pSrc)
+{
+	if (!_pSrc->bCollide)
+		return false;
+
+	// 중점간의 거리
+	float fX = abs(_pDst->Get_Info().vPos.x - _pSrc->vPos.x);
+	float fY = abs(_pDst->Get_Info().vPos.y - _pSrc->vPos.y);
+
+
+	// 반지름 합
+	float fCX = ((_pDst->Get_Info().vSize.x + _pSrc->vSize.x) * 0.5f);
+	float fCY = ((_pDst->Get_Info().vSize.y + _pSrc->vSize.y) * 0.5f);
+
+	if (fCX > fX && fCY > fY)
+	{
 		return true;
 	}
 	return false;

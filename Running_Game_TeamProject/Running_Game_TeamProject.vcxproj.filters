@@ -43,21 +43,6 @@
     <Filter Include="02.Obj\01.Field">
       <UniqueIdentifier>{a683b040-f68e-4173-89f0-aa2d76ac86a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.Obj\01.Field\00.Floor">
-      <UniqueIdentifier>{2d8966f4-a021-4792-a6e5-1d67e3181313}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Obj\01.Field\02.LowHill">
-      <UniqueIdentifier>{1a7f4e54-7bc1-4799-8114-667c3f899b80}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Obj\01.Field\03.HighHill">
-      <UniqueIdentifier>{771248c0-fa1b-4902-99f9-30f7246ecafc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Obj\01.Field\04.Bullet">
-      <UniqueIdentifier>{abd98fdd-bdc8-4444-8877-89276b5c66e6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Obj\01.Field\01.Floor2F">
-      <UniqueIdentifier>{a8725a28-e6e9-4b5b-ac7c-90de7fb15fda}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.Obj\03.Player">
       <UniqueIdentifier>{a04d56e3-0624-4c46-b8b0-2e169676b31d}</UniqueIdentifier>
     </Filter>
@@ -99,6 +84,25 @@
     </Filter>
     <Filter Include="02.Obj\03.Player\99.Subject\00.Observer\00.PlayerObserver">
       <UniqueIdentifier>{386bc49a-135c-4603-beb6-b8ccb6ad4e59}</UniqueIdentifier>
+
+    <Filter Include="01.Scene\02.Menu">
+      <UniqueIdentifier>{bfc27d2a-e91c-43e7-919b-fbdb92608c75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\03.Edit">
+      <UniqueIdentifier>{742893d0-2d6f-4385-a907-52fe3cdc47ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Managers\02.Scroll_Mgr">
+      <UniqueIdentifier>{86b2b4e3-c933-4a2c-aa6b-996905457ccf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Managers\03.Filed_Mgr">
+      <UniqueIdentifier>{db9b2a5e-5971-45c9-9fb7-f17d4dacc219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Managers\04.Line_Mgr">
+      <UniqueIdentifier>{8bbecb45-629a-4bdb-bb7e-269c69d46d2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="97.Managers\04.Line_Mgr\Line">
+      <UniqueIdentifier>{647cd553-217c-4543-bab5-bfc32ed5daa0}</UniqueIdentifier>
+
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +184,7 @@
     <ClInclude Include="Player.h">
       <Filter>02.Obj\03.Player</Filter>
     </ClInclude>
+
     <ClInclude Include="HealthBar.h">
       <Filter>02.Obj\04.UI\01.HealthBar</Filter>
     </ClInclude>
@@ -200,6 +205,28 @@
     </ClInclude>
     <ClInclude Include="PlayerObserver.h">
       <Filter>02.Obj\03.Player\99.Subject\00.Observer\00.PlayerObserver</Filter>
+
+    <ClInclude Include="MyEdit.h">
+      <Filter>01.Scene\03.Edit</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMenu.h">
+      <Filter>01.Scene\02.Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Scroll_Manager.h">
+      <Filter>97.Managers\02.Scroll_Mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>97.Managers\03.Filed_Mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Extern.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>97.Managers\04.Line_Mgr\Line</Filter>
+    </ClInclude>
+    <ClInclude Include="LineMgr.h">
+      <Filter>97.Managers\04.Line_Mgr</Filter>
+
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -257,6 +284,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>02.Obj\03.Player</Filter>
     </ClCompile>
+
     <ClCompile Include="HealthBar.cpp">
       <Filter>02.Obj\04.UI\01.HealthBar</Filter>
     </ClCompile>
@@ -277,6 +305,23 @@
     </ClCompile>
     <ClCompile Include="PlayerObserver.cpp">
       <Filter>02.Obj\03.Player\99.Subject\00.Observer\00.PlayerObserver</Filter>
+    <ClCompile Include="MyEdit.cpp">
+      <Filter>01.Scene\03.Edit</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMenu.cpp">
+      <Filter>01.Scene\02.Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="Scroll_Manager.cpp">
+      <Filter>97.Managers\02.Scroll_Mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>97.Managers\03.Filed_Mgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>97.Managers\04.Line_Mgr\Line</Filter>
+    </ClCompile>
+    <ClCompile Include="LineMgr.cpp">
+      <Filter>97.Managers\04.Line_Mgr</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

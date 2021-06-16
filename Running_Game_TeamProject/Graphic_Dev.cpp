@@ -5,7 +5,8 @@ IMPLEMENT_SINGLETON(CGraphic_Dev)
 CGraphic_Dev::CGraphic_Dev()
 	:m_pSDK(nullptr),
 	m_pGraphicDev(nullptr),
-	m_pSprite(nullptr)
+	m_pSprite(nullptr),
+	m_pLine(nullptr)
 {
 }
 
@@ -20,44 +21,44 @@ HRESULT CGraphic_Dev::Ready_GraphicDev(void)
 	D3DCAPS9 d3dcaps;
 	ZeroMemory(&d3dcaps, sizeof(D3DCAPS9));
 
-	//2. ÀåÄ¡ÀÇ ¼öÁØÀ» Á¶»çÇÏ°í 
-	//D3DADAPTER_DEFAULT, Áø´Üµµ±¸¿¡ ³ª¿­µÈ ±×·¡ÇÈ Ä«µåÀÇ Á¤º¸¸¦ Á¶»çÇÏ°Ú´Ù.
+	//2. ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ 
+	//D3DADAPTER_DEFAULT, ï¿½ï¿½ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°Ú´ï¿½.
 	//HAL - Hardware Abstract Layer 
 	if (FAILED(m_pSDK->GetDeviceCaps(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, &d3dcaps)))
 	{
 		ERR_MSG(L"m_pSDK Create FAILED!");
 		return E_FAIL;
 	}
-	DWORD vp = 0; // ¹öÅØ½º ÇÁ·Î¼¼½Ì  = Á¤Á¡º¯È¯ + Á¶¸í¿¬»ê
+	DWORD vp = 0; // ï¿½ï¿½ï¿½Ø½ï¿½ ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ï¿½  = ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¯ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				  //HW//TRANSFORM//AND//LIGHT//
 	if (d3dcaps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT)
 		vp |= D3DCREATE_HARDWARE_VERTEXPROCESSING;
 	else
-		vp |= D3DCREATE_SOFTWARE_VERTEXPROCESSING; //ÄÄÇ»ÅÍ°¡. ¼¼Á¾´ë¿Õ, Áøµ¾°³, »ïº¸. 
+		vp |= D3DCREATE_SOFTWARE_VERTEXPROCESSING; //ï¿½ï¿½Ç»ï¿½Í°ï¿½. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ïº¸. 
 
 	D3DPRESENT_PARAMETERS d3dpp;
 	ZeroMemory(&d3dpp, sizeof(D3DPRESENT_PARAMETERS));
 	d3dpp.BackBufferWidth = WINCX;
 	d3dpp.BackBufferHeight = WINCY;
 	d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8;// 0~ 255 
-	d3dpp.BackBufferCount = 1; //¿©±â Ä«¿îÆ®´Â µðÆúÆ® 1 + ³»°¡ ³Ö¾îÁØ Ä«¿îÆ® ¸¸Å­ . ±×·¡¼­ 
-							   // 1À» ³Ö¾îÁÖ¸é ÃÑ 2°³ ¾²°Ú´Ù. ¹é¹öÆÛ¸¦ ¤·¤»  ?? 
+	d3dpp.BackBufferCount = 1; //ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® 1 + ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ® ï¿½ï¿½Å­ . ï¿½×·ï¿½ï¿½ï¿½ 
+							   // 1ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ö¸ï¿½ ï¿½ï¿½ 2ï¿½ï¿½ ï¿½ï¿½ï¿½Ú´ï¿½. ï¿½ï¿½ï¿½ï¿½Û¸ï¿½ ï¿½ï¿½ï¿½ï¿½  ?? 
 
 	d3dpp.MultiSampleType = D3DMULTISAMPLE_NONE;
 	d3dpp.MultiSampleQuality = 0;
 
-	//D3DSWAPEFFECT_DISCARD - ½º¿ÒÃ¼ÀÎ ¹æ½ÄÀ» »ç¿ëÇÏ°Ú´Ù ¶ó´Â ¶æÀÌ µÈ´Ù. 
+	//D3DSWAPEFFECT_DISCARD - ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï°Ú´ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È´ï¿½. 
 	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 	d3dpp.hDeviceWindow = g_hWnd;
-	d3dpp.Windowed = TRUE; //TRUE ÀÏ °æ¿ì Ã¢¸ðµå , FALSE ÀÏ°æ¿ì ÀüÃ¼È­¸é 
+	d3dpp.Windowed = TRUE; //TRUE ï¿½ï¿½ ï¿½ï¿½ï¿½ Ã¢ï¿½ï¿½ï¿½ , FALSE ï¿½Ï°ï¿½ï¿½ ï¿½ï¿½Ã¼È­ï¿½ï¿½ 
 	d3dpp.EnableAutoDepthStencil = TRUE;
 	d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;
 
-	// Ç®½ºÅ©¸°ÀÏ¶§ ¾î¶»°Ô Ã³¸®ÇÒ °ÍÀÎÁö¿¡ ´ëÇÑ Ã³¸®µå.. ÀÌ°Ç ÄÄÇ»ÅÍ°¡ ¾Ë¾Æ¼­ ÇØÁÙ ¹®Á¦. 
+	// Ç®ï¿½ï¿½Å©ï¿½ï¿½ï¿½Ï¶ï¿½ ï¿½î¶»ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½.. ï¿½Ì°ï¿½ ï¿½ï¿½Ç»ï¿½Í°ï¿½ ï¿½Ë¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. 
 	d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 	d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 
-	//3. ±× ¼öÁØÀ» Åä´ë·Î ÀåÄ¡¸¦ Á¦¾îÇÏ´Â ÄÄ°´Ã¼¸¦ »ý¼ºÇÒ °ÍÀÌ´Ù. 
+	//3. ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ä°ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½. 
 	if (FAILED(m_pSDK->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, g_hWnd, vp, &d3dpp, &m_pGraphicDev)))
 	{
 		ERR_MSG(L"CreateDevice FAILED!");
@@ -71,6 +72,7 @@ HRESULT CGraphic_Dev::Ready_GraphicDev(void)
 	}
 
 
+
 	D3DXFONT_DESCW tFont;
 	ZeroMemory(&tFont, sizeof(D3DXFONT_DESCW));
 
@@ -78,13 +80,17 @@ HRESULT CGraphic_Dev::Ready_GraphicDev(void)
 	tFont.Height = 20;
 	tFont.Weight = FW_HEAVY;
 	tFont.CharSet = HANGUL_CHARSET;
-	lstrcpy(tFont.FaceName, L"±Ã¼­");
+	lstrcpy(tFont.FaceName, L"ï¿½Ã¼ï¿½");
 	if (FAILED(D3DXCreateFontIndirectW(m_pGraphicDev, &tFont, &m_pFont)))
 	{
-		ERR_MSG(L"ÆùÆ® »ý¼º ½ÇÆÐ!");
+		ERR_MSG(L"ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½!");
+
+	if (FAILED(D3DXCreateLine(m_pGraphicDev, &m_pLine)))
+	{
+		ERR_MSG(L"CreateLine FAILED!");
+
 		return E_FAIL;
 	}
-
 
 	return S_OK;
 }

@@ -22,7 +22,8 @@ public:
 
 public:
 	list<CObj*>* Get_List(OBJID::ID eID) { return &m_listObj[eID]; }
-
+public :
+	void Set_Tile(vector<TILE*> _Obstacle) { m_vecObstacle = _Obstacle; }
 
 public:
 	HRESULT		Insert_Obj(const OBJID::ID& eID, CObj* pObj);
@@ -31,6 +32,8 @@ public:
 
 private:
 	list<CObj*>	m_listObj[OBJID::END];
+	vector<TILE*> m_vecObstacle;
+
 };
 
 #endif // !__CObj_Mgr_H__

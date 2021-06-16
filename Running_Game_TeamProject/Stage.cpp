@@ -9,8 +9,10 @@
 #include "HealthBar.h"
 #include "JellyScore.h"
 #include "CoinScore.h"
-
-
+#include "Terrain.h"
+#include "LineMgr.h"
+#include "Scroll_Manager.h"
+#include "KeyMgr.h"
 
 CStage::CStage()
 {
@@ -24,11 +26,9 @@ CStage::~CStage()
 
 HRESULT CStage::Ready_Scene()
 {
-
-
-	// ÅØ½ºÃÄ ·Îµù ¸ÕÀú
+	// ï¿½Ø½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½
 	
-	// ÇÃ·¹ÀÌ¾î
+	// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Player", TEXID::TEX_MULTI, L"../Resource/Player/Dash/%d.png", L"Dash", 4);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Player", TEXID::TEX_MULTI, L"../Resource/Player/Dead/%d.png", L"Dead", 9);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Player", TEXID::TEX_MULTI, L"../Resource/Player/Hit/%d.png", L"Hit", 1);
@@ -40,8 +40,8 @@ HRESULT CStage::Ready_Scene()
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// ¾ÆÀÌÅÛ ÀÌ¹ÌÁö ·Îµå
-	// ÄÚÀÎ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Îµï¿½
+	// ï¿½ï¿½ï¿½ï¿½
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Coin/Gold/Big/%d.png", L"GoldCoin_Big", 4);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Coin/Gold/Small/%d.png", L"GoldCoin_Small", 6);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Coin/Silver/Big/%d.png", L"SilverCoin_Big", 4);
@@ -49,7 +49,7 @@ HRESULT CStage::Ready_Scene()
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/TransCoin/%d.png", L"TransCoin", 4);
 
 
-	// °­È­ ¹× È¸º¹ ¾ÆÀÌÅÛ
+	// ï¿½ï¿½È­ ï¿½ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Biggest/%d.png", L"Biggest", 4);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Dash/%d.png", L"Dash", 4);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Energy/Big/%d.png", L"Energy_Big", 4);
@@ -58,7 +58,7 @@ HRESULT CStage::Ready_Scene()
 
 
 
-	// Á©¸®
+	// ï¿½ï¿½ï¿½ï¿½
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Jelly/1-1/%d.png", L"Jelly_1", 20);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Jelly/1-2/%d.png", L"Jelly_2", 20);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Jelly/1-3/%d.png", L"Jelly_3", 10);
@@ -73,7 +73,7 @@ HRESULT CStage::Ready_Scene()
 
 
 
-	// UI ÀÌ¹ÌÁö ·Îµå
+	// UI ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½Îµï¿½
 
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"HealthIcon", TEXID::TEX_SINGLE, L"../Resource/UI/HealthIcon.png");
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"HealthBar", TEXID::TEX_SINGLE, L"../Resource/UI/HealthBar.png");
@@ -86,33 +86,35 @@ HRESULT CStage::Ready_Scene()
 
 
 
-	// Àå¾Ö¹°
+	// ï¿½ï¿½Ö¹ï¿½
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"1-1", TEXID::TEX_MULTI, L"../Resource/Map/1-1/Bullet/%d.png", L"Bullet", 8);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"1-1", TEXID::TEX_MULTI, L"../Resource/Map/1-1/Celling/%d.png", L"Celling", 2);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"1-1", TEXID::TEX_MULTI, L"../Resource/Map/1-1/Floor/%d.png", L"Floor", 2);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"1-1", TEXID::TEX_MULTI, L"../Resource/Map/1-1/HighHill/%d.png", L"HighHill", 2);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"1-1", TEXID::TEX_MULTI, L"../Resource/Map/1-1/LowHill/%d.png", L"LowHill", 2);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"1-1Map", TEXID::TEX_SINGLE, L"../Resource/Map/1-1/Map/0.png");
+	CTexture_Manager::Get_Instance()->Insert_Texture(L"EMPTY", TEXID::TEX_SINGLE, L"../Resource/Map/0.png");
 
 
 
 
-
+	// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	CObj*	pObj = nullptr;
-
-	// ÇÃ·¹ÀÌ¾î »ý¼º 
 	pObj = CPlayer::Create();
 	NULL_CHECK_RETURN(pObj, E_FAIL);
 	FAILED_CHECK_RETURN(CObj_Manager::Get_Instance()->Insert_Obj(OBJID::PLAYER, pObj), E_FAIL);
 
-	// Àå¾Ö¹° »ý¼º
-	CObj*	Obj = nullptr;
-	Obj = CFieldHurdle::Create({100.f,100.f,0.f}, HURDLEID::LOWHILL);
-	NULL_CHECK_RETURN(Obj, E_FAIL);
-	FAILED_CHECK_RETURN(CObj_Manager::Get_Instance()->Insert_Obj(OBJID::OBSTACLE, Obj), E_FAIL);
+
+	m_pTerrain = new CTerrain;
+	FAILED_CHECK_RETURN(m_pTerrain->Ready_Terrain(), E_FAIL);
+
+	m_pTerrain->Load_Terrain();
+	CLineMgr::Get_Instance()->Load_Line();
+	CObj_Manager::Get_Instance()->Set_Tile(m_pTerrain->Get_Tile());
 
 
-	// ¾ÆÀÌÅÛ »ý¼º
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	pObj = CItem::Create(ITEMID::DASH);
 	NULL_CHECK_RETURN(pObj, E_FAIL);
 	FAILED_CHECK_RETURN(CObj_Manager::Get_Instance()->Insert_Obj(OBJID::ITEM, pObj), E_FAIL);
@@ -139,7 +141,16 @@ HRESULT CStage::Ready_Scene()
 
 void CStage::Update_Scene()
 {
+
+	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT))
+		CScroll_Manager::Get_Instance()->Set_Scroll(_vec3{ -10.f,0.f,0.f });
+	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_RIGHT))
+		CScroll_Manager::Get_Instance()->Set_Scroll(_vec3{ 10.f,0.f,0.f });
+	
+
+
 	CObj_Manager::Get_Instance()->Update_Object();
+	
 }
 
 void CStage::LateUpdate_Scene()
@@ -149,12 +160,40 @@ void CStage::LateUpdate_Scene()
 
 void CStage::Render_Scene(void)
 {
+	CGraphic_Dev::Get_Instance()->Render_Begin();
+
+
+	RenderMap();
+
+
+	m_pTerrain->Render_Terrain();
+	CLineMgr::Get_Instance()->Render();
 	CObj_Manager::Get_Instance()->Render_Object();
+	CGraphic_Dev::Get_Instance()->Render_End();
 }
 
 void CStage::Release_Scene(void)
 {
+	Safe_Delete(m_pTerrain);
+	CLineMgr::Destroy_Instance();
+	CScroll_Manager::Destroy_Instance();
 	CObj_Manager::Get_Instance()->Destroy_Instance();
+}
+
+void CStage::RenderMap()
+{
+	const TEXINFO* pTexInfo = CTexture_Manager::Get_Instance()->Get_TexInfo(L"1-1Map");
+	_vec3 Scroll = CScroll_Manager::Get_Instance()->Get_Scroll();
+	float fCenterX = pTexInfo->tImageInfo.Width >> 1;
+	float fCenterY = pTexInfo->tImageInfo.Height >> 1;
+	_mat matScale, matTrans;
+	D3DXMatrixScaling(&matScale, 2.5f, 2.5f, 0.f);
+	D3DXMatrixTranslation(&matTrans, WINCX+250, WINCY >> 1, 0.f);
+	matScale *= matTrans;
+	CGraphic_Dev::Get_Instance()->Get_Sprite()->SetTransform(&matScale);
+	CGraphic_Dev::Get_Instance()->
+		Get_Sprite()->
+		Draw(pTexInfo->pTexture, nullptr, &D3DXVECTOR3(fCenterX + Scroll.x*0.01f, fCenterY, 0.f), nullptr, D3DCOLOR_ARGB(255, 255, 255, 255));
 }
 
 CStage * CStage::Create(void)

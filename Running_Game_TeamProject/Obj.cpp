@@ -41,6 +41,8 @@ HRESULT CObj::Setting_TexInfo(void)
 	return S_OK;
 }
 
+
+
 void CObj::Move_Frame(void)
 {
 	// 프레임 증가
