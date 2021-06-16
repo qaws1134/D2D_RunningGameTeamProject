@@ -149,10 +149,6 @@ HRESULT CStage::Ready_Scene()
 void CStage::Update_Scene()
 {
 
-	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_LEFT))
-		CScroll_Manager::Get_Instance()->Set_Scroll(_vec3{ -10.f,0.f,0.f });
-	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_RIGHT))
-		CScroll_Manager::Get_Instance()->Set_Scroll(_vec3{ 10.f,0.f,0.f });
 	
 
 
@@ -174,7 +170,7 @@ void CStage::Render_Scene(void)
 
 
 	m_pTerrain->Render_Terrain();
-	CLineMgr::Get_Instance()->Render();
+	//CLineMgr::Get_Instance()->Render();
 	CObj_Manager::Get_Instance()->Render_Object();
 	CGraphic_Dev::Get_Instance()->Render_End();
 }

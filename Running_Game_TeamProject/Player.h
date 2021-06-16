@@ -94,6 +94,9 @@ public:
 
 	// 대쉬 불값
 	bool				m_bDash;
+	
+	bool				m_bAlpha;
+
 
 	//무적
 	bool				m_bSuper;

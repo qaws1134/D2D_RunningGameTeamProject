@@ -81,13 +81,14 @@ void CCollision_Manager::Collision_Rect_Obstacle(list<CObj*>& _Dst, vector<TILE*
 			if (Check_Rect_Obstacle(Dst, Src))
 			{
 				//플레이어 데미지
-				static_cast<CPlayer*>(Dst)->Set_Hp();
 				static_cast<CPlayer*>(Dst)->Set_Super();
 
 				if (static_cast<CPlayer*>(Dst)->Get_Dash() || static_cast<CPlayer*>(Dst)->Get_Giant())
 				{
 					Src->bPlayerCol = true;
+					continue;
 				}
+				static_cast<CPlayer*>(Dst)->Set_Hp();
 			}
 	
 		}
@@ -187,6 +188,7 @@ bool CCollision_Manager::Check_Rect(CObj * _pDst, CObj * _pSrc, float * _x, floa
 
 bool CCollision_Manager::Check_Rect_Obstacle(CObj * _pDst, TILE * _pSrc)
 {
+
 	_vec3 Scroll = CScroll_Manager::Get_Instance()->Get_Scroll();
 	// 중점간의 거리
 	float fX = abs(_pDst->Get_Info().vPos.x - _pSrc->vPos.x+ Scroll.x);
