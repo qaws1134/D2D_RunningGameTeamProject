@@ -20,4 +20,5 @@ using namespace std;
 #include "Enum.h"
 #include "Define.h"
 #include "Graphic_Dev.h"
+#include "Extern.h"
 #endif // !__Include_H_

@@ -45,8 +45,6 @@ void CMainApp::Render_MainApp(void)
 
 void CMainApp::Release_MainApp(void)
 {
-
-	
 	CSceneMgr::Get_Instance()->Destroy_Instance();
 	CKeyMgr::Get_Instance()->Destroy_Instance();
 	CObj_Manager::Get_Instance()->Destroy_Instance();
