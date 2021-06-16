@@ -83,6 +83,11 @@ void CCollision_Manager::Collision_Rect_Obstacle(list<CObj*>& _Dst, vector<TILE*
 				//플레이어 데미지
 				static_cast<CPlayer*>(Dst)->Set_Hp();
 				static_cast<CPlayer*>(Dst)->Set_Super();
+
+				if (static_cast<CPlayer*>(Dst)->Get_Dash() || static_cast<CPlayer*>(Dst)->Get_Giant())
+				{
+					Src->bPlayerCol = true;
+				}
 			}
 	
 		}
@@ -191,6 +196,13 @@ bool CCollision_Manager::Check_Rect_Obstacle(CObj * _pDst, TILE * _pSrc)
 	// 반지름 합
 	float fCX = ((_pDst->Get_Info().vSize.x + _pSrc->vScale.x) * 0.5f);
 	float fCY = ((_pDst->Get_Info().vSize.y + _pSrc->vScale.y) * 0.5f);
+
+	if (static_cast<CPlayer*>(_pDst)->Get_Giant())
+	{
+		if (fCX > fX)
+			return true;
+	}
+
 
 	if (fCX > fX && fCY > fY)
 	{

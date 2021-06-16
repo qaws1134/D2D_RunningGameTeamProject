@@ -9,6 +9,7 @@ CPlayer::CPlayer()
 	, m_bJump(false), m_bDoubleJump(false), m_fHPMinus(0.f)
 	, m_bDeathCountStart(false), m_bDash(false), m_bSuper(false)
 	, m_iSuperTime(0), m_dwSuperTime(GetTickCount()), m_fJumpY(0.f), m_bDown(false),m_iDownTime(0),m_dwDownTime(GetTickCount())
+	, m_fIncrese(0.f)
 {
 
 }
@@ -117,7 +118,7 @@ void CPlayer::Render_Object(void)
 
 	CGraphic_Dev::Get_Instance()->Get_Sprite()->Draw(m_pTexInfo->pTexture, 
 														nullptr, 
-														&_vec3(m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f), 
+														&_vec3(m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f + m_fIncrese, 0.f),
 														nullptr, 
 														D3DXCOLOR(m_tInfo.vColor.r, m_tInfo.vColor.g, m_tInfo.vColor.b, m_tInfo.vColor.a));
 
@@ -189,6 +190,7 @@ void CPlayer::Item_Acquired(const ITEMID::ID & eItemID)
 	case ITEMID::BIGGEST:
 	{
 		m_tGiantTime.dwCountTime = GetTickCount();
+		m_bSuper = true;
 		m_bGiantOn = true;
 	}
 	break;
@@ -273,8 +275,6 @@ void CPlayer::Moving_Logic(void)
 	D3DXMatrixTranslation(&m_matInfo[MATRIXID::TRANS], m_tInfo.vPos.x, m_tInfo.vPos.y, m_tInfo.vPos.z);
 	m_matInfo[MATRIXID::WORLD] = m_matInfo[MATRIXID::SCALE] * m_matInfo[MATRIXID::TRANS];
 
-
-
 }
 
 void CPlayer::Key_Input(void)
@@ -331,17 +331,17 @@ void CPlayer::Item_Expired_Check(void)
 		m_vScaleIncrease = _vec3(0.2f, 0.2f, 0.f);
 	}
 
-
 	// 거대화 크기 제한값
 	if (m_bGiantOn && D3DXVec3Length(&m_tInfo.vScale) >= D3DXVec3Length(&m_vLimitScale))
 	{
 		m_tInfo.vScale = m_vLimitScale;
-		m_tInfo.vSize *= 2.5f;
+		m_fIncrese = 45.f;
+		//m_tInfo.vSize *= 2.5f;
 	}
 	else if (!m_bGiantOn && D3DXVec3Length(&m_tInfo.vScale) <= D3DXVec3Length(&_vec3(1.f, 1.f, 0.f)))
 	{
 		m_tInfo.vScale = _vec3(1.f, 1.f, 0.f);
-		m_tInfo.vSize = _vec3(1.f, 1.f, 0.f);
+		m_fIncrese = 0.f;
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -554,13 +554,17 @@ void CPlayer::Item_EffectCheck(void)
 	// 거대화시 
 	if (m_bGiantOn)
 	{
+		m_bSuper = true;
+		m_dwSuperTime= GetTickCount();
 		m_tInfo.vScale += m_vScaleIncrease;
-		m_tInfo.vSize += m_vScaleIncrease;
+		m_fIncrese += 0.7f;
+		//m_tInfo.vSize += m_vScaleIncrease;
 	}
 	else if (!m_bGiantOn)
 	{
+		m_fIncrese -= 7.f;
 		m_tInfo.vScale -= m_vScaleIncrease;
-		m_tInfo.vSize -= m_vScaleIncrease;
+		//m_tInfo.vSize -= m_vScaleIncrease;
 	}
 }
 

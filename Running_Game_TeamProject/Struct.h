@@ -71,8 +71,9 @@ typedef struct tagTile
 	D3DXVECTOR3 vSize;
 	bool bCollide;
 
-	_vec3 vScale;
 
+	bool bPlayerCol;
+	_vec3 vScale;
 
 	BYTE byDrawID;
 	BYTE byOption;

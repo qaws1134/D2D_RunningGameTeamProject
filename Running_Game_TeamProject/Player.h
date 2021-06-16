@@ -38,7 +38,8 @@ public :
 
 public :
 	bool		Get_Super() { return m_bSuper; }
-
+	bool		Get_Dash() { return m_bDash; }
+	bool		Get_Giant() { return m_bGiantOn; }
 
 private:
 	// Update용 함수
@@ -82,6 +83,10 @@ public:
 	_vec3				m_vLimitScale;
 	_vec3				m_vScaleIncrease;
 	bool				m_bGiantOn;
+	_vec3				m_vInitSize;
+	float				m_fIncrese;
+
+
 
 	// 대쉬 불값
 	bool				m_bDash;

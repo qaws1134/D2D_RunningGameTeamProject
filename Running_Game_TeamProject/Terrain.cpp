@@ -3,7 +3,7 @@
 #include "Scroll_Manager.h"
 #include "FieldHurdle.h"
 #include "Texture_Manager.h"
-CTerrain::CTerrain() : m_fOffsetY(0), bCollide(false)
+CTerrain::CTerrain() : m_fOffsetY(0), bCollide(false),m_fAngle(0), m_fIncrese(0.f)
 {
 }
 
@@ -28,9 +28,12 @@ HRESULT CTerrain::Ready_Terrain()
 			pTile->vPos = { fX, fY, 0.f };
 			pTile->vSize = { 1.f, 1.f, 1.f };
 			pTile->byOption = 5;
+			pTile->bPlayerCol = false;
 			m_vecTile.emplace_back(pTile);
 		}
 	}
+
+
 	return S_OK;
 }
 
@@ -38,11 +41,16 @@ void CTerrain::Render_Terrain()
 {
 	D3DXMATRIX matScale, matTrans;
 	int iSize = m_vecTile.size();
+	vFlyDir = { 1.f,1.f,0.f };
 
 	_vec3 iScroll = CScroll_Manager::Get_Instance()->Get_Scroll();
 
 	for (int i = 0; i < iSize; ++i)
 	{
+		if (m_vecTile[i]->bPlayerCol)
+		{
+			m_vecTile[i]->byOption = 5;
+		}
 
 		Set_Tile(m_vecTile[i]->byOption);
 		m_vecTile[i]->bCollide = bCollide;
@@ -51,9 +59,10 @@ void CTerrain::Render_Terrain()
 
 		if (nullptr == pTexInfo)
 			return;
-		float fCenterX = pTexInfo->tImageInfo.Width >> 1;
-		float fCenterY = pTexInfo->tImageInfo.Height >> 1;
+		float fCenterX = (float)(pTexInfo->tImageInfo.Width >> 1);
+		float fCenterY = (float)(pTexInfo->tImageInfo.Height >> 1);
 		m_vecTile[i]->vScale = { fCenterX, fCenterY, 0.f };
+
 
 		D3DXMatrixScaling(&matScale, m_vecTile[i]->vSize.x, m_vecTile[i]->vSize.y, 0.f);
 		D3DXMatrixTranslation(&matTrans, m_vecTile[i]->vPos.x - iScroll.x, m_vecTile[i]->vPos.y + m_fOffsetY, 0.f);
@@ -124,6 +133,8 @@ void CTerrain::Set_Tile(int _iID)
 		break;
 	}
 }
+
+
 
 void CTerrain::TilePicking_Terrain(const D3DXVECTOR3 & vMousePos, const BYTE & byOption)
 {
@@ -196,6 +207,7 @@ void CTerrain::Load_Terrain()
 		pTile->vPos = vPos;
 		pTile->vSize = vSize;
 		pTile->bCollide = bCollide;
+		pTile->bPlayerCol = false;
 		m_vecTile.emplace_back(pTile);
 	}
 
