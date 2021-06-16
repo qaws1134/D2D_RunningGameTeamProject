@@ -34,7 +34,7 @@ typedef struct tagLineInfo
 {
 	PDIRECT3DTEXTURE9 pTexture;
 	D3DXVECTOR3 vPos;
-
+	D3DXVECTOR2 LPos, RPos;
 }LINEINFO;
 
 
@@ -55,7 +55,19 @@ typedef struct tagFrame
 
 	wstring wstrObjKey;
 	wstring wstrStateKey;
-
 }FRAME;
+
+typedef struct tagTile
+{
+	D3DXVECTOR3 vPos;
+	D3DXVECTOR3 vSize;
+	bool bCollide;
+
+
+
+	BYTE byDrawID;
+	BYTE byOption;
+}TILE;
+
 
 #endif __Struct_H_

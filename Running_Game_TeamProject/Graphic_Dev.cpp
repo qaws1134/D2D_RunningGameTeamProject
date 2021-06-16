@@ -5,7 +5,8 @@ IMPLEMENT_SINGLETON(CGraphic_Dev)
 CGraphic_Dev::CGraphic_Dev()
 	:m_pSDK(nullptr),
 	m_pGraphicDev(nullptr),
-	m_pSprite(nullptr)
+	m_pSprite(nullptr),
+	m_pLine(nullptr)
 {
 }
 
@@ -69,6 +70,14 @@ HRESULT CGraphic_Dev::Ready_GraphicDev(void)
 		ERR_MSG(L"CreateSprite FAILED!");
 		return E_FAIL;
 	}
+
+	if (FAILED(D3DXCreateLine(m_pGraphicDev, &m_pLine)))
+	{
+		ERR_MSG(L"CreateLine FAILED!");
+		return E_FAIL;
+	}
+
+
 
 	return S_OK;
 }

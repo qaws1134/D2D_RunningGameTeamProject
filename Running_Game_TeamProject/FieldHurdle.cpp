@@ -22,6 +22,27 @@ CFieldHurdle * CFieldHurdle::Create(_vec3 _vPos, HURDLEID::ID _eID)
 	return pInstance;
 }
 
+CFieldHurdle * CFieldHurdle::Create(_mat _MatTrans, HURDLEID::ID _eID)
+{
+	CFieldHurdle*	pInstance = new CFieldHurdle;
+	pInstance->Set_ID(_eID);
+	pInstance->Set_MatTrans(_MatTrans);
+	if (FAILED(pInstance->Ready_Object()))
+		Safe_Delete(pInstance);
+
+	return pInstance;
+}
+CFieldHurdle * CFieldHurdle::Create()
+{
+	CFieldHurdle*	pInstance = new CFieldHurdle;
+
+	if (FAILED(pInstance->Ready_Object()))
+		Safe_Delete(pInstance);
+
+	return pInstance;
+}
+
+
 HRESULT CFieldHurdle::Ready_Object(void)
 {
 
@@ -63,6 +84,18 @@ HRESULT CFieldHurdle::Ready_Object(void)
 		m_tFrame.wstrStateKey = L"HighHill";
 		m_tFrame.fFrameSpeed = 0.f;
 		break;
+	case HURDLEID::CELLING:
+		m_tInfo.vSize.x = 165.f;
+		m_tInfo.vSize.y = 493.f;
+		m_tFrame.fStartFrame = 0.f;
+		m_tFrame.fMaxFrame = 0.f;
+		m_tFrame.wstrStateKey = L"Celling";
+		m_tFrame.fFrameSpeed = 0.f;
+	case HURDLEID::EMPTY:
+		m_tInfo.vSize.x = 124.f;
+		m_tInfo.vSize.y = 140.f;
+		m_tFrame.wstrObjKey = L"EMPTY";
+		break;
 	case HURDLEID::BULLET:
 		m_tInfo.vSize.x = 202.f;
 		m_tInfo.vSize.y = 117.f;
@@ -79,13 +112,6 @@ HRESULT CFieldHurdle::Ready_Object(void)
 		m_tFrame.wstrStateKey = L"Bullet";
 		m_tFrame.fFrameSpeed = 0.2f;
 		break;
-	case HURDLEID::CELLING:
-		m_tInfo.vSize.x = 165.f;
-		m_tInfo.vSize.y = 493.f;
-		m_tFrame.fStartFrame = 0.f;
-		m_tFrame.fMaxFrame = 0.f;
-		m_tFrame.wstrStateKey = L"Celling";
-		m_tFrame.fFrameSpeed = 0.f;
 	default:
 		break;
 	}
@@ -109,10 +135,8 @@ void CFieldHurdle::Render_Object(void)
 {
 	CGraphic_Dev::Get_Instance()->Get_Sprite()->SetTransform(&m_matInfo[MATRIXID::WORLD]);
 
-
-	CGraphic_Dev::Get_Instance()
-		->Get_Sprite()
-		->Draw(m_pTexInfo->pTexture
+	
+	CGraphic_Dev::Get_Instance()->Get_Sprite()->Draw(m_pTexInfo->pTexture
 			,nullptr
 			,&_vec3(m_tInfo.vSize.x * 0.5f, m_tInfo.vSize.y * 0.5f, 0.f)
 			,nullptr

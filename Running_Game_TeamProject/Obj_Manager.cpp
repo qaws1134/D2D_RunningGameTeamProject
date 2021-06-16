@@ -3,6 +3,7 @@
 #include "Collision_Manager.h"
 #include "SceneMgr.h"
 #include "Obj.h"
+#include "LineMgr.h"
 
 IMPLEMENT_SINGLETON(CObj_Manager)
 
@@ -38,6 +39,14 @@ int CObj_Manager::Update_Object(void)
 				++iter;
 		}
 	}
+
+
+	//플레이어 타일 충돌검사 
+	CCollision_Manager::Collision_Rect_Obstacle(m_listObj[OBJID::PLAYER], m_vecObstacle);
+	//플레이어 x 검사   플레이어 y 포인터로 값 변경
+	//상식적으로 cosnt Get INFO인데  y값 변경이 안될것같은 느낌적인 느낌느낌???
+	_vec3 PlayerPos = m_listObj[OBJID::PLAYER].front()->Get_Info().vPos;	
+	CLineMgr::Get_Instance()->Collision_Line(PlayerPos.x, &PlayerPos.y);
 
 	return 0;
 }
