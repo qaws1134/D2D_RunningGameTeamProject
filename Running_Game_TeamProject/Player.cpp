@@ -9,7 +9,8 @@ CPlayer::CPlayer()
 	, m_bJump(false), m_bDoubleJump(false), m_fHPMinus(0.f)
 	, m_bDeathCountStart(false), m_bDash(false), m_bSuper(false)
 	, m_iSuperTime(0), m_dwSuperTime(GetTickCount()), m_fJumpY(0.f), m_bDown(false),m_iDownTime(0),m_dwDownTime(GetTickCount())
-	, m_fIncrese(0.f)
+	, m_fIncrese(0.f), m_bHit(false)
+
 {
 
 }
@@ -22,51 +23,57 @@ CPlayer::~CPlayer()
 
 HRESULT CPlayer::Ready_Object(void)
 {
-	// Ã¼·Â¼³Á¤. ³ªÁß¿¡ UI¿¡ ¿ÉÀú¹öÆÐÅÏÀ¸·Î ³Ñ°ÜÁÖ¸é µÉµí
+	// Ã¼ï¿½Â¼ï¿½ï¿½ï¿½. ï¿½ï¿½ï¿½ß¿ï¿½ UIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½Ö¸ï¿½ ï¿½Éµï¿½
 	m_tInfo.fHP = 224.f;
 	m_tInfo.fMaxHP = m_tInfo.fHP;
 
 	m_tInfo.vPos = _vec3(100.f, WINCY-(WINCY >> 2), 0.f);
-	//ÃÊ±â°ªÀº ·¯´×
+	//ï¿½Ê±â°ªï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	m_tInfo.fMoveSpeed = 5.f;
 	m_tFrame.fStartFrame = 0.f;
 	m_tFrame.fMaxFrame = 4.f;
 	m_tFrame.wstrObjKey = L"Player";
 	m_tFrame.wstrStateKey = L"Run";
 	m_tFrame.fFrameSpeed = 0.2f;
-	// °­È­¾ÆÀÌÅÛ Á¦ÇÑ½Ã°£ ¼³Á¤
+	// ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
 	m_tGiantTime.dwEndTime = 5000;
 	m_tDashTime.dwEndTime = 5000;
 	m_tMagnetTime.dwEndTime = 5000;
 
 	Setting_TexInfo();
 	
-	// »óÅÂ°ªÀÌ º¯È­ÇÏ¸é MaxFrameµµ º¯È­ ¤¡¤¡¤¡
+	// ï¿½ï¿½ï¿½Â°ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½Ï¸ï¿½ MaxFrameï¿½ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
-	// °Å´ëÈ­ Á¦ÇÑº¤ÅÍ°ª, Áõ°¡°ª
+	// ï¿½Å´ï¿½È­ ï¿½ï¿½ï¿½Ñºï¿½ï¿½Í°ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	m_vLimitScale = _vec3(2.5f, 2.5f, 0.f);
 	m_vScaleIncrease = _vec3(0.02f, 0.02f, 0.f);
 	
 	m_iCoin = 0;
 	m_iJelly = 0;
 
-	//¹«Àû
+	//ï¿½ï¿½ï¿½ï¿½
 	m_iSuperTime = 2000;
 
 
-	// Á¡ÇÁ °ü·Ã
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	m_fJumpPower = 60.f;
 	m_iDownTime = 1000;
 
 	m_fHPMinus = m_tInfo.fMaxHP - m_tInfo.fHP;
-	// ¿ÉÀú¹ö ¾Ë¸²
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½
 	CSubject::Get_Instance()->Notify(DATA_MESSAGE::HP, &m_fHPMinus);
 	CSubject::Get_Instance()->Notify(DATA_MESSAGE::COIN, &m_iCoin);
 	CSubject::Get_Instance()->Notify(DATA_MESSAGE::JELLY, &m_iJelly);
 
 
-	// »ç¸ÁÈÄ ´ÙÀ½ ¾À ÀüÈ¯Àü±îÁö ´ë±â½Ã°£
+	m_tHitTime.dwEndTime = 500;
+
+
+	m_tAlphaTime.dwEndTime = 200;
+
+
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã°ï¿½
 	m_tDeathTime.dwEndTime = 2000;
 
 	return S_OK;
@@ -76,7 +83,7 @@ int CPlayer::Update_Object(void)
 {
 
 
-	// Ã¼·ÂÀº ¸Å ÇÁ·¹ÀÓ¸¶´Ù 1¾¿ ±îÀÌµµ·Ï ÀÓ½Ã ¼³Á¤
+	// Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½Ó½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	//m_tInfo.fHP -= 0.1f;
 
 	SuperTime();
@@ -84,27 +91,31 @@ int CPlayer::Update_Object(void)
 	Key_Input();
 
 
-	// ¾ÆÀÌÅÛ È¿°ú Ã¼Å©
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ Ã¼Å©
 	Item_EffectCheck();
 
 
-	// ÀÌµ¿ÇÔ¼ö
+	// ï¿½Ìµï¿½ï¿½Ô¼ï¿½
 	Moving_Logic();
 
-	// ¿ÉÀú¹ö °»½Å
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	Notify_Observer();
 	
-	
-	Move_Frame();
+	if(m_eCurState != HIT) 
+		Move_Frame();
+
 	return OBJ_NOEVENT;
 }
 
 void CPlayer::LateUpdate_Object(void)
 {
-	// ¾ÆÀÌÅÛ È¿°ú ½Ã°£ Ã¼Å©
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½Ã°ï¿½ Ã¼Å©
 	Item_Expired_Check();
 	
 	LateUpdate_StateCheck();
+
+	if (m_eCurState == HIT)
+		m_tFrame.fStartFrame = 0.f;
 
 	FAILED_CHECK_RETURN(Setting_TexInfo(), );
 }
@@ -122,12 +133,12 @@ void CPlayer::Render_Object(void)
 														nullptr, 
 														D3DXCOLOR(m_tInfo.vColor.r, m_tInfo.vColor.g, m_tInfo.vColor.b, m_tInfo.vColor.a));
 
-	// Á¡ÇÁÁß
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (JUMPING == m_eCurState || DOUBLEJUMPING == m_eCurState)
 	{
 		if (m_tFrame.fStartFrame >= m_tFrame.fMaxFrame - 1.f)
 		{
-			// ´Þ¸®±â ¾ÆÀÌÅÛ ÀÜ¿©½Ã°£ÀÌ ÀÖÀ»½Ã
+			// ï¿½Þ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü¿ï¿½ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if (m_bDash)
 				Switch_State(DASHING);
 			else
@@ -135,11 +146,11 @@ void CPlayer::Render_Object(void)
 		}
 	}
 
-	// ½½¶óÀÌµùÁß
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½
 	if (SLIDING == m_eCurState && m_tFrame.fMaxFrame == 3.f)
 		Switch_State(RUN);
 
-	// »ç¸Á½Ã
+	// ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (DEAD == m_eCurState)
 	{
 		if (!m_bDeathCountStart && m_tFrame.fStartFrame >= m_tFrame.fMaxFrame - 1.f)
@@ -184,7 +195,7 @@ void CPlayer::Item_Acquired(const ITEMID::ID & eItemID)
 	break;
 	case ITEMID::TRANSCOIN:
 	{
-		// WINCX °ªº¸´Ù ÀÛÀº Àå¾Ö¹°µé °Ë»çÇØ¼­ ÄÚÀÎÀ¸·Î º¯È¯
+		// WINCX ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
 	}
 	break;
 	case ITEMID::BIGGEST:
@@ -192,6 +203,7 @@ void CPlayer::Item_Acquired(const ITEMID::ID & eItemID)
 		m_tGiantTime.dwCountTime = GetTickCount();
 		m_bSuper = true;
 		m_bGiantOn = true;
+		m_bSuper = true;
 	}
 	break;
 	case ITEMID::DASH:
@@ -203,12 +215,12 @@ void CPlayer::Item_Acquired(const ITEMID::ID & eItemID)
 	break;
 	case ITEMID::MAGNET:
 	{
-		// ÆêÇÑÅ× ¸í·ÉÁà¼­ ÇÃ·¹ÀÌ¾îº¸´Ù ¾à°£ ¾Õ¿¡¼­ »¡¾ÆµéÀÌµµ·Ï ¸í·É ÇÔ¼ö ¤¡¤¡
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½à¼­ ï¿½Ã·ï¿½ï¿½Ì¾îº¸ï¿½ï¿½ ï¿½à°£ ï¿½Õ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æµï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 	break;
 	case ITEMID::ENERGY_BIG:
 	{
-		// Ã¼·ÂÁõ°¡
+		// Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		m_tInfo.fHP += 30.f;
 		if (m_tInfo.fMaxHP <= m_tInfo.fHP)
 			m_tInfo.fHP = m_tInfo.fMaxHP;
@@ -244,7 +256,7 @@ void CPlayer::Item_Acquired(const ITEMID::ID & eItemID)
 	break;
 	case ITEMID::TRANSJELLY:
 	{
-		// WINCXº¸´Ù ¾È¿¡ ÀÖ´Â Á©¸®µéÀ» °õÁ©¸®·Î ¹Ù²Ù¸é µÉµí
+		// WINCXï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Ù¸ï¿½ ï¿½Éµï¿½
 	}
 	break;
 	default:
@@ -260,14 +272,23 @@ void CPlayer::SuperTime()
 		{
 			m_bSuper = false;
 			m_dwSuperTime = GetTickCount();
+			m_tInfo.vColor.a = 1.f;
 		}
 	}
 }
 
 void CPlayer::Moving_Logic(void)
 {
-	// Á¡ÇÁ Ã¼Å©¸ÕÀú ¤¡¤¡
+	// ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	Jumping();
+
+
+
+
+
+
+
+
 
 	D3DXMatrixIdentity(&m_matInfo[MATRIXID::WORLD]);
 
@@ -279,13 +300,13 @@ void CPlayer::Moving_Logic(void)
 
 void CPlayer::Key_Input(void)
 {
-	// ¾ÆÀÌÅÛ Ãæµ¹ Å×½ºÆ®¿ë ÀÓ½Ã Å°ÀÎÇ²°ª
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ ï¿½×½ï¿½Æ®ï¿½ï¿½ ï¿½Ó½ï¿½ Å°ï¿½ï¿½Ç²ï¿½ï¿½
 	//if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 	//	m_tInfo.vPos.x += 5.f;
 	//if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 	//	m_tInfo.vPos.x -= 5.f;
 	
-	// Á¡ÇÁ
+	// ï¿½ï¿½ï¿½ï¿½
 
 	if (!m_bJump && !m_bDoubleJump && CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
@@ -296,7 +317,7 @@ void CPlayer::Key_Input(void)
 		m_fJumpTime = 0.f;
 
 	}
-	// ´õºíÁ¡ÇÁ
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (m_bJump && !m_bDoubleJump && CKeyMgr::Get_Instance()->Key_Down(VK_SPACE))
 	{
 		if (!m_bDoubleJump)
@@ -309,7 +330,7 @@ void CPlayer::Key_Input(void)
 	}
 
 
-	// ½½¶óÀÌµù
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½
 	if (CKeyMgr::Get_Instance()->Key_Pressing(VK_DOWN))
 	{
 		m_tFrame.fMaxFrame = 2.f;
@@ -324,14 +345,14 @@ void CPlayer::Key_Input(void)
 
 void CPlayer::Item_Expired_Check(void)
 {
-	//////////////////////// °Å´ëÈ­ ¾ÆÀÌÅÛ //////////////////////////////////////////////////////////////////////
+	//////////////////////// ï¿½Å´ï¿½È­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ //////////////////////////////////////////////////////////////////////
 	if (m_tGiantTime.dwCountTime + m_tGiantTime.dwEndTime < GetTickCount())
 	{
 		m_bGiantOn = false;
 		m_vScaleIncrease = _vec3(0.2f, 0.2f, 0.f);
 	}
 
-	// °Å´ëÈ­ Å©±â Á¦ÇÑ°ª
+	// ï¿½Å´ï¿½È­ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ°ï¿½
 	if (m_bGiantOn && D3DXVec3Length(&m_tInfo.vScale) >= D3DXVec3Length(&m_vLimitScale))
 	{
 		m_tInfo.vScale = m_vLimitScale;
@@ -347,7 +368,7 @@ void CPlayer::Item_Expired_Check(void)
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	/////////////////////////////////// ´ë½¬ ¾ÆÀÌÅÛ //////////////////////////////////////////////////////////////////////
+	/////////////////////////////////// ï¿½ë½¬ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ //////////////////////////////////////////////////////////////////////
 	if (DASHING == m_eCurState && m_tDashTime.dwCountTime + m_tDashTime.dwEndTime < GetTickCount())
 	{
 		m_bDash = false;
@@ -358,9 +379,9 @@ void CPlayer::Item_Expired_Check(void)
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	/////////////////////////////////// ¸¶±×³Ý ¾ÆÀÌÅÛ /////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////////////// ï¿½ï¿½ï¿½×³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// ´ëÃæ Å¸ÀÌ¸Ó ³¡³ª¸é ÆêÇÑÅ× µÚ·Î µ¹¾Æ°¡¶ó°í ¸í·É ÇÏ´Â°Íº¸´Ù....
+	// ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´Â°Íºï¿½ï¿½ï¿½....
 
 	///////////////////////////////////
 }
@@ -460,7 +481,7 @@ void CPlayer::Jumping(void)
 			m_bDoubleJump = false;
 		}
 	}
-	else if(bLineCol)		//¶óÀÎ Ã¼Å©ÇØ¼­ y °ª ÁØ´Ù  ¹Ù´ÚÀ» °ÅÄ£ ÈÄ ¶óÀÎÀ» µé¾î¿À¸é m_bdown true·Î Áà¼­¹Ù´ÚÀ» °ÅÃÆ´Ù°í ÇØÁÜ
+	else if(bLineCol)		//ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ø¼ï¿½ y ï¿½ï¿½ ï¿½Ø´ï¿½  ï¿½Ù´ï¿½ï¿½ï¿½ ï¿½ï¿½Ä£ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ m_bdown trueï¿½ï¿½ ï¿½à¼­ï¿½Ù´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ´Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½
 	{
 		if (m_bDown)
 		{
@@ -491,7 +512,7 @@ void CPlayer::Jumping(void)
 		}
 		m_tInfo.vPos.y -=  (1 * m_fJumpTime - 0.5f * 9.8f * m_fJumpTime * m_fJumpTime);
 		m_fJumpTime += 0.1f;
-		if (bLineCol&&fY < m_tInfo.vPos.y)	//Á¡ÇÁ	//¶óÀÎ Ãæµ¹ÁßÀÌ°í pos y °ªÀÌ ÇÃ·¹ÀÌ¾îº¸´Ù ÀÛÀ»¶§ 
+		if (bLineCol&&fY < m_tInfo.vPos.y)	//ï¿½ï¿½ï¿½ï¿½	//ï¿½ï¿½ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ï¿½Ì°ï¿½ pos y ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾îº¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 		{
 			m_fJumpTime = 0.f;
 			m_bJump = false;
@@ -508,26 +529,46 @@ void CPlayer::Jumping(void)
 
 void CPlayer::LateUpdate_StateCheck(void)
 {
-	//////////////////////////// Á¡ÇÁ »óÅÂ //////////////////////////////////////////////////////////////////////////////////////
+	//////////////////////////// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ //////////////////////////////////////////////////////////////////////////////////////
 
 
 
 	if (JUMPING == m_eCurState || DOUBLEJUMPING == m_eCurState)
 	{
-		// ¶³¾îÁö´ÂÁßÀÏ¶§´Â ÇÁ·¹ÀÓÀ» ¸¶Áö¸· - 2¹øÂ°·Î °íÁ¤
- 		if (m_tFrame.fStartFrame >= (m_tFrame.fMaxFrame - 2.f) && m_tFrame.fStartFrame <= (m_tFrame.fMaxFrame - 1.f))
-			m_tFrame.fStartFrame = m_tFrame.fMaxFrame - 2.f;
-
+		if (m_bJump || m_bDoubleJump)
+		{
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - 2ï¿½ï¿½Â°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			if (m_tFrame.fStartFrame >= (m_tFrame.fMaxFrame - 2.f) && m_tFrame.fStartFrame <= (m_tFrame.fMaxFrame - 1.f))
+				m_tFrame.fStartFrame = m_tFrame.fMaxFrame - 2.f;
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	///////////////////////////// Àå¾Ö¹° Ãæµ¹/////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////// ï¿½ï¿½Ö¹ï¿½ ï¿½æµ¹/////////////////////////////////////////////////////////////////////////////////////
+
+
+	if (m_bHit && m_tHitTime.dwCountTime + m_tHitTime.dwEndTime < GetTickCount())
+	{
+		m_bHit = false;
+		Switch_State(RUN);
+	}
+
+
+	// ï¿½ï¿½ï¿½Ä°ï¿½ ï¿½ï¿½ï¿½ï¿½
+	if (m_bSuper)
+	{
+		if (m_tAlphaTime.dwCountTime + m_tAlphaTime.dwEndTime < GetTickCount())
+			m_tInfo.vColor.a *= -1.f;
+	}
+
+
+
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	///////////////////////////// »ç¸Á ///////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////// ï¿½ï¿½ï¿½ ///////////////////////////////////////////////////////////////////////////////////////////
 
 	if (!m_bDeathCountStart && m_tInfo.fHP <= 0.f)
 		Switch_State(DEAD);
@@ -541,7 +582,7 @@ void CPlayer::LateUpdate_StateCheck(void)
 
 void CPlayer::Notify_Observer(void)
 {
-	// Ã¼·ÂÀº ÃÖ´ëÃ¼·Â - ÇöÀçÃ¼·ÂÀÇ Â÷ÀÌ°ªÀ» ³Ñ°ÜÁÜ
+	// Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½Ã¼ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ï¿½ï¿½ ï¿½Ñ°ï¿½ï¿½ï¿½
 	m_fHPMinus = m_tInfo.fMaxHP - m_tInfo.fHP;
 
 	CSubject::Get_Instance()->Notify(DATA_MESSAGE::HP, &m_fHPMinus);
@@ -551,7 +592,7 @@ void CPlayer::Notify_Observer(void)
 
 void CPlayer::Item_EffectCheck(void)
 {
-	// °Å´ëÈ­½Ã 
+	// ï¿½Å´ï¿½È­ï¿½ï¿½ 
 	if (m_bGiantOn)
 	{
 		m_bSuper = true;
@@ -567,6 +608,30 @@ void CPlayer::Item_EffectCheck(void)
 		//m_tInfo.vSize -= m_vScaleIncrease;
 	}
 }
+
+void	CPlayer::Set_Hp()
+{
+	if (!m_bSuper)m_tInfo.fHP -= 20.f;
+
+
+	Switch_State(HIT);
+
+	m_tHitTime.dwCountTime = GetTickCount();
+}
+
+
+
+void	CPlayer::Set_Super()
+{
+	m_bSuper = true; 
+	m_bHit = true;
+	m_dwSuperTime = GetTickCount();
+
+
+	m_tAlphaTime.dwCountTime = GetTickCount();
+}
+
+
 
 CPlayer * CPlayer::Create(void)
 {

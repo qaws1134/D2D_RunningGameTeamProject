@@ -32,9 +32,10 @@ public:
 	void		Item_Acquired(const ITEMID::ID& eItemID);
 	void		SuperTime();
 
-public :
-	void		Set_Hp() { if(!m_bSuper)m_tInfo.fHP -= 20.f; }
-	void		Set_Super() { m_bSuper = true; m_dwSuperTime = GetTickCount();}
+
+	void		Set_Hp(void);
+	void		Set_Super();
+
 
 public :
 	bool		Get_Super() { return m_bSuper; }
@@ -64,9 +65,12 @@ public:
 
 
 
+
 	// 무적용 bool값
 	bool				m_bInvinsible;
 
+	// 무적시 알파값 변경을 위한 시간값
+	CUSTOMTIME			m_tAlphaTime;
 
 
 	// 강화 아이템 제한시간 구조체
@@ -95,6 +99,11 @@ public:
 	bool				m_bSuper;
 	DWORD				m_dwSuperTime;
 	int					m_iSuperTime;
+
+
+	// 맞았을때
+	CUSTOMTIME			m_tHitTime;
+	bool				m_bHit;
 
 	// 점프 관련 변수들
 	// 점프 체크용 불값
