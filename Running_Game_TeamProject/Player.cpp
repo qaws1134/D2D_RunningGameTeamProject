@@ -99,7 +99,7 @@ int CPlayer::Update_Object(void)
 	// 옵저버 갱신
 	Notify_Observer();
 	
-	if(m_eCurState != HIT)
+	if(m_eCurState != HIT) 
 		Move_Frame();
 
 	return OBJ_NOEVENT;
@@ -533,10 +533,12 @@ void CPlayer::LateUpdate_StateCheck(void)
 
 	if (JUMPING == m_eCurState || DOUBLEJUMPING == m_eCurState)
 	{
-		// 떨어지는중일때는 프레임을 마지막 - 2번째로 고정
- 		if (m_tFrame.fStartFrame >= (m_tFrame.fMaxFrame - 2.f) && m_tFrame.fStartFrame <= (m_tFrame.fMaxFrame - 1.f))
-			m_tFrame.fStartFrame = m_tFrame.fMaxFrame - 2.f;
-
+		if (m_bJump || m_bDoubleJump)
+		{
+			// 떨어지는중일때는 프레임을 마지막 - 2번째로 고정
+			if (m_tFrame.fStartFrame >= (m_tFrame.fMaxFrame - 2.f) && m_tFrame.fStartFrame <= (m_tFrame.fMaxFrame - 1.f))
+				m_tFrame.fStartFrame = m_tFrame.fMaxFrame - 2.f;
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
