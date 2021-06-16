@@ -17,6 +17,17 @@ public:
 	virtual void Release_Scene(void) override;
 
 	static CMyMenu*	Create(void);
+
+
+private:
+	_vec3 m_vPos;
+	_vec3 m_vSize;
+	_vec3 m_vScale;
+
+	_mat m_matScale;
+	_mat m_matTrans;
+	_mat m_matWorld;
+
 };
 
 

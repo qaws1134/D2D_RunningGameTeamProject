@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MyMenu.h"
-
+#include "SceneMgr.h"
+#include "Texture_Manager.h"
 
 CMyMenu::CMyMenu()
 {
@@ -13,11 +14,17 @@ CMyMenu::~CMyMenu()
 
 HRESULT CMyMenu::Ready_Scene()
 {
-	return E_NOTIMPL;
+
+	CTexture_Manager::Get_Instance()->Insert_Texture(L"Logo", TEXID::TEX_SINGLE, L"../Resource/Logo/Logo.jpg");
+
+	return S_OK;
 }
 
 void CMyMenu::Update_Scene()
 {
+	m_vPos = _vec3(WINCX >> 1, WINCY >> 1, 0.f);
+	m_vScale = _vec3(1.f, 1.f, 0.f);
+
 }
 
 void CMyMenu::LateUpdate_Scene()

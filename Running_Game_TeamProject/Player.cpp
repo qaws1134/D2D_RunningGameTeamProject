@@ -200,6 +200,7 @@ void CPlayer::Item_Acquired(const ITEMID::ID & eItemID)
 	{
 		m_tGiantTime.dwCountTime = GetTickCount();
 		m_bGiantOn = true;
+		m_bSuper = true;
 	}
 	break;
 	case ITEMID::DASH:
