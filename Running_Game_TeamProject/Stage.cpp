@@ -1,9 +1,16 @@
 #include "stdafx.h"
 #include "Stage.h"
-#include "Obj_Manager.h"
-#include "Texture_Manager.h"
 #include "Player.h"
 #include "Item.h"
+#include "Obj_Manager.h"
+#include "Texture_Manager.h"
+#include "FieldHurdle.h"
+#include "HealthIcon.h"
+#include "HealthBar.h"
+#include "JellyScore.h"
+#include "CoinScore.h"
+
+
 
 CStage::CStage()
 {
@@ -31,15 +38,17 @@ HRESULT CStage::Ready_Scene()
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Player", TEXID::TEX_MULTI, L"../Resource/Player/Sliding/%d.png", L"Sliding", 3);
 
 
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	// 아이템 이미지 로드
 	// 코인
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Coin/Gold/Big/%d.png", L"GoldCoin_Big", 4);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Coin/Gold/Small/%d.png", L"GoldCoin_Small", 6);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Coin/Silver/Big/%d.png", L"SilverCoin_Big", 4);
-	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Coin/Silver/Big/%d.png", L"SilverCoin_Small", 4);
+	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Coin/Silver/Small/%d.png", L"SilverCoin_Small", 4);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/TransCoin/%d.png", L"TransCoin", 4);
 
-	
+
 	// 강화 및 회복 아이템
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Biggest/%d.png", L"Biggest", 4);
 	CTexture_Manager::Get_Instance()->Insert_Texture(L"Item", TEXID::TEX_MULTI, L"../Resource/Item/Dash/%d.png", L"Dash", 4);
@@ -60,6 +69,32 @@ HRESULT CStage::Ready_Scene()
 
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+	// UI 이미지 로드
+
+	CTexture_Manager::Get_Instance()->Insert_Texture(L"HealthIcon", TEXID::TEX_SINGLE, L"../Resource/UI/HealthIcon.png");
+	CTexture_Manager::Get_Instance()->Insert_Texture(L"HealthBar", TEXID::TEX_SINGLE, L"../Resource/UI/HealthBar.png");
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+	// 장애물
+	CTexture_Manager::Get_Instance()->Insert_Texture(L"1-1", TEXID::TEX_MULTI, L"../Resource/Map/1-1/Bullet/%d.png", L"Bullet", 8);
+	CTexture_Manager::Get_Instance()->Insert_Texture(L"1-1", TEXID::TEX_MULTI, L"../Resource/Map/1-1/Celling/%d.png", L"Celling", 2);
+	CTexture_Manager::Get_Instance()->Insert_Texture(L"1-1", TEXID::TEX_MULTI, L"../Resource/Map/1-1/Floor/%d.png", L"Floor", 2);
+	CTexture_Manager::Get_Instance()->Insert_Texture(L"1-1", TEXID::TEX_MULTI, L"../Resource/Map/1-1/HighHill/%d.png", L"HighHill", 2);
+	CTexture_Manager::Get_Instance()->Insert_Texture(L"1-1", TEXID::TEX_MULTI, L"../Resource/Map/1-1/LowHill/%d.png", L"LowHill", 2);
+	CTexture_Manager::Get_Instance()->Insert_Texture(L"1-1Map", TEXID::TEX_SINGLE, L"../Resource/Map/1-1/Map/0.png");
+
+
 
 
 
@@ -70,12 +105,33 @@ HRESULT CStage::Ready_Scene()
 	NULL_CHECK_RETURN(pObj, E_FAIL);
 	FAILED_CHECK_RETURN(CObj_Manager::Get_Instance()->Insert_Obj(OBJID::PLAYER, pObj), E_FAIL);
 
-	// 아이템 생성테스트
-	pObj = CItem::Create(ITEMID::BIGGEST);
+	// 장애물 생성
+	CObj*	Obj = nullptr;
+	Obj = CFieldHurdle::Create({100.f,100.f,0.f}, HURDLEID::LOWHILL);
+	NULL_CHECK_RETURN(Obj, E_FAIL);
+	FAILED_CHECK_RETURN(CObj_Manager::Get_Instance()->Insert_Obj(OBJID::OBSTACLE, Obj), E_FAIL);
+
+
+	// 아이템 생성
+	pObj = CItem::Create(ITEMID::DASH);
 	NULL_CHECK_RETURN(pObj, E_FAIL);
 	FAILED_CHECK_RETURN(CObj_Manager::Get_Instance()->Insert_Obj(OBJID::ITEM, pObj), E_FAIL);
 
 
+
+	// UI
+	pObj = CHealthBar::Create();
+	NULL_CHECK_RETURN(pObj, E_FAIL);
+	FAILED_CHECK_RETURN(CObj_Manager::Get_Instance()->Insert_Obj(OBJID::UI, pObj), E_FAIL);
+	pObj = CHealthIcon::Create();
+	NULL_CHECK_RETURN(pObj, E_FAIL);
+	FAILED_CHECK_RETURN(CObj_Manager::Get_Instance()->Insert_Obj(OBJID::UI, pObj), E_FAIL);
+	pObj = CJellyScore::Create();
+	NULL_CHECK_RETURN(pObj, E_FAIL);
+	FAILED_CHECK_RETURN(CObj_Manager::Get_Instance()->Insert_Obj(OBJID::UI, pObj), E_FAIL);
+	pObj = CCoinScore::Create();
+	NULL_CHECK_RETURN(pObj, E_FAIL);
+	FAILED_CHECK_RETURN(CObj_Manager::Get_Instance()->Insert_Obj(OBJID::UI, pObj), E_FAIL);
 
 
 	return S_OK;

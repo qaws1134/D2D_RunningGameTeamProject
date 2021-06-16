@@ -4,7 +4,6 @@
 #include "SceneMgr.h"
 #include "Player.h"
 
-
 IMPLEMENT_SINGLETON(CObj_Manager)
 
 CObj_Manager::CObj_Manager()
@@ -41,9 +40,9 @@ int CObj_Manager::Update_Object(void)
 	}
 
 
-
-	// 충돌체크
+	// 플레이어 아이템 충돌처리
 	CCollision_Manager::Collision_Rect(m_listObj[OBJID::PLAYER].front(), m_listObj[OBJID::ITEM]);
+
 
 	return 0;
 }
@@ -81,10 +80,7 @@ void CObj_Manager::Release_Object(void)
 {
 	for (int i = 0; i < OBJID::END; ++i)
 	{
-
 		for_each(m_listObj[i].begin(), m_listObj[i].end(), Safe_Delete<CObj*>);
-
-
 		m_listObj[i].clear();
 	}
 }
@@ -99,7 +95,6 @@ HRESULT CObj_Manager::Insert_Obj(const OBJID::ID & eID, CObj * pObj)
 
 	return S_OK;
 }
-
 
 
 

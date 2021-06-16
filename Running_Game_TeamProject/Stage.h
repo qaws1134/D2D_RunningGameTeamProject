@@ -1,7 +1,4 @@
-#ifndef __Stage_H_
-#define __Stage_H_
-
-
+#pragma once
 #include "Scene.h"
 class CStage :
 	public CScene
@@ -24,4 +21,3 @@ public:
 	static CStage*		Create(void);
 };
 
-#endif // !__Stage_H_

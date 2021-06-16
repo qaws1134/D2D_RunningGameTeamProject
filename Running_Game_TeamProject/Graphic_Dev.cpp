@@ -70,11 +70,28 @@ HRESULT CGraphic_Dev::Ready_GraphicDev(void)
 		return E_FAIL;
 	}
 
+
+	D3DXFONT_DESCW tFont;
+	ZeroMemory(&tFont, sizeof(D3DXFONT_DESCW));
+
+	tFont.Width = 20;
+	tFont.Height = 20;
+	tFont.Weight = FW_HEAVY;
+	tFont.CharSet = HANGUL_CHARSET;
+	lstrcpy(tFont.FaceName, L"궁서");
+	if (FAILED(D3DXCreateFontIndirectW(m_pGraphicDev, &tFont, &m_pFont)))
+	{
+		ERR_MSG(L"폰트 생성 실패!");
+		return E_FAIL;
+	}
+
+
 	return S_OK;
 }
 
 void CGraphic_Dev::Release_GraphicDev(void)
 {
+	Safe_Release(m_pFont);
 	Safe_Release(m_pSprite);
 	Safe_Release(m_pGraphicDev);
 	Safe_Release(m_pSDK);

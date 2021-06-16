@@ -7,9 +7,6 @@
     <Filter Include="98.Headers">
       <UniqueIdentifier>{32f0502c-8b13-41db-a642-a93e14a7d33d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="97.Graphic_Dev">
-      <UniqueIdentifier>{5bf8dbe3-b0d5-4af0-b07d-760eee5cf3ab}</UniqueIdentifier>
-    </Filter>
     <Filter Include="97.Managers">
       <UniqueIdentifier>{39cced62-f5cb-4ca7-840a-838c78db5e58}</UniqueIdentifier>
     </Filter>
@@ -37,41 +34,71 @@
     <Filter Include="01.Scene\01.Stage">
       <UniqueIdentifier>{375317cf-6eb8-4cae-9bb5-67e8e25c26e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="96.Texture">
-      <UniqueIdentifier>{323affcc-0f13-45b4-8fad-bf4979969894}</UniqueIdentifier>
+    <Filter Include="02.Obj\02.Item">
+      <UniqueIdentifier>{1a76ced9-89e8-42d9-9b6c-61823a9c8f58}</UniqueIdentifier>
     </Filter>
-    <Filter Include="96.Texture\00.Single_Texture">
-      <UniqueIdentifier>{f3180600-3f0c-4631-8a98-fe037d4cebd2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="96.Texture\01.Multi_Texture">
-      <UniqueIdentifier>{9542db14-a358-4f62-ab70-80fe8872777c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="96.Texture\99.Texture_Manager">
-      <UniqueIdentifier>{e800582e-7183-43e6-83ce-55ab6dffd3a4}</UniqueIdentifier>
+    <Filter Include="02.Obj\99.Manager\00.ObjMgr">
+      <UniqueIdentifier>{95c00b27-db21-4720-8318-b9e33969f071}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Obj\01.Field">
-      <UniqueIdentifier>{319cebf9-20f9-4623-9ccb-21ee8bca3021}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Obj\02.Item">
-      <UniqueIdentifier>{77559cad-71c5-4385-8d3e-8e247a0967cd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Obj\03.Player">
-      <UniqueIdentifier>{79104faf-46a5-49ce-b4e8-0e51eb2c551d}</UniqueIdentifier>
+      <UniqueIdentifier>{a683b040-f68e-4173-89f0-aa2d76ac86a1}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Obj\01.Field\00.Floor">
-      <UniqueIdentifier>{bc6ac2cc-5d7e-4857-9471-85c4e2c1a4d4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.Obj\01.Field\01.Floor2F">
-      <UniqueIdentifier>{eb8158de-709f-432e-86d7-af8ade1481fa}</UniqueIdentifier>
+      <UniqueIdentifier>{2d8966f4-a021-4792-a6e5-1d67e3181313}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Obj\01.Field\02.LowHill">
-      <UniqueIdentifier>{c242e03e-2715-46bf-99ac-2835d52b93b2}</UniqueIdentifier>
+      <UniqueIdentifier>{1a7f4e54-7bc1-4799-8114-667c3f899b80}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Obj\01.Field\03.HighHill">
-      <UniqueIdentifier>{c5756032-ff81-4a65-ba08-f95dbdd25c67}</UniqueIdentifier>
+      <UniqueIdentifier>{771248c0-fa1b-4902-99f9-30f7246ecafc}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.Obj\01.Field\04.Bullet">
-      <UniqueIdentifier>{88ad8673-55fd-48d9-a573-bd557803eaba}</UniqueIdentifier>
+      <UniqueIdentifier>{abd98fdd-bdc8-4444-8877-89276b5c66e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\01.Field\01.Floor2F">
+      <UniqueIdentifier>{a8725a28-e6e9-4b5b-ac7c-90de7fb15fda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\03.Player">
+      <UniqueIdentifier>{a04d56e3-0624-4c46-b8b0-2e169676b31d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="96.Graphic_Dev">
+      <UniqueIdentifier>{5bf8dbe3-b0d5-4af0-b07d-760eee5cf3ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="95.Texture">
+      <UniqueIdentifier>{8f2a37b7-deb6-478d-afc3-52c243971a9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="95.Texture\00.Single_Texture">
+      <UniqueIdentifier>{b800aa27-8ccb-4452-bb9b-934b134a0769}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="95.Texture\01.Multi_Texture">
+      <UniqueIdentifier>{cdd7f05d-99c2-4419-98d7-093e493a3275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="95.Texture\99.Texture_Manager">
+      <UniqueIdentifier>{a48760dc-7653-4dae-a09c-710d77a9a714}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\04.UI">
+      <UniqueIdentifier>{b268b5d1-7e9e-48b7-9c60-85d8ef1a144b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\04.UI\01.HealthBar">
+      <UniqueIdentifier>{6a6a49d2-7ae1-44f2-935a-be5d4a732a29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\04.UI\02.JellyScore">
+      <UniqueIdentifier>{45523483-03cb-4ec2-a194-4a7477211047}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\04.UI\03.CoinScore">
+      <UniqueIdentifier>{18a97da1-e614-4844-9cd0-7de5ca230583}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\04.UI\00.HealthIcon">
+      <UniqueIdentifier>{bdc7422b-bce8-46f1-a035-ce34d8552de3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\03.Player\99.Subject">
+      <UniqueIdentifier>{6d08f57b-29f2-4bfb-96fc-0487bcda93d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\03.Player\99.Subject\00.Observer">
+      <UniqueIdentifier>{f43b6a73-292a-454b-8372-613b9887f450}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Obj\03.Player\99.Subject\00.Observer\00.PlayerObserver">
+      <UniqueIdentifier>{386bc49a-135c-4603-beb6-b8ccb6ad4e59}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -87,8 +114,14 @@
     <ClInclude Include="targetver.h">
       <Filter>99.ETC</Filter>
     </ClInclude>
+    <ClInclude Include="Include.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
     <ClInclude Include="MainApp.h">
       <Filter>00.MainApp</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj.h">
+      <Filter>02.Obj</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>01.Scene</Filter>
@@ -96,59 +129,77 @@
     <ClInclude Include="SceneMgr.h">
       <Filter>01.Scene\99.Manager</Filter>
     </ClInclude>
-    <ClInclude Include="KeyMgr.h">
-      <Filter>97.Managers\01.Key_Mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphic_Dev.h">
-      <Filter>97.Graphic_Dev</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision_Manager.h">
-      <Filter>97.Managers\00.Collision_Mgr</Filter>
-    </ClInclude>
-    <ClInclude Include="Obj_Manager.h">
-      <Filter>02.Obj\99.Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Stage.h">
-      <Filter>01.Scene\01.Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>02.Obj\03.Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>96.Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="Multi_Texture.h">
-      <Filter>96.Texture\01.Multi_Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="Include.h">
-      <Filter>98.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Define.h">
-      <Filter>98.Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Struct.h">
-      <Filter>98.Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Enum.h">
       <Filter>98.Headers</Filter>
     </ClInclude>
     <ClInclude Include="Typedef.h">
       <Filter>98.Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>98.Headers</Filter>
+    </ClInclude>
     <ClInclude Include="Functor.h">
       <Filter>98.Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Obj.h">
-      <Filter>02.Obj</Filter>
+    <ClInclude Include="KeyMgr.h">
+      <Filter>97.Managers\01.Key_Mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic_Dev.h">
+      <Filter>96.Graphic_Dev</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision_Manager.h">
+      <Filter>97.Managers\00.Collision_Mgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>01.Scene\01.Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>02.Obj\02.Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Obj_Manager.h">
+      <Filter>02.Obj\99.Manager\00.ObjMgr</Filter>
     </ClInclude>
     <ClInclude Include="FieldHurdle.h">
       <Filter>02.Obj\01.Field</Filter>
     </ClInclude>
-    <ClInclude Include="Texture_Manager.h">
-      <Filter>96.Texture\99.Texture_Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Single_Texture.h">
-      <Filter>96.Texture\00.Single_Texture</Filter>
+      <Filter>95.Texture\00.Single_Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>95.Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Multi_Texture.h">
+      <Filter>95.Texture\01.Multi_Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture_Manager.h">
+      <Filter>95.Texture\99.Texture_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>02.Obj\03.Player</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthBar.h">
+      <Filter>02.Obj\04.UI\01.HealthBar</Filter>
+    </ClInclude>
+    <ClInclude Include="JellyScore.h">
+      <Filter>02.Obj\04.UI\02.JellyScore</Filter>
+    </ClInclude>
+    <ClInclude Include="CoinScore.h">
+      <Filter>02.Obj\04.UI\03.CoinScore</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthIcon.h">
+      <Filter>02.Obj\04.UI\00.HealthIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>02.Obj\03.Player\99.Subject</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>02.Obj\03.Player\99.Subject\00.Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerObserver.h">
+      <Filter>02.Obj\03.Player\99.Subject\00.Observer\00.PlayerObserver</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -174,34 +225,58 @@
       <Filter>97.Managers\01.Key_Mgr</Filter>
     </ClCompile>
     <ClCompile Include="Graphic_Dev.cpp">
-      <Filter>97.Graphic_Dev</Filter>
+      <Filter>96.Graphic_Dev</Filter>
     </ClCompile>
     <ClCompile Include="Collision_Manager.cpp">
       <Filter>97.Managers\00.Collision_Mgr</Filter>
     </ClCompile>
-    <ClCompile Include="Obj_Manager.cpp">
-      <Filter>02.Obj\99.Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Stage.cpp">
       <Filter>01.Scene\01.Stage</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>02.Obj\03.Player</Filter>
+    <ClCompile Include="Item.cpp">
+      <Filter>02.Obj\02.Item</Filter>
     </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>96.Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="Multi_Texture.cpp">
-      <Filter>96.Texture\01.Multi_Texture</Filter>
+    <ClCompile Include="Obj_Manager.cpp">
+      <Filter>02.Obj\99.Manager\00.ObjMgr</Filter>
     </ClCompile>
     <ClCompile Include="FieldHurdle.cpp">
       <Filter>02.Obj\01.Field</Filter>
     </ClCompile>
-    <ClCompile Include="Texture_Manager.cpp">
-      <Filter>96.Texture\99.Texture_Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Single_Texture.cpp">
-      <Filter>96.Texture\00.Single_Texture</Filter>
+      <Filter>95.Texture\00.Single_Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>95.Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Multi_Texture.cpp">
+      <Filter>95.Texture\01.Multi_Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture_Manager.cpp">
+      <Filter>95.Texture\99.Texture_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>02.Obj\03.Player</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthBar.cpp">
+      <Filter>02.Obj\04.UI\01.HealthBar</Filter>
+    </ClCompile>
+    <ClCompile Include="JellyScore.cpp">
+      <Filter>02.Obj\04.UI\02.JellyScore</Filter>
+    </ClCompile>
+    <ClCompile Include="CoinScore.cpp">
+      <Filter>02.Obj\04.UI\03.CoinScore</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthIcon.cpp">
+      <Filter>02.Obj\04.UI\00.HealthIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>02.Obj\03.Player\99.Subject</Filter>
+    </ClCompile>
+    <ClCompile Include="Observer.cpp">
+      <Filter>02.Obj\03.Player\99.Subject\00.Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerObserver.cpp">
+      <Filter>02.Obj\03.Player\99.Subject\00.Observer\00.PlayerObserver</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -76,8 +76,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(DXSDK_DIR)Include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)lib\x86\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -86,8 +84,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(DXSDK_DIR)Include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)lib\x86\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -155,19 +151,25 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CoinScore.h" />
     <ClInclude Include="Collision_Manager.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="FieldHurdle.h" />
     <ClInclude Include="Functor.h" />
-    <ClInclude Include="Include.h" />
+    <ClInclude Include="HealthBar.h" />
+    <ClInclude Include="HealthIcon.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="JellyScore.h" />
     <ClInclude Include="Multi_Texture.h" />
-    <ClInclude Include="Obj.h" />
     <ClInclude Include="Obj_Manager.h" />
     <ClInclude Include="Graphic_Dev.h" />
     <ClInclude Include="KeyMgr.h" />
     <ClInclude Include="MainApp.h" />
+    <ClInclude Include="Obj.h" />
+    <ClInclude Include="Observer.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerObserver.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Running_Game_TeamProject.h" />
     <ClInclude Include="Scene.h" />
@@ -176,21 +178,30 @@
     <ClInclude Include="Stage.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Struct.h" />
+    <ClInclude Include="Subject.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Include.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Texture_Manager.h" />
     <ClInclude Include="Typedef.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CoinScore.cpp" />
     <ClCompile Include="Collision_Manager.cpp" />
     <ClCompile Include="FieldHurdle.cpp" />
+    <ClCompile Include="HealthBar.cpp" />
+    <ClCompile Include="HealthIcon.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="JellyScore.cpp" />
     <ClCompile Include="Multi_Texture.cpp" />
     <ClCompile Include="Obj_Manager.cpp" />
     <ClCompile Include="Graphic_Dev.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="MainApp.cpp" />
     <ClCompile Include="Obj.cpp" />
+    <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerObserver.cpp" />
     <ClCompile Include="Running_Game_TeamProject.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
@@ -202,6 +213,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Subject.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Texture_Manager.cpp" />
   </ItemGroup>

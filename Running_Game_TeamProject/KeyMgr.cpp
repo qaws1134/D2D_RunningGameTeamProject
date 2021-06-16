@@ -13,17 +13,6 @@ CKeyMgr::~CKeyMgr()
 {
 }
 
-void CKeyMgr::Update_KeyManager(void)
-{
-	for (int i = 0; i < VK_MAX; ++i)
-	{
-		if (m_bKeyState[i] && !(GetAsyncKeyState(i) & 0x8000))
-			m_bKeyState[i] = !m_bKeyState[i];
-		if (!m_bKeyState[i] && (GetAsyncKeyState(i) & 0x8000))
-			m_bKeyState[i] = !m_bKeyState[i];
-	}
-}
-
 bool CKeyMgr::Key_Pressing(int _key)
 {
 	if (GetAsyncKeyState(_key) & 0x8000)
