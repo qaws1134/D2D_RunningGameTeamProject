@@ -26,7 +26,7 @@ void CMyMenu::Update_Scene()
 	D3DXMatrixIdentity(&m_matWorld);
 
 	D3DXMatrixTranslation(&m_matTrans, m_vPos.x, m_vPos.y, 0.f);
-	D3DXMatrixScaling(&m_matScale, 1.f, 1.f, 0.f);
+	D3DXMatrixScaling(&m_matScale, 1.4f, 1.4f, 0.f);
 
 	m_matWorld = m_matScale * m_matTrans;
 

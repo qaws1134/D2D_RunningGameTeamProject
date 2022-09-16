@@ -81,7 +81,6 @@ void CCollision_Manager::Collision_Rect_Obstacle(list<CObj*>& _Dst, vector<TILE*
 			if (Check_Rect_Obstacle(Dst, Src))
 			{
 				//플레이어 데미지
-				static_cast<CPlayer*>(Dst)->Set_Super();
 
 				if (static_cast<CPlayer*>(Dst)->Get_Dash() || static_cast<CPlayer*>(Dst)->Get_Giant())
 				{
@@ -89,6 +88,7 @@ void CCollision_Manager::Collision_Rect_Obstacle(list<CObj*>& _Dst, vector<TILE*
 					continue;
 				}
 				static_cast<CPlayer*>(Dst)->Set_Hp();
+				static_cast<CPlayer*>(Dst)->Set_Super();
 			}
 	
 		}

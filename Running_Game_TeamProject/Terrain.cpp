@@ -208,6 +208,9 @@ void CTerrain::Load_Terrain()
 		pTile->vSize = vSize;
 		pTile->bCollide = bCollide;
 		pTile->bPlayerCol = false;
+
+
+
 		m_vecTile.emplace_back(pTile);
 	}
 

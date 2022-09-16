@@ -51,8 +51,6 @@ HRESULT CPlayer::Ready_Object(void)
 
 	m_iSuperTime = 2000;
 
-
-	// ���� ����
 	m_fJumpPower = 60.f;
 	m_iDownTime = 1000;
 
@@ -575,6 +573,7 @@ void CPlayer::Item_EffectCheck(void)
 
 void	CPlayer::Set_Hp()
 {
+
 	if (!m_bSuper)m_tInfo.fHP -= 20.f;
 
 
@@ -589,10 +588,10 @@ void	CPlayer::Set_Super()
 {
 	m_bSuper = true; 
 	m_bHit = true;
+	m_tAlphaTime.dwCountTime = GetTickCount();
+
 	m_dwSuperTime = GetTickCount();
 
-
-	m_tAlphaTime.dwCountTime = GetTickCount();
 }
 
 
